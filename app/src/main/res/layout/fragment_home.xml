@@ -1,0 +1,240 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="me.cekpedia.HomeFragment">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#61B1BE"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cekpedia"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/cari"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/my_toolbar"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        android:drawableLeft="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:backgroundTint="#EEEBEB"
+        android:hint="Cari"
+        android:background="@drawable/search_layout"
+        android:textSize="14sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cari">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:paddingBottom="60dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_view">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/btn_topsearch"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:text="Top Search"
+                    android:textStyle="bold"
+                    android:textColor="#61B1BE"
+                    android:textAllCaps="false"
+                    android:background="@drawable/rectangle_button"/>
+
+                <Button
+                    android:id="@+id/btn_fav"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:text="Favorite"
+                    android:textStyle="bold"
+                    android:textColor="#61B1BE"
+                    android:textAllCaps="false"
+                    android:background="@drawable/rectangle_button"/>
+
+                <Button
+                    android:id="@+id/btn_recomend"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:text="Recomended"
+                    android:textStyle="bold"
+                    android:textColor="#61B1BE"
+                    android:textAllCaps="false"
+                    android:background="@drawable/rectangle_button"/>
+
+            </LinearLayout>
+
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider"
+                android:layout_below="@id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--<LinearLayout android:layout_height="match_parent"-->
+        <!--android:layout_width="match_parent"-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:orientation="vertical">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#0288D1"-->
+            <!--android:padding="8dp"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/cari"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="36dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:paddingLeft="16dp"-->
+                <!--android:drawableLeft="@drawable/ic_search"-->
+                <!--android:backgroundTint="#FFF"-->
+                <!--android:hint="Apa yang anda cari ? "-->
+                <!--android:background="@drawable/search_layout"-->
+                <!--android:textSize="14sp">-->
+
+            <!--</EditText>-->
+        <!--</LinearLayout>-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/my_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#0288D1"-->
+        <!--android:elevation="4dp"-->
+
+        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+            <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--android:background="#0288D1"-->
+                <!--android:src="@drawable/logocekpedia1"/>-->
+            <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+
+                <!--android:background="#0288D1"/>-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/cari"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="36dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:drawableLeft="@drawable/ic_search"-->
+                <!--android:backgroundTint="#FFF"-->
+                <!--android:hint="Apa yang anda cari ? "-->
+                <!--android:background="@drawable/search_layout"-->
+                <!--android:textSize="14sp">-->
+
+            <!--</EditText>-->
+        <!--</LinearLayout>-->
+    <!--</android.support.v7.widget.Toolbar>-->
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="170dp">-->
+
+            <!--<com.daimajia.slider.library.SliderLayout-->
+                <!--android:id="@+id/slider"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:layout_marginBottom="4dp"-->
+                <!--android:layout_height="170dp"/>-->
+
+            <!--<android.support.v4.view.ViewPager-->
+                <!--android:id="@+id/viewPagerImageAds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"/>-->
+
+            <!--<com.viewpagerindicator.CirclePageIndicator-->
+                <!--android:id="@+id/circlePageImageAds"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:gravity="bottom"-->
+                <!--android:padding="10dip"-->
+                <!--app:centered="true"-->
+                <!--app:fillColor="@android:color/white"-->
+                <!--app:pageColor="@android:color/darker_gray"-->
+                <!--app:snap="false" />-->
+
+        <!--</RelativeLayout>-->
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="170dp"-->
+        <!--android:id="@+id/slider1"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/iklan"/>-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+
+        <!--android:background="#FFF"-->
+        <!--android:id="@+id/recycler_view">-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+    <!--</LinearLayout>-->
+</RelativeLayout>

@@ -1,0 +1,133 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:id="@+id/signup_layout"
+    android:background="@drawable/login_bg"
+    tools:context="me.cekpedia.LoginActivity2">
+
+    <TextView
+        android:id="@+id/cekpedia_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="75dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/et_nama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#66000000"
+        android:hint="Nama"
+        android:padding="10dp"
+        android:background="@drawable/ellips_edittext"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF">
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#66000000"
+        android:hint="Username"
+        android:padding="10dp"
+        android:background="@drawable/ellips_edittext"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF">
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#66000000"
+        android:hint="Password"
+        android:padding="10dp"
+        android:background="@drawable/ellips_edittext"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF">
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#66000000"
+        android:hint="Email"
+        android:padding="10dp"
+        android:background="@drawable/ellips_edittext"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF">
+    </EditText>
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:background="@drawable/ellips_button"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>

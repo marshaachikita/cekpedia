@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -117,15 +118,38 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //    private HomeFragment homeFragment;
 
     private SliderLayout sliderLayout;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private List<Thumbnail> listThumbnail;
     GridLayoutManager layoutManager;
     View view;
     TextView st;
     Typeface tf;
-//
-//    public HomeFragment() {
-//        // Required empty public constructor
-//    }
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        listThumbnail = new ArrayList<>();
+        listThumbnail.add(new Thumbnail("Transportasi", R.drawable.ic_transport));
+//        listThumbnail.add(new Thumbnail("Hotel", R.drawable.icon_hotel));
+//        listThumbnail.add(new Thumbnail("Masjid", R.drawable.ic_masjid));
+//        listThumbnail.add(new Thumbnail("Wisata", R.drawable.ic_wisata));
+//        listThumbnail.add(new Thumbnail("Penginapan", R.drawable.ic_penginapan));
+//        listThumbnail.add(new Thumbnail("Rumah Sakit", R.drawable.ic_rumah_sakit));
+//        listThumbnail.add(new Thumbnail("Restoran", R.drawable.ic_restoran));
+//        listThumbnail.add(new Thumbnail("Supermarket", R.drawable.ic_supermarket));
+//        listThumbnail.add(new Thumbnail("Sekolah", R.drawable.ic_sekolah));
+//        listThumbnail.add(new Thumbnail("Transportasi", R.drawable.ic_transportasi));
+//        listThumbnail.add(new Thumbnail("Input Lokasi", R.drawable.ic_input_lokasi));
+//        listThumbnail.add(new Thumbnail("SPBU", R.drawable.ic_spbu));
+//        listThumbnail.add(new Thumbnail("Apotik", R.drawable.ic_apotek));
+//        listThumbnail.add(new Thumbnail("Bidan", R.drawable.ic_bidan));
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -153,12 +177,12 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
         search.setCompoundDrawables(drawable_search, null, null, null);
 
         // Pengaturan Recycler View
-//        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-//        layoutManager = new GridLayoutManager(getActivity(), 4);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(layoutManager);
-//        ImageAdapter myAdapter = new ImageAdapter(getActivity(), gambar, namaMenu);
-//        recyclerView.setAdapter(myAdapter);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        ImageAdapter myAdapter = new ImageAdapter(getActivity(), listThumbnail);
+        layoutManager = new GridLayoutManager(getActivity(), 4);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(myAdapter);
 
         // Slider Layout
         sliderLayout = view.findViewById(R.id.slider);
