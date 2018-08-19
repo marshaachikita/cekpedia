@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Documents\kuliah\startup\cekpedia\app\app.iml" filepath="D:\Documents\kuliah\startup\cekpedia\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/cekpedia.iml" filepath="$PROJECT_DIR$/cekpedia.iml" />
+      <module fileurl="file://D:\Documents\kuliah\startup\cekpedia\cekpedia.iml" filepath="D:\Documents\kuliah\startup\cekpedia\cekpedia.iml" />
     </modules>
   </component>
 </project>
