@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //    private String imageUrls;
 //
     int[] gambar = {
-            R.drawable.icon_hotel,
+            R.drawable.ic_home,
             R.drawable.ic_masjid,
             R.drawable.ic_wisata,
             R.drawable.ic_penginapan,
