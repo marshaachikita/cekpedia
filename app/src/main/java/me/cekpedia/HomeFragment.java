@@ -185,7 +185,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myAdapter);
 
-        // Slider Layout
+
 //        sliderLayout = view.findViewById(R.id.slider);
 //        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 //        file_maps.put("Apotek K24 Gerlong", R.drawable.apotekk24gerlong);
@@ -236,6 +236,8 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
             }
         });
         mDb = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
+
+        // Slider Layout
         sliderLayout = view.findViewById(R.id.slider);
         mDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -277,10 +279,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
             }
         });
-//        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-//        file_maps.put("Apotek K24 Gerlong", R.drawable.apotekk24gerlong);
-//        file_maps.put("RM Bakul Daun", R.drawable.rmbakuldaun);
-//        file_maps.put("Bandara Husein Sastranegara", R.drawable.bandarahusein);
 
         return view;
     }
@@ -292,72 +290,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
     }
 
-    //    @Override
- /*   public void loadSlider(){
-
-        aPhotoAds = new String[8];
-        aNameAds = new String[8];
-        imageSize = 0;
-        FirebaseDatabase.getInstance().getReference()
-                .child("slider")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            Map<String, Object> map = (Map<String, Object>) child.getValue();
-
-                            aPhotoAds[imageSize] = map.get("url").toString();
-                            aNameAds[imageSize] = map.get("name").toString();
-
-                            imageSize++;
-                        }
-                        viewPager.setAdapter(new ImageSlideAdapter(homeFragment.getContext(), aPhotoAds, imageSize, homeFragment));
-                        circlePage.setViewPager(viewPager);
-
-                        //final float density = homeFragment.getActivity().getResources().getDisplayMetrics().density;
-
-                        //Set circle indicator radius
-                        circlePage.setRadius(5 * 1);
-
-                        NUM_PAGES = imageSize-1;
-
-                        handler = new Handler();
-                        Update = new Runnable() {
-                            public void run() {
-                                if (currentPage == NUM_PAGES) {
-                                    currentPage = 0;
-                                }
-                                viewPager.setCurrentItem(currentPage++, true);
-                            }
-                        };
-
-                        swipeTimer = new Timer();
-                        swipeTimer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                handler.post(Update);
-                            }
-                        }, 3000, 3000);
-
-                        circlePage.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                            @Override
-                            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                                currentPage = position;
-                            }
-                            @Override
-                            public void onPageSelected(int position) {}
-                            @Override
-                            public void onPageScrollStateChanged(int state) {}
-                        });
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-    }*/
     @Override
     public void itemClicked(View view, int position) {
         switch (position) {
