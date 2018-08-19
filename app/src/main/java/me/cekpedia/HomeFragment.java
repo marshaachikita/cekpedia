@@ -57,21 +57,22 @@ import me.cekpedia.models.ImageUpload;
 
 
 public class HomeFragment extends Fragment implements ImageAdapter.ClickListener{
-//    GridView gridView;
-//    private FirebaseUser mFirebaseUser;
-//    DatabaseReference mDb;
-//    private ImageView imgViewProf;
+    GridView gridView;
+    private FirebaseUser mFirebaseUser;
+    DatabaseReference mDb;
+    private ImageView imgViewProf;
 //    private TextView usernama, useremail;
 //    private SliderLayout sliderLayout;
-//    private EditText searchView;
-//    private FirebaseStorage firebaseStorage;
+    ImageAdapter myAdapter;
+    private EditText searchView;
+    private FirebaseStorage firebaseStorage;
 //    private String userID;
 //    private StorageReference storageReference;
 //    String[] aPhotoAds;
 //    String[] aNameAds;
 //    int imageSize;
-//    FirebaseAuth mAuth;
-//    public static final String FB_DATABASE_PATH = "slider";
+    FirebaseAuth mAuth;
+    public static final String FB_DATABASE_PATH = "slider";
 //    private BottomNavigationView bottomNavigationView;
 
 //    ViewPager viewPager;
@@ -134,8 +135,8 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        listThumbnail = new ArrayList<>();
-        listThumbnail.add(new Thumbnail("Transportasi", R.drawable.ic_transport));
+//        listThumbnail = new ArrayList<>();
+//        listThumbnail.add(new Thumbnail("Transportasi", R.drawable.ic_transport));
 //        listThumbnail.add(new Thumbnail("Hotel", R.drawable.icon_hotel));
 //        listThumbnail.add(new Thumbnail("Masjid", R.drawable.ic_masjid));
 //        listThumbnail.add(new Thumbnail("Wisata", R.drawable.ic_wisata));
@@ -178,103 +179,104 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
         // Pengaturan Recycler View
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        ImageAdapter myAdapter = new ImageAdapter(getActivity(), listThumbnail);
+//        ImageAdapter myAdapter = new ImageAdapter(getActivity(), listThumbnail);
         layoutManager = new GridLayoutManager(getActivity(), 4);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myAdapter);
 
         // Slider Layout
-        sliderLayout = view.findViewById(R.id.slider);
-        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Apotek K24 Gerlong", R.drawable.apotekk24gerlong);
-        file_maps.put("RM Bakul Daun", R.drawable.rmbakuldaun);
-        file_maps.put("Bandara Husein Sastranegara", R.drawable.bandarahusein);
-
-        for(String name : file_maps.keySet()){
-            TextSliderView textSliderView = new TextSliderView(getActivity());
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra",name);
-            sliderLayout.addSlider(textSliderView);
-        }
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        sliderLayout.setCustomAnimation(new DescriptionAnimation());
-        sliderLayout.setDuration(4000);
+//        sliderLayout = view.findViewById(R.id.slider);
+//        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
+//        file_maps.put("Apotek K24 Gerlong", R.drawable.apotekk24gerlong);
+//        file_maps.put("RM Bakul Daun", R.drawable.rmbakuldaun);
+//        file_maps.put("Bandara Husein Sastranegara", R.drawable.bandarahusein);
+//
+//        for(String name : file_maps.keySet()){
+//            TextSliderView textSliderView = new TextSliderView(getActivity());
+//            // initialize a SliderLayout
+//            textSliderView
+//                    .description(name)
+//                    .image(file_maps.get(name))
+//                    .setScaleType(BaseSliderView.ScaleType.Fit);
+//            //add your extra information
+//            textSliderView.bundle(new Bundle());
+//            textSliderView.getBundle()
+//                    .putString("extra",name);
+//            sliderLayout.addSlider(textSliderView);
+//        }
+//        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
+//        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+//        sliderLayout.setCustomAnimation(new DescriptionAnimation());
+//        sliderLayout.setDuration(4000);
 
 //        homeFragment = this;
 
 //        loadSlider();
 //        viewPager = view.findViewById(R.id.viewPagerImageAds);
 //        circlePage = view.findViewById(R.id.circlePageImageAds);
-//        recyclerView = view.findViewById(R.id.recycler_view);
-//        layoutManager = new GridLayoutManager(getActivity(), 4);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(layoutManager);
-//        ImageAdapter myAdapter = new ImageAdapter(getActivity(), gambar, namaMenu);
-//        recyclerView.setAdapter(myAdapter);
-//        myAdapter.setClickListener(this);
-//        searchView = (EditText) view.findViewById(R.id.cari);
-//        searchView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getActivity(), ListCariActivity.class));
+        recyclerView = view.findViewById(R.id.recycler_view);
+        layoutManager = new GridLayoutManager(getActivity(), 4);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        myAdapter = new ImageAdapter(getActivity(), gambar, namaMenu);
+        recyclerView.setAdapter(myAdapter);
+        myAdapter.setClickListener(this);
+        searchView = (EditText) view.findViewById(R.id.cari);
+        searchView = (EditText) view.findViewById(R.id.cari);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ListCariActivity.class));
 //                setTitle("Trafinder");
 //                HomeFragment fragment = new HomeFragment();
 //                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 //                fragmentTransaction.replace(R.id.frameLayout, fragment);
 //                fragmentTransaction.commit();
-//            }
-//        });
-//        mDb = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
-//        sliderLayout = view.findViewById(R.id.slider);
-//        mDb.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
-//                Map<String, ImageSlider> td = new HashMap<String, ImageSlider>();
-//                HashMap<String,String> url_maps = new HashMap<String, String>();
-//                ArrayList<ImageSlider> value = new ArrayList<>(td.values());
-//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    ImageUpload img = ds.getValue(ImageUpload.class);
-//                    String text = ds.child("name").getValue(String.class);
-//                    String image = ds.child("url").getValue(String.class);
-//                    url_maps.put(text.toString(), image.toString());
-//                    for (ImageSlider ad : value) {
+            }
+        });
+        mDb = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
+        sliderLayout = view.findViewById(R.id.slider);
+        mDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
+                Map<String, ImageSlider> td = new HashMap<String, ImageSlider>();
+                HashMap<String,String> url_maps = new HashMap<String, String>();
+                ArrayList<ImageSlider> value = new ArrayList<>(td.values());
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    ImageUpload img = ds.getValue(ImageUpload.class);
+                    String text = ds.child("name").getValue(String.class);
+                    String image = ds.child("url").getValue(String.class);
+                    url_maps.put(text.toString(), image.toString());
+                    for (ImageSlider ad : value) {
+
+                    }
+                    for (String name : url_maps.keySet()) {
+                        TextSliderView textSliderView = new TextSliderView(getActivity());
+                        // initialize a SliderLayout
+                        textSliderView
+                                .description(name)
+                                .image(url_maps.get(name))
+                                .setScaleType(BaseSliderView.ScaleType.Fit);
+                        //add your extra information
+                        textSliderView.bundle(new Bundle());
+                        textSliderView.getBundle()
+                                .putString("extra", name);
+                        sliderLayout.addSlider(textSliderView);
+                    }
+                }
+                sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
+                sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                sliderLayout.setCustomAnimation(new DescriptionAnimation());
+                sliderLayout.setDuration(4000);
+            }
 //
-//                    }
-//                    for (String name : url_maps.keySet()) {
-//                        TextSliderView textSliderView = new TextSliderView(getActivity());
-//                        // initialize a SliderLayout
-//                        textSliderView
-//                                .description(name)
-//                                .image(url_maps.get(name))
-//                                .setScaleType(BaseSliderView.ScaleType.Fit);
-//                        //add your extra information
-//                        textSliderView.bundle(new Bundle());
-//                        textSliderView.getBundle()
-//                                .putString("extra", name);
-//                        sliderLayout.addSlider(textSliderView);
-//                    }
-//                }
-//                sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-//                sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-//                sliderLayout.setCustomAnimation(new DescriptionAnimation());
-//                sliderLayout.setDuration(4000);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 //        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 //        file_maps.put("Apotek K24 Gerlong", R.drawable.apotekk24gerlong);
 //        file_maps.put("RM Bakul Daun", R.drawable.rmbakuldaun);
