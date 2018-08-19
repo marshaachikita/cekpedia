@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         username.setCompoundDrawables(drawable_username, null, null, null);
         password.setCompoundDrawables(drawable_password, null, null, null);
-        btn_google.setCompoundDrawables(drawable_google, null, null, null);
+//        btn_google.setCompoundDrawables(drawable_google, null, null, null);
 
         // Pengaturan Font
         st = (TextView) findViewById(R.id.cekpedia_login);
