@@ -81,7 +81,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //    private String imageUrls;
 //
     int[] gambar = {
-            R.drawable.ic_home,
             R.drawable.ic_masjid,
             R.drawable.ic_wisata,
             R.drawable.ic_penginapan,
@@ -96,7 +95,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
             R.drawable.ic_bidan
     };
     String [] namaMenu = {
-            "    Hotel",
             "    Masjid",
             "    Wisata",
             "Penginapan",
