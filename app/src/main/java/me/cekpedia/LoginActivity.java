@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 mFirebaseUser = firebaseAuth.getCurrentUser();
                 if (mFirebaseUser != null){
                     if (BuildConfig.DEBUG) Log.d(TAG, "onAuthStateChanged:signed_in " + mFirebaseUser.getDisplayName());
-                    startActivity(new Intent(LoginActivity.this, UtamaActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -178,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 mFirebaseUser = firebaseAuth.getCurrentUser();
                 if (mFirebaseUser != null){
-                    startActivity(new Intent(LoginActivity.this, UtamaActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }
             }
@@ -277,7 +277,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     .setValue(user, new DatabaseReference.CompletionListener() {
                                         @Override
                                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                           startActivity(new Intent(LoginActivity.this, UtamaActivity.class));
+                                           startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                         }
                                     });
                             if (BuildConfig.DEBUG)Log.v(TAG, "Auth Successful");
