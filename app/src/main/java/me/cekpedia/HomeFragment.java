@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //    private String imageUrls;
 //
     int[] gambar = {
-            R.drawable.icon_hotel,
+            R.drawable.ic_home,
             R.drawable.ic_masjid,
             R.drawable.ic_wisata,
             R.drawable.ic_penginapan,
@@ -134,8 +134,8 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        listThumbnail = new ArrayList<>();
-        listThumbnail.add(new Thumbnail("Transportasi", R.drawable.ic_transport));
+//        listThumbnail = new ArrayList<>();
+//        listThumbnail.add(new Thumbnail("Transportasi", R.drawable.ic_transport));
 //        listThumbnail.add(new Thumbnail("Hotel", R.drawable.icon_hotel));
 //        listThumbnail.add(new Thumbnail("Masjid", R.drawable.ic_masjid));
 //        listThumbnail.add(new Thumbnail("Wisata", R.drawable.ic_wisata));
