@@ -181,7 +181,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myAdapter);
-
+        myAdapter.setClickListener(this);
         // Slider Layout
         sliderLayout = view.findViewById(R.id.slider);
         mDb = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
