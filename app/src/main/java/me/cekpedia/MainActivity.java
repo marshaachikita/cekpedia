@@ -44,37 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private NearMeFragment nearMeFragment;
     private HelpFragment helpFragment;
 
-    int[] gambar = {
-            R.drawable.ic_masjid,
-            R.drawable.ic_wisata,
-            R.drawable.ic_penginapan,
-            R.drawable.ic_rumah_sakit,
-            R.drawable.ic_restoran,
-            R.drawable.ic_supermarket,
-            R.drawable.ic_sekolah,
-            R.drawable.ic_transportasi,
-            R.drawable.ic_input_lokasi,
-            R.drawable.ic_spbu,
-            R.drawable.ic_apotek,
-            R.drawable.ic_bidan
-        };
-    String [] namaMenu = {
-        "Masjid",
-        "Wisata",
-        "Penginapan",
-        "Rumah Sakit",
-        "Restoran",
-        "Supermarket",
-        "Sekolah",
-        "Transportasi",
-        "Input Lokasi",
-        "SPBU",
-        "Apotek",
-        "Bidan"
-    };
-    public MainActivity(){
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         helpFragment = new HelpFragment();
         nearMeFragment = new NearMeFragment();
 
-        setFragment(nearMeFragment);
+        setFragment(homeFragment);
 
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
