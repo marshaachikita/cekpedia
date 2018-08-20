@@ -119,7 +119,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
     private SliderLayout sliderLayout;
     private RecyclerView recyclerView;
-    private List<Thumbnail> listThumbnail;
     GridLayoutManager layoutManager;
     View view;
     TextView st;
@@ -127,28 +126,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
     public HomeFragment() {
         // Required empty public constructor
-    }
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-//        listThumbnail = new ArrayList<>();
-//        listThumbnail.add(new Thumbnail("Transportasi", R.drawable.ic_transport));
-//        listThumbnail.add(new Thumbnail("Hotel", R.drawable.icon_hotel));
-//        listThumbnail.add(new Thumbnail("Masjid", R.drawable.ic_masjid));
-//        listThumbnail.add(new Thumbnail("Wisata", R.drawable.ic_wisata));
-//        listThumbnail.add(new Thumbnail("Penginapan", R.drawable.ic_penginapan));
-//        listThumbnail.add(new Thumbnail("Rumah Sakit", R.drawable.ic_rumah_sakit));
-//        listThumbnail.add(new Thumbnail("Restoran", R.drawable.ic_restoran));
-//        listThumbnail.add(new Thumbnail("Supermarket", R.drawable.ic_supermarket));
-//        listThumbnail.add(new Thumbnail("Sekolah", R.drawable.ic_sekolah));
-//        listThumbnail.add(new Thumbnail("Transportasi", R.drawable.ic_transportasi));
-//        listThumbnail.add(new Thumbnail("Input Lokasi", R.drawable.ic_input_lokasi));
-//        listThumbnail.add(new Thumbnail("SPBU", R.drawable.ic_spbu));
-//        listThumbnail.add(new Thumbnail("Apotik", R.drawable.ic_apotek));
-//        listThumbnail.add(new Thumbnail("Bidan", R.drawable.ic_bidan));
     }
 
     @Override
