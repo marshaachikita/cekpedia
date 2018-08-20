@@ -49,6 +49,7 @@
         android:padding="5dp"
         android:drawablePadding="10dp"
         android:drawableLeft="@drawable/ic_keywhite"
+        android:inputType="textPassword"
         android:backgroundTint="#66000000"
         android:hint="Password"
         android:background="@drawable/ellips_edittext"

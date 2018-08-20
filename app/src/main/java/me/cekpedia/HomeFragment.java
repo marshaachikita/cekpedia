@@ -57,9 +57,9 @@ import me.cekpedia.models.ImageUpload;
 
 
 public class HomeFragment extends Fragment implements ImageAdapter.ClickListener{
-    GridView gridView;
-    private FirebaseUser mFirebaseUser;
-    DatabaseReference mDb;
+//    GridView gridView;
+//    private FirebaseUser mFirebaseUser;
+//    DatabaseReference mDb;
 //    private ImageView imgViewProf;
 //    private TextView usernama, useremail;
 //    private SliderLayout sliderLayout;
@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //    String[] aNameAds;
 //    int imageSize;
 //    FirebaseAuth mAuth;
-    public static final String FB_DATABASE_PATH = "slider";
+//    public static final String FB_DATABASE_PATH = "slider";
 //    private BottomNavigationView bottomNavigationView;
 
 //    ViewPager viewPager;
@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //    private String imageUrls;
 //
     int[] gambar = {
+            R.drawable.ic_home,
             R.drawable.ic_masjid,
             R.drawable.ic_wisata,
             R.drawable.ic_penginapan,
@@ -95,18 +96,19 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
             R.drawable.ic_bidan
     };
     String [] namaMenu = {
-            "    Masjid",
-            "    Wisata",
+            "Hotel",
+            "Masjid",
+            "Wisata",
             "Penginapan",
             "Rumah Sakit",
-            "  Restoran",
+            "Restoran",
             "Supermarket",
-            "   Sekolah",
+            "Sekolah",
             "Transportasi",
             "Input Lokasi",
-            "     SPBU",
-            "    Apotek",
-            "    Bidan"
+            "SPBU",
+            "Apotek",
+            "Bidan"
     };
 //    private Handler handler;
 //    private Runnable Update;
@@ -184,70 +186,28 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
         // Slider Layout
         sliderLayout = view.findViewById(R.id.slider);
-        mDb = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
-        sliderLayout = view.findViewById(R.id.slider);
-        mDb.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-//                final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
-                Map<String, ImageSlider> td = new HashMap<String, ImageSlider>();
-                HashMap<String,String> url_maps = new HashMap<String, String>();
-                ArrayList<ImageSlider> value = new ArrayList<>(td.values());
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    ImageUpload img = ds.getValue(ImageUpload.class);
-                    String text = ds.child("name").getValue(String.class);
-                    String image = ds.child("url").getValue(String.class);
-                    url_maps.put(text.toString(), image.toString());
-//                    for (ImageSlider ad : value) {
-//
-//                    }
-                    for (String name : url_maps.keySet()) {
-                        TextSliderView textSliderView = new TextSliderView(getActivity());
-                        // initialize a SliderLayout
-                        textSliderView
-                                .description(name)
-                                .image(url_maps.get(name))
-                                .setScaleType(BaseSliderView.ScaleType.Fit);
-                        //add your extra information
-                        textSliderView.bundle(new Bundle());
-                        textSliderView.getBundle()
-                                .putString("extra", name);
-                        sliderLayout.addSlider(textSliderView);
-                    }
-                }
-                sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-                sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-                sliderLayout.setCustomAnimation(new DescriptionAnimation());
-                sliderLayout.setDuration(4000);
-            }
-            //yoms
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
+        file_maps.put("Apotek K24 Gerlong", R.drawable.apotekk24gerlong);
+        file_maps.put("RM Bakul Daun", R.drawable.rmbakuldaun);
+        file_maps.put("Bandara Husein Sastranegara", R.drawable.bandarahusein);
 
-            }
-        });
-//        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-//        file_maps.put("Apotek K24 Gerlong", R.drawable.apotekk24gerlong);
-//        file_maps.put("RM Bakul Daun", R.drawable.rmbakuldaun);
-//        file_maps.put("Bandara Husein Sastranegara", R.drawable.bandarahusein);
-//
-//        for(String name : file_maps.keySet()){
-//            TextSliderView textSliderView = new TextSliderView(getActivity());
-//            // initialize a SliderLayout
-//            textSliderView
-//                    .description(name)
-//                    .image(file_maps.get(name))
-//                    .setScaleType(BaseSliderView.ScaleType.Fit);
-//            //add your extra information
-//            textSliderView.bundle(new Bundle());
-//            textSliderView.getBundle()
-//                    .putString("extra",name);
-//            sliderLayout.addSlider(textSliderView);
-//        }
-//        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-//        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-//        sliderLayout.setCustomAnimation(new DescriptionAnimation());
-//        sliderLayout.setDuration(4000);
+        for(String name : file_maps.keySet()){
+            TextSliderView textSliderView = new TextSliderView(getActivity());
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+            //add your extra information
+            textSliderView.bundle(new Bundle());
+            textSliderView.getBundle()
+                    .putString("extra",name);
+            sliderLayout.addSlider(textSliderView);
+        }
+        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        sliderLayout.setCustomAnimation(new DescriptionAnimation());
+        sliderLayout.setDuration(4000);
 
 //        homeFragment = this;
 
