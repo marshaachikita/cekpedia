@@ -4,6 +4,7 @@ import android.*;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseUser mFirebaseUser;
     private static final String TAG = LoginActivity.class.getSimpleName();
 
-    Button sign_in, sign_up;
+    Button sign_in;
     TextView st;
     Typeface tf;
 
@@ -115,15 +117,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        sign_up = (Button) findViewById(R.id.btn_signup);
-        sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), LoginActivity2.class);
-                startActivity(intent);
-            }
-        });
-
         Name = (TextView)findViewById(R.id.name);
         Email = (TextView)findViewById(R.id.email);
 //        Prof_Section = (LinearLayout)findViewById(R.id.prof_section);
@@ -138,6 +131,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 signIn();
             }
         });
+
+//        for (int i = 0; i < googlelogin.getChildCount(); i++) {
+//            View v = googlelogin.getChildAt(i);
+//
+//            if (v instanceof TextView)
+//            {
+//                TextView tv = (TextView) v;
+//                tv.setTextSize(14);
+//                tv.setTypeface(null, Typeface.NORMAL);
+//                tv.setText("My Text");
+//                tv.setTextColor(Color.parseColor("#FFFFFF"));
+//                tv.setBackgroundResource(R.drawable.ellips_button);
+//                tv.setSingleLine(true);
+//                tv.setPadding(15, 15, 15, 15);
+//
+//                ViewGroup.LayoutParams params = tv.getLayoutParams();
+//                params.width = 100;
+//                params.height = 70;
+//                tv.setLayoutParams(params);
+//
+//                return;
+//            }
+//        }
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("668210003774-dtag7e2q0sgbfld6rvk8upd6qcslqejl.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
@@ -342,4 +359,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                break;
 //        }
     }
-}
+
+    public void daftarAkun(View view) {
+        Intent intent = new Intent(this, LoginActivity2.class);
+        startActivity(intent);
+    }
+    }

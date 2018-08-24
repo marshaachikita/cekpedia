@@ -1,128 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/login_layout"
-    android:orientation="vertical"
     tools:context="me.cekpedia.LoginActivity"
-    android:background="@drawable/login_bg">
+    android:background="#62b1be">
 
-    <TextView
-        android:id="@+id/cekpedia_login"
+    <LinearLayout
+        android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Cekpedia"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="75dp"
-        android:textStyle="bold"
-        />
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:paddingBottom="30dp"
+        android:orientation="vertical"
+        android:background="@drawable/rectangle_background">
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="60dp"
-        android:padding="5dp"
-        android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/ic_personwhite"
-        android:backgroundTint="#66000000"
-        android:hint="Username atau email"
-        android:background="@drawable/ellips_edittext"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF">
-    </EditText>
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
-        android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/ic_keywhite"
-        android:inputType="textPassword"
-        android:backgroundTint="#66000000"
-        android:hint="Password"
-        android:background="@drawable/ellips_edittext"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF">
-    </EditText>
-
-    <Button
-        android:id="@+id/btn_signin"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:text="Sign In"
-        android:textAllCaps="false"
-        android:background="@drawable/ellips_button"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"/>
-
-    <FrameLayout
-        android:id="@+id/FrameLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/bn_login"
+        <TextView
+            android:id="@+id/cekpedia_login"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:drawableLeft="@mipmap/ic_google_logo"
-            android:onClick="onClick"
-            android:text="Sign In"
-            android:textAllCaps="false"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Cekpedia"
+            android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:background="@drawable/ellips_button"
+            android:textSize="75dp"
+            android:textStyle="bold"
             />
 
-        <!--<Button-->
-            <!--android:id="@+id/google_button"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_marginRight="50dp"-->
-            <!--android:layout_marginLeft="50dp"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:padding="5dp"-->
-            <!--android:drawableLeft="@mipmap/ic_google_logo"-->
-            <!--android:onClick="onClick"-->
-            <!--android:text="Sign In"-->
-            <!--android:textAllCaps="false"-->
-            <!--android:textColor="#FFFFFF"-->
-            <!--android:textSize="14sp"-->
-            <!--android:background="@drawable/ellips_button"-->
-            <!--/>-->
-    </FrameLayout>
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:padding="5dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_personwhite"
+            android:hint="Username atau email"
+            android:background="@drawable/rectangle_edittext"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF">
+        </EditText>
 
-    <Button
-        android:id="@+id/btn_signup"
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_keywhite"
+            android:inputType="textPassword"
+            android:hint="Kata Sandi"
+            android:background="@drawable/rectangle_edittext"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF">
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tampilkan kata sandi"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_signin"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Masuk"
+            android:textAllCaps="false"
+            android:background="@drawable/login_button"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:text="Belum memiliki akun?"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/daftar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="5dp"
+                android:text="Daftar"
+                android:textSize="12sp"
+                android:textColor="#142d32"
+                android:onClick="daftarAkun"
+                android:clickable="true"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_below="@id/linear1"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="3dp"
+            android:background="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="ATAU"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"/>
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="3dp"
+            android:background="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Sign Up"
-        android:textAllCaps="false"
-        android:background="@drawable/ellips_button"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"/>
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/FrameLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/bn_login"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
