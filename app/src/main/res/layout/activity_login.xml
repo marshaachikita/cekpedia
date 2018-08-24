@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/login_layout"
     tools:context="me.cekpedia.LoginActivity"
-    android:background="#62b1be">
+    android:background="#61B1BE">
 
     <LinearLayout
         android:id="@+id/linear1"
@@ -40,8 +40,9 @@
             android:layout_marginTop="30dp"
             android:padding="5dp"
             android:drawablePadding="10dp"
+            android:inputType="textEmailAddress"
             android:drawableLeft="@drawable/ic_personwhite"
-            android:hint="Username atau email"
+            android:hint="Email"
             android:background="@drawable/rectangle_edittext"
             android:textSize="14sp"
             android:textColor="#FFFFFF"
