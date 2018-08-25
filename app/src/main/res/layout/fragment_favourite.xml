@@ -1,69 +1,65 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="me.cekpedia.FavouriteFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="me.cekpedia.HotelActivity">
+        android:layout_height="wrap_content"
+        android:background="#61B1BE"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-
-                android:background="#0288D1" />
-
-            <EditText
-                android:id="@+id/cari"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="#FFFF"
-                android:drawableLeft="@drawable/ic_search"
-                android:hint="apa yang anda cari ?"
-                android:paddingLeft="16dp" />
-
-
-        </RelativeLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:orientation="vertical">
+            android:text="Cekpedia"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
 
-            <ListView
-                android:id="@+id/listviewfav1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true">
-                <!--android:layout_marginBottom="?android:attr/actionBarSize"-->
+    </android.support.v7.widget.Toolbar>
 
+    <EditText
+        android:id="@+id/cari"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/my_toolbar"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        android:drawableLeft="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:backgroundTint="#EEEBEB"
+        android:hint="Cari"
+        android:background="@drawable/search_layout"
+        android:textSize="14sp"/>
 
-            </ListView>
-        </LinearLayout>
-        <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/recycler_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--/>-->
-    </LinearLayout>
-</FrameLayout>
+    <TextView
+        android:id="@+id/id_fav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Favorit"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@id/cari"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_fav"
+        android:id="@+id/recycler_view">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

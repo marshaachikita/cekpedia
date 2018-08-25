@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragment accountFragment;
     private HomeFragment homeFragment;
     private NearMeFragment nearMeFragment;
-    private HelpFragment helpFragment;
+    private FavouriteFragment favFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         accountFragment = new ProfileFragment();
         homeFragment = new HomeFragment();
-        helpFragment = new HelpFragment();
+        favFragment = new FavouriteFragment();
         nearMeFragment = new NearMeFragment();
 
         setFragment(homeFragment);
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         setFragment(nearMeFragment);
                         return true;
                     case R.id.action_help :
-                        setFragment(helpFragment);
+                        setFragment(favFragment);
                         return true;
                     case R.id.action_account :
                         setFragment(accountFragment);

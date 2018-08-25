@@ -11,20 +11,29 @@ import android.widget.Toast;
 
 public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHolder> {
 
-    private String[] nama = {"Chapter One",
-            "Chapter Two",
-            "Chapter Three",
-            "Chapter Four",
-            "Chapter Five",
-            "Chapter Six",
-            "Chapter Seven",
-            "Chapter Eight"};
+    private String[] nama = {"Nama Tempat 1",
+            "Nama Tempat 2",
+            "Nama Tempat 3",
+            "Nama Tempat 4",
+            "Nama Tempat 5",
+            "Nama Tempat 6",
+            "Nama Tempat 7",
+            "Nama Tempat 8"};
 
-    private String[] detail = {"Item one details",
-            "Item two details", "Item three details",
-            "Item four details", "Item file details",
-            "Item six details", "Item seven details",
-            "Item eight details"};
+    private String[] jarak = {"Jarak Tempat 1",
+            "Jarak Tempat 2",
+            "Jarak Tempat 3",
+            "Jarak Tempat 4",
+            "Jarak Tempat 5",
+            "Jarak Tempat 6",
+            "Jarak Tempat 7",
+            "Jarak Tempat 8"};
+
+    private String[] detail = {"Alamat lengkap tempat 1",
+            "Alamat lengkap tempat 2", "Alamat lengkap tempat 3",
+            "Alamat lengkap tempat 4", "Alamat lengkap tempat 5",
+            "Alamat lengkap tempat 6", "Alamat lengkap tempat 7",
+            "Alamat lengkap tempat 8"};
 
     private int[] gambar = { R.drawable.hotelgrandia,
             R.drawable.hotelhorison,
@@ -51,6 +60,7 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHo
         holder.itemNama.setText(nama[position]);
         holder.itemDetail.setText(detail[position]);
         holder.itemGambar.setImageResource(gambar[position]);
+        holder.itemJarak.setText(jarak[position]);
 
     }
 
@@ -63,14 +73,14 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHo
 
         public int current;
         public ImageView itemGambar;
-        public TextView itemNama;
-        public TextView itemDetail;
+        public TextView itemNama, itemDetail, itemJarak;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemGambar = (ImageView)itemView.findViewById(R.id.gambar);
             itemNama = (TextView)itemView.findViewById(R.id.namaTempat);
             itemDetail = (TextView)itemView.findViewById(R.id.alamatTempat);
+            itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
