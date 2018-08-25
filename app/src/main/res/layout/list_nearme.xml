@@ -1,55 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_margin="10dp"
-    android:background="@drawable/border_shadow">
-
-    <ImageView
-        android:id="@+id/gambar"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:src="@drawable/bandarahusein"
-        android:scaleType="fitXY"/>
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    card_view:cardBackgroundColor="#FFFFFF"
+    android:divider="@android:color/transparent"
+    android:elevation="8dp"
+    card_view:cardElevation="3dp"
+    android:clickable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/namaTempat"
+        <ImageView
+            android:id="@+id/gambar"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/bandarahusein"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:paddingLeft="16dp"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:text="Bandara Husein"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/alamatTempat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:textSize="12sp"
-            android:text="Jl. Pelajar Pejuang 45 No.  121, Turangga, Lengkong, Kota Bandung, Jawa Barat, 40264" />
+            <TextView
+                android:id="@+id/namaTempat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="16dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="Bandara Husein"/>
 
-        <Button
-            android:id="@+id/detail"
-            android:layout_width="80dp"
-            android:layout_height="25dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="12sp"
-            android:text="Cek Detail"
-            android:layout_gravity="right"
-            android:textColor="@android:color/white"
-            android:background="@drawable/search_layout"
-            android:backgroundTint="#61B1BE" />
+            <TextView
+                android:id="@+id/alamatTempat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:textSize="12sp"
+                android:text="Jl. Pelajar Pejuang 45 No.  121, Turangga, Lengkong, Kota Bandung, Jawa Barat, 40264" />
+
+            <Button
+                android:id="@+id/detail"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="12sp"
+                android:text="Cek Detail"
+                android:layout_gravity="right"
+                android:textColor="@android:color/white"
+                android:background="@drawable/search_layout"
+                android:backgroundTint="#61B1BE" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-</LinearLayout>
+</android.support.v7.widget.CardView>

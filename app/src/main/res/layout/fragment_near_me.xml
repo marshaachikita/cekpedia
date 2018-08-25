@@ -1,69 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".NearMeFragment">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#61B1BE"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-
-            <TextView
-                android:id="@+id/toolbar_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cekpedia"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"
-                android:textStyle="bold"/>
-
-        </android.support.v7.widget.Toolbar>
-
-        <EditText
-            android:id="@+id/cari"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_below="@id/my_toolbar"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="8dp"
-            android:padding="5dp"
-            android:drawableLeft="@drawable/ic_search"
-            android:drawablePadding="10dp"
-            android:backgroundTint="#EEEBEB"
-            android:hint="Cari"
-            android:background="@drawable/search_layout"
-            android:textSize="14sp"/>
+        android:layout_height="wrap_content"
+        android:background="#61B1BE"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
 
         <TextView
-            android:id="@+id/id_nearme"
+            android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Near Me"
-            android:layout_below="@id/cari"
-            android:gravity="center"
-            android:textSize="20sp"/>
+            android:text="Cekpedia"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
 
-        <ListView
-            android:id="@+id/lv_nearme"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/id_nearme">
+    </android.support.v7.widget.Toolbar>
 
-        </ListView>
+    <EditText
+        android:id="@+id/cari"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/my_toolbar"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        android:drawableLeft="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:backgroundTint="#EEEBEB"
+        android:hint="Cari"
+        android:background="@drawable/search_layout"
+        android:textSize="14sp"/>
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/id_nearme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sekitar Anda"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@id/cari"/>
 
-</FrameLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_nearme"
+        android:id="@+id/recycler_view">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

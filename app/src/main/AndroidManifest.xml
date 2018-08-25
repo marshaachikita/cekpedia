@@ -19,7 +19,7 @@
 
     <application
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:largeHeap="true"
         android:icon="@drawable/logo_navy"
         android:label="@string/app_name"
