@@ -40,10 +40,12 @@
         android:id="@+id/id_nama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Nama"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="16sp"/>
 
     <EditText
         android:id="@+id/et_nama"
@@ -67,9 +69,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Email"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="16sp"/>
 
     <EditText
         android:id="@+id/et_email"
@@ -93,9 +96,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Nomor Handphone"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="16sp"/>
 
     <EditText
         android:id="@+id/et_no_hp"
@@ -113,33 +117,17 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+    <Button
+        android:id="@+id/btn_edit_profil"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+        android:text="Edit Profil"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:background="@drawable/ellips_button"/>
 
-        <Button
-            android:id="@+id/btn_edit_profil"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
-            android:text="Edit Profil"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            android:background="@drawable/ellips_button"/>
-
-        <Button
-            android:id="@+id/btn_keluar"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:text="Keluar Akun"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            android:background="@drawable/ellips_button"/>
-
-    </LinearLayout>
 
 </LinearLayout>
