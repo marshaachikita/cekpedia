@@ -1,6 +1,9 @@
 package me.cekpedia;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,12 +19,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment {
-
+    FirebaseAuth mAuth;
     View view;
     TextView st;
     Typeface tf;
@@ -39,7 +44,7 @@ public class ProfileFragment extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.my_toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
@@ -68,7 +73,29 @@ public class ProfileFragment extends Fragment {
                 return true;
 
             case R.id.action_keluar:
-                Toast.makeText(getActivity(), "Action bantuan clicked", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                builder1.setMessage("Yakin Ingin Keluar?");
+                builder1.setCancelable(true);
+                builder1.setPositiveButton(
+                        "Ya",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                mAuth.signOut();
+                                startActivity(new Intent(getActivity(), LoginActivity.class));
+                                getActivity().finish();
+                                dialog.cancel();
+
+                            }
+                        });
+                builder1.setNegativeButton(
+                        "Tidak",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
                 return true;
         }
 

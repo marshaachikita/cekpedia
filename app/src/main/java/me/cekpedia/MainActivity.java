@@ -1,5 +1,7 @@
 package me.cekpedia;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -25,6 +27,8 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText searchView;
     RecyclerView recyclerView;
     GridLayoutManager layoutManager;
-
+    FirebaseAuth mAuth;
     private BottomNavigationView bottomNavigationView;
     private FrameLayout mMainFrame;
-
+    private FirebaseUser mFirebaseUser;
     private ProfileFragment accountFragment;
     private HomeFragment homeFragment;
     private NearMeFragment nearMeFragment;
@@ -48,7 +52,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() == null){
+            mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
 //        final ArrayList<Image> cekpedia = new ArrayList<>();
 //
 //        cekpedia.add(new Image(R.drawable.ic_masjid, "MASJID"));
@@ -112,6 +120,31 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
+    }
+    public void logoutout(View view){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+        builder1.setMessage("Yakin Ingin Keluar?");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "Ya",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mAuth.signOut();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        finish();
+                        dialog.cancel();
+
+                    }
+                });
+        builder1.setNegativeButton(
+                "Tidak",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }
 
