@@ -5,28 +5,28 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/ic_home"
-        android:title="Home"
+        android:title="Beranda"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_loc"
         android:enabled="true"
         android:icon="@drawable/ic_location"
-        android:title="Near Me"
+        android:title="Sekitar Anda"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_help"
         android:enabled="true"
-        android:icon="@drawable/ic_help"
-        android:title="Help"
+        android:icon="@drawable/ic_fav"
+        android:title="Favorit"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_account"
         android:enabled="true"
         android:icon="@drawable/ic_account"
-        android:title="Account"
+        android:title="Akun"
         app:showAsAction="ifRoom" />
 
 </menu>

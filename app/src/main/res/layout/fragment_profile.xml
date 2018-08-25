@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#62b1be"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="me.cekpedia.ProfileFragment">
 
@@ -26,13 +27,119 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circle_image"
+        android:layout_marginTop="30dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/hotelhorison"
+        />
+
     <TextView
-        android:id="@+id/id_nearme"
+        android:id="@+id/id_nama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        android:layout_below="@id/my_toolbar"
+        android:text="Nama"
+        android:textStyle="bold"
         android:gravity="center"
         android:textSize="20sp"/>
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/et_nama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:inputType="text"
+        android:padding="10dp"
+        android:backgroundTint="#66000000"
+        android:background="@drawable/ellips_edittext"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/id_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Email"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:inputType="text"
+        android:padding="10dp"
+        android:backgroundTint="#66000000"
+        android:background="@drawable/ellips_edittext"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/id_no_hp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Nomor Handphone"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/et_no_hp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:inputType="text"
+        android:padding="10dp"
+        android:backgroundTint="#66000000"
+        android:background="@drawable/ellips_edittext"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_edit_profil"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:text="Edit Profil"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:background="@drawable/ellips_button"/>
+
+        <Button
+            android:id="@+id/btn_keluar"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:text="Keluar Akun"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:background="@drawable/ellips_button"/>
+
+    </LinearLayout>
+
+</LinearLayout>

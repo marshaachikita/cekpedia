@@ -5,7 +5,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:id="@+id/signup_layout"
-    android:background="#61B1BE"
+    android:background="#62b1be"
     tools:context="me.cekpedia.LoginActivity2">
 
     <TextView
