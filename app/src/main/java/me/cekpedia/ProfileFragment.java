@@ -16,10 +16,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 
 /**
@@ -29,8 +39,13 @@ public class ProfileFragment extends Fragment {
     FirebaseAuth mAuth;
     View view;
     TextView st;
+    EditText nama, email, nohp;
+    String Nama, Email, NoHp, Uid, photoUrl, favorit;
     Typeface tf;
-
+    FirebaseDatabase mDb;
+    DatabaseReference database;
+    FirebaseAuth firebaseAuth;
+    Button btnedit;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -50,9 +65,49 @@ public class ProfileFragment extends Fragment {
 
         //Pengaturan Font
         st = (TextView) view.findViewById(R.id.toolbar_text);
+        nama = view.findViewById(R.id.et_nama);
+        email = view.findViewById(R.id.et_email);
+        nohp = view.findViewById(R.id.et_no_hp);
+        btnedit = view.findViewById(R.id.btn_edit_profil);
         tf = Typeface.createFromAsset(getActivity().getAssets(), "FRSCRIPT.TTF");
         st.setTypeface(tf);
+        database = FirebaseDatabase.getInstance().getReference("users");
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth == null) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
+        final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        mDb = FirebaseDatabase.getInstance();
+        final DatabaseReference dataprofile = database.child(firebaseUser.getEmail().replace(".", ","));
+        dataprofile.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
+                Nama = detailprofil.get("user").toString();
+                Email = detailprofil.get("email").toString();
+                NoHp = detailprofil.get("nohp").toString();
+                Uid = detailprofil.get("uid").toString();
+                photoUrl = detailprofil.get("photoUrl").toString();
+                favorit = detailprofil.get("favourite").toString();
+                nama.setText(Nama);
+                email.setText(Email);
+                nohp.setText(NoHp);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        btnedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User user = new User(nama.getText().toString(), email.getText().toString(), photoUrl, Uid, favorit, nohp.getText().toString());
+                database.child(firebaseUser.getEmail().replace(".", ",")).setValue(user);
+                Toast.makeText(getActivity(), "simpan berhasil", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
@@ -101,4 +156,5 @@ public class ProfileFragment extends Fragment {
 
         return false;
     }
+
 }

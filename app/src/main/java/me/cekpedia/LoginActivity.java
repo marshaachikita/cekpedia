@@ -40,11 +40,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
+
+import java.util.Map;
 
 import me.cekpedia.utils.Constants;
 
@@ -60,13 +64,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int REQ_CODE = 9001;
     private TextView Name,Email;
     SignInButton googlelogin;
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth;DatabaseReference database;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mFirebaseUser;
     private static final String TAG = LoginActivity.class.getSimpleName();
-
+    String NoHp, favorit;
     Button sign_in;
-    TextView st;
+    TextView st, favhidden, nohphidden;
     Typeface tf;
 
     public ProgressDialog mProgressDialog;
@@ -119,6 +123,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Name = (TextView)findViewById(R.id.name);
         Email = (TextView)findViewById(R.id.email);
+        favhidden = findViewById(R.id.favhidden);
+        nohphidden = findViewById(R.id.nohphidden);
+
 //        Prof_Section = (LinearLayout)findViewById(R.id.prof_section);
 //        SignOut = (Button)findViewById(R.id.bn_logout);
 //        SignIn = (SignInButton)findViewById(R.id.bn_login);
@@ -231,7 +238,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
     }
-    @Override
+
+        @Override
+        public void onBackPressed() {
+            super.onBackPressed();
+            finish();
+        }
+
+        @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
@@ -282,11 +296,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (account.getPhotoUrl() != null){
                                 photoUrl = account.getPhotoUrl().toString();
                             }
+                            final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            database = FirebaseDatabase.getInstance().getReference("users");
+                            final DatabaseReference dataprofile = database.child(firebaseUser.getEmail().replace(".", ","));
+                            dataprofile.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
+                                    NoHp = detailprofil.get("nohp").toString();
+                                    favorit = detailprofil.get("favourite").toString();
+                                    nohphidden.setText(NoHp);
+                                    favhidden.setText(favorit);
+//                                    nama.setText(Nama);
+//                                    email.setText(Email);
+//                                    nohp.setText(NoHp);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                             User user = new User(
-                                    account.getDisplayName() + " " + account.getFamilyName(),
+                                    account.getDisplayName(),
+//                                            " " + account.getFamilyName(),
                                     account.getEmail(),
                                     photoUrl,
-                                    FirebaseAuth.getInstance().getCurrentUser().getUid(), ""
+                                    FirebaseAuth.getInstance().getCurrentUser().getUid(),"",""
                             );
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference userRef = database.getReference(Constants.USER_KEY);
