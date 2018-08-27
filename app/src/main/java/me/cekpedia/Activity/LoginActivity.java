@@ -1,10 +1,13 @@
 package me.cekpedia.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +31,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -59,7 +64,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int REQ_CODE = 9001;
     private TextView Name,Email;
     SignInButton googlelogin;
-    FirebaseAuth firebaseAuth;DatabaseReference database;
+    FirebaseAuth firebaseAuth;
+    DatabaseReference database;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mFirebaseUser;
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -67,6 +73,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button sign_in;
     TextView st, favhidden, nohphidden;
     Typeface tf;
+    EditText username, password;
+    ProgressDialog progressDialog;
 
     public ProgressDialog mProgressDialog;
 
@@ -74,6 +82,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progressDialog = new ProgressDialog(this);
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth != null){
+            mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        }
 
         // Pengaturan Opacity Background Gambar
         View backgroundimage = findViewById(R.id.login_layout);
@@ -111,8 +124,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
-                startActivity(intent);
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.show();
+
+                if (username.getText().toString().equals("")) {
+                    progressDialog.cancel();
+                    Toast.makeText(LoginActivity.this, "Email Tidak boleh kosong", Toast.LENGTH_LONG).show();
+                } else if (password.getText().toString().equals("")) {
+                    Toast.makeText(LoginActivity.this, "Password Tidak boleh kosong", Toast.LENGTH_LONG).show();
+                    progressDialog.cancel();
+                } else {
+                    if (checkInternet()) {
+                        firebaseAuth.signInWithEmailAndPassword(username.getText().toString(), password.getText().toString()
+                        ).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                hideProgressDialog();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                            intent.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
+                                startActivity(intent);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.cancel();
+                                Toast.makeText(LoginActivity.this, "Login Gagal", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                    else {
+                        hideProgressDialog();
+                        Toast.makeText(LoginActivity.this, "No Connection", Toast.LENGTH_SHORT).show();
+                    }
+                }
+//                Intent intent = new Intent(view.getContext(), MainActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -183,10 +229,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth != null){
-            mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        }
+
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 //        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,signInOptions).build();
 
@@ -345,7 +388,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
         protected void hideProgressDialog(){
             if(mProgressDialog != null && mProgressDialog.isShowing()){
-                mProgressDialog.hide();
+                mProgressDialog.cancel();
             }
         }
 
@@ -394,5 +437,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void daftarAkun(View view) {
         Intent intent = new Intent(this, LoginActivity2.class);
         startActivity(intent);
+        }
+    public boolean checkInternet(){
+        boolean connectStatus = true;
+        ConnectivityManager ConnectionManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true ) {
+            connectStatus = true;
+        }
+        else {
+           connectStatus = false;
+        }
+        return connectStatus;
     }
-    }
+}

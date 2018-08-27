@@ -13,6 +13,7 @@ public class User {
     private String Uid;
     private String favourite;
     private String nohp;
+    private String Password;
     public User(String user, String email, String photoUrl, String uid, String favourite, String nohp) {
         this.User = user;
         this.email = email;
@@ -21,15 +22,19 @@ public class User {
         this.favourite = favourite;
         this.nohp = nohp;
     }
-    public User(String user, String email, String photoUrl, String uid) {
+//    public User(String user, String email, String photoUrl, String uid) {
+//        this.User = user;
+//        this.email = email;
+//        this.photoUrl = photoUrl;
+//        this.Uid = uid;
+//    }
+
+
+    public User(String user, String email, String password, String nohp) {
         this.User = user;
         this.email = email;
-        this.photoUrl = photoUrl;
-        this.Uid = uid;
-    }
-
-    public User(String user, String email, String nohp) {
-
+        this.Password = password;
+        this.nohp = nohp;
     }
 
     public User(EditText nama, EditText email, String photoUrl, String uid, String favorit, EditText nohp) {
@@ -55,6 +60,14 @@ public class User {
 //    }
     public User(EditText nama, EditText email, EditText nohp){
 
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
     }
 
     public String getNohp() {

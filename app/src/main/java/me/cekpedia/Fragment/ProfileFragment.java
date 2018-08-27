@@ -82,26 +82,26 @@ public class ProfileFragment extends Fragment {
         final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         mDb = FirebaseDatabase.getInstance();
         final DatabaseReference dataprofile = database.child(firebaseUser.getEmail().replace(".", ","));
-        dataprofile.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
-                Nama = detailprofil.get("user").toString();
-                Email = detailprofil.get("email").toString();
-                NoHp = detailprofil.get("nohp").toString();
-                Uid = detailprofil.get("uid").toString();
-                photoUrl = detailprofil.get("photoUrl").toString();
-                favorit = detailprofil.get("favourite").toString();
-                nama.setText(Nama);
-                email.setText(Email);
-                nohp.setText(NoHp);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        dataprofile.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
+//                Nama = detailprofil.get("user").toString();
+//                Email = detailprofil.get("email").toString();
+//                NoHp = detailprofil.get("nohp").toString();
+//                Uid = detailprofil.get("uid").toString();
+//                photoUrl = detailprofil.get("photoUrl").toString();
+//                favorit = detailprofil.get("favourite").toString();
+//                nama.setText(Nama);
+//                email.setText(Email);
+//                nohp.setText(NoHp);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
