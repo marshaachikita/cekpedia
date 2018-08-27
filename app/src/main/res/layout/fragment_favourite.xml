@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="me.cekpedia.FavouriteFragment">
+    tools:context="me.cekpedia.Fragment.FavouriteFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"

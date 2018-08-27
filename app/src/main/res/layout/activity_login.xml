@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/login_layout"
     android:background="#62b1be"
-    tools:context="me.cekpedia.LoginActivity"
+    tools:context="me.cekpedia.Activity.LoginActivity"
     >
 
     <LinearLayout
