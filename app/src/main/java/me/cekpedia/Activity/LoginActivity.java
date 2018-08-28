@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int REQ_CODE = 9001;
     private TextView Name,Email;
     SignInButton googlelogin;
+//    Button googlelogin;
     FirebaseAuth firebaseAuth;
     DatabaseReference database;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -87,7 +89,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (firebaseAuth != null){
             mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         }
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("668210003774-dtag7e2q0sgbfld6rvk8upd6qcslqejl.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
 
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         // Pengaturan Opacity Background Gambar
         View backgroundimage = findViewById(R.id.login_layout);
         Drawable background = backgroundimage.getBackground();
@@ -124,39 +133,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.setMessage("Please Wait...");
-                progressDialog.show();
-
-                if (username.getText().toString().equals("")) {
-                    progressDialog.cancel();
-                    Toast.makeText(LoginActivity.this, "Email Tidak boleh kosong", Toast.LENGTH_LONG).show();
-                } else if (password.getText().toString().equals("")) {
-                    Toast.makeText(LoginActivity.this, "Password Tidak boleh kosong", Toast.LENGTH_LONG).show();
-                    progressDialog.cancel();
-                } else {
-                    if (checkInternet()) {
-                        firebaseAuth.signInWithEmailAndPassword(username.getText().toString(), password.getText().toString()
-                        ).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                hideProgressDialog();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            intent.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
-                                startActivity(intent);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.cancel();
-                                Toast.makeText(LoginActivity.this, "Login Gagal", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                    else {
-                        hideProgressDialog();
-                        Toast.makeText(LoginActivity.this, "No Connection", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                Toast.makeText(LoginActivity.this, "fitur masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+//                progressDialog.setMessage("Please Wait...");
+//                progressDialog.show();
+//
+//                if (username.getText().toString().equals("")) {
+//                    progressDialog.cancel();
+//                    Toast.makeText(LoginActivity.this, "Email Tidak boleh kosong", Toast.LENGTH_LONG).show();
+//                } else if (password.getText().toString().equals("")) {
+//                    Toast.makeText(LoginActivity.this, "Password Tidak boleh kosong", Toast.LENGTH_LONG).show();
+//                    progressDialog.cancel();
+//                } else {
+//                    if (checkInternet()) {
+//                        firebaseAuth.signInWithEmailAndPassword(username.getText().toString(), password.getText().toString()
+//                        ).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//                            @Override
+//                            public void onSuccess(AuthResult authResult) {
+//                                hideProgressDialog();
+//                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+////                            intent.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
+//                                startActivity(intent);
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                progressDialog.cancel();
+//                                Toast.makeText(LoginActivity.this, "Login Gagal", Toast.LENGTH_LONG).show();
+//                            }
+//                        });
+//                    }
+//                    else {
+//                        hideProgressDialog();
+//                        Toast.makeText(LoginActivity.this, "No Connection", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
 //                Intent intent = new Intent(view.getContext(), MainActivity.class);
 //                startActivity(intent);
             }
@@ -203,37 +213,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //            }
 //        }
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("668210003774-dtag7e2q0sgbfld6rvk8upd6qcslqejl.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
 
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-//        SignIn.setOnClickListener(this);
-
-//        SignOut.setOnClickListener(this);
-//        Prof_Section .setVisibility(View.GONE);
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 mFirebaseUser = firebaseAuth.getCurrentUser();
                 if (mFirebaseUser != null){
                     if (BuildConfig.DEBUG) Log.d(TAG, "onAuthStateChanged:signed_in " + mFirebaseUser.getDisplayName());
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }else {
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    if (BuildConfig.DEBUG) Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
             }
         };
-
-
-
-        GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-//        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,signInOptions).build();
-
-
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -242,19 +233,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (mFirebaseUser != null){
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
+                    if (mFirebaseUser != null) {
+                        if (BuildConfig.DEBUG)
+                            Log.d(TAG, "onAuthStateChanged:signed_in " + mFirebaseUser.getDisplayName());
+                    } else {
+                        if (BuildConfig.DEBUG) Log.d(TAG, "onAuthStateChanged:signed_out");
+                    }
                 }
             }
         };
-//
-
-//        btn_home =(Button)findViewById(R.id.home);
-//
-//        btn_home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//            }
-//        });
     }
     private void signIn(){
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
@@ -435,8 +422,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void daftarAkun(View view) {
-        Intent intent = new Intent(this, LoginActivity2.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, LoginActivity2.class);
+//        startActivity(intent);
+        Toast.makeText(this, "fitur masih dalam pengembangan", Toast.LENGTH_SHORT).show();
         }
     public boolean checkInternet(){
         boolean connectStatus = true;

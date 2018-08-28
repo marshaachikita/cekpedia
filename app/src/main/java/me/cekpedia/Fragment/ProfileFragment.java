@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -139,6 +140,7 @@ public class ProfileFragment extends Fragment {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 mAuth.signOut();
+                                AuthUI.getInstance().signOut(getActivity());
                                 startActivity(new Intent(getActivity(), LoginActivity.class));
                                 getActivity().finish();
                                 dialog.cancel();

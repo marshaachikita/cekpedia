@@ -99,20 +99,37 @@ public class LoginActivity2 extends AppCompatActivity {
                     progressDialog.cancel();
                     Toast.makeText(LoginActivity2.this, "Tidak Valid", Toast.LENGTH_SHORT).show();
                 }else {
-                    User user = new User(Nama.getText().toString(), Email.getText().toString(), Password.getText().toString(), NomorTelp.getText().toString());
-                    database.child("userbyemail").child(Email.getText().toString().replace(".", ",")).setValue(user)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    progressDialog.dismiss();
 
-                                    if (task.isSuccessful()) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(LoginActivity2.this, "Registration Successfuly", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(LoginActivity2.this, LoginActivity.class);
+//                    database.child("userbyemail").child(Email.getText().toString().replace(".", ",")).setValue(user)
+//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    progressDialog.dismiss();
+//                                    firebaseAuth.createUserWithEmailAndPassword(Email.getText().toString(), Password.getText().toString());
+//                                    if (task.isSuccessful()) {
+//                                        progressDialog.dismiss();
+//                                        Toast.makeText(LoginActivity2.this, "Registration Successfuly", Toast.LENGTH_SHORT).show();
+//                                        Intent intent = new Intent(LoginActivity2.this, LoginActivity.class);
+//                                        startActivity(intent);
+//                                        finish();
 
-                                        startActivity(intent);
-                                        finish();
+                                  firebaseAuth.createUserWithEmailAndPassword(Email.getText().toString(), Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                progressDialog.dismiss();
+                                                if (task.isSuccessful()) {
+                                                    progressDialog.dismiss();
+                                                    User user = new User(Nama.getText().toString(), Email.getText().toString(), Password.getText().toString(), NomorTelp.getText().toString());
+                                                    Toast.makeText(LoginActivity2.this, "Registration Successfuly", Toast.LENGTH_SHORT).show();
+                                                    database.child("userbyemail").child(Email.getText().toString().replace(".", ",")).setValue(user);
+                                                    Intent intent = new Intent(LoginActivity2.this, LoginActivity.class);
+//                                                    finish();
+                                                    startActivity(intent);
+//                            else {
+//                                progressDialog.dismiss();
+//                                Toast.makeText(LoginActivity2.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+//                            }
+
                                     } else {
                                         progressDialog.dismiss();
                                         Toast.makeText(LoginActivity2.this, "Registration Failed", Toast.LENGTH_SHORT).show();
@@ -122,25 +139,7 @@ public class LoginActivity2 extends AppCompatActivity {
                             });
                     progressDialog.setMessage("Please Wait...");
                     progressDialog.show();
-                    firebaseAuth.createUserWithEmailAndPassword(Email.getText().toString(), Password.getText().toString()
-                    ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressDialog.dismiss();
 
-                            if (task.isSuccessful()) {
-                                progressDialog.dismiss();
-                                Toast.makeText(LoginActivity2.this, "Registration Successfuly", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity2.this, LoginActivity.class);
-
-                                startActivity(intent);
-                            }
-//                            else {
-//                                progressDialog.dismiss();
-//                                Toast.makeText(LoginActivity2.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-//                            }
-                        }
-                    });
                 }
             }
         });
