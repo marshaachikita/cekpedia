@@ -17,9 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,6 +52,7 @@ public class ProfileFragment extends Fragment {
     DatabaseReference database;
     FirebaseAuth firebaseAuth;
     Button btnedit;
+    ImageView prof_pic;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -72,37 +75,39 @@ public class ProfileFragment extends Fragment {
         nama = view.findViewById(R.id.et_nama);
         email = view.findViewById(R.id.et_email);
         nohp = view.findViewById(R.id.et_no_hp);
+        prof_pic = view.findViewById(R.id.circle_image);
         btnedit = view.findViewById(R.id.btn_edit_profil);
         tf = Typeface.createFromAsset(getActivity().getAssets(), "FRSCRIPT.TTF");
         st.setTypeface(tf);
         database = FirebaseDatabase.getInstance().getReference("users");
         firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth == null) {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-        }
+//        if (firebaseAuth == null) {
+//            startActivity(new Intent(getActivity(), LoginActivity.class));
+//        }
         final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         mDb = FirebaseDatabase.getInstance();
         final DatabaseReference dataprofile = database.child(firebaseUser.getEmail().replace(".", ","));
-//        dataprofile.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
-//                Nama = detailprofil.get("user").toString();
-//                Email = detailprofil.get("email").toString();
-//                NoHp = detailprofil.get("nohp").toString();
-//                Uid = detailprofil.get("uid").toString();
-//                photoUrl = detailprofil.get("photoUrl").toString();
-//                favorit = detailprofil.get("favourite").toString();
-//                nama.setText(Nama);
-//                email.setText(Email);
-//                nohp.setText(NoHp);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+        dataprofile.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
+                Nama = detailprofil.get("user").toString();
+                Email = detailprofil.get("email").toString();
+                NoHp = detailprofil.get("nohp").toString();
+                Uid = detailprofil.get("uid").toString();
+                photoUrl = detailprofil.get("photoUrl").toString();
+                Glide.with(getActivity()).load(photoUrl).into(prof_pic);
+                favorit = detailprofil.get("favourite").toString();
+                nama.setText(Nama);
+                email.setText(Email);
+                nohp.setText(NoHp);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         btnedit.setOnClickListener(new View.OnClickListener() {
             @Override

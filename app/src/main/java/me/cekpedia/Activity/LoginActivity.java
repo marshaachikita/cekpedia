@@ -232,6 +232,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 mFirebaseUser = firebaseAuth.getCurrentUser();
                 if (mFirebaseUser != null){
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    Toast.makeText(LoginActivity.this, "Sign in berhasil", Toast.LENGTH_SHORT).show();
                     finish();
                     if (mFirebaseUser != null) {
                         if (BuildConfig.DEBUG)
@@ -317,10 +318,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                            updateUI(user);
                         }
                         else {
-                            String photoUrl = null;
-                            if (account.getPhotoUrl() != null){
-                                photoUrl = account.getPhotoUrl().toString();
-                            }
+
                             final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             database = FirebaseDatabase.getInstance().getReference("users");
                             final DatabaseReference dataprofile = database.child(firebaseUser.getEmail().replace(".", ","));
@@ -328,38 +326,49 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
-                                    NoHp = detailprofil.get("nohp").toString();
-                                    favorit = detailprofil.get("favourite").toString();
-                                    nohphidden.setText(NoHp);
-                                    favhidden.setText(favorit);
-//                                    nama.setText(Nama);
-//                                    email.setText(Email);
-//                                    nohp.setText(NoHp);
+                                    if(dataSnapshot.getChildrenCount()>=5) {
+                                        if (!detailprofil.get("nohp").toString().equals("")) {
+                                            NoHp = detailprofil.get("nohp").toString();
+                                            favorit = detailprofil.get("favourite").toString();
+//                                            nohphidden.setText(NoHp);
+//                                            favhidden.setText(favorit);
+                                        } else {
+                                            NoHp = "";
+                                            favorit = "";
+                                        }
+                                    }else {
+                                        NoHp = "";
+                                        favorit = "";
+                                    }
+                                    String photoUrl = null;
+                                    if (account.getPhotoUrl() != null){
+                                        photoUrl = account.getPhotoUrl().toString();
+                                    }
+                                    User user = new User(
+                                            account.getDisplayName(),
+//                                            " " + account.getFamilyName(),
+                                            account.getEmail(),
+                                            photoUrl,
+                                            FirebaseAuth.getInstance().getCurrentUser().getUid(),favorit,NoHp
+                                    );
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference userRef = database.getReference(Constants.USER_KEY);
+                                    userRef.child(account.getEmail().replace(".", ","))
+                                            .setValue(user, new DatabaseReference.CompletionListener() {
+                                                @Override
+                                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+//                                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                                }
+                                            });
+                                    if (BuildConfig.DEBUG)Log.v(TAG, "Auth Successful");
+//                                    Toast.makeText(LoginActivity.this, "Sign In Success", Toast.LENGTH_SHORT).show();
                                 }
-
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
 
                                 }
                             });
-                            User user = new User(
-                                    account.getDisplayName(),
-//                                            " " + account.getFamilyName(),
-                                    account.getEmail(),
-                                    photoUrl,
-                                    FirebaseAuth.getInstance().getCurrentUser().getUid(),"",""
-                            );
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference userRef = database.getReference(Constants.USER_KEY);
-                            userRef.child(account.getEmail().replace(".", ","))
-                                    .setValue(user, new DatabaseReference.CompletionListener() {
-                                        @Override
-                                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                           startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                        }
-                                    });
-                            if (BuildConfig.DEBUG)Log.v(TAG, "Auth Successful");
-                            Toast.makeText(LoginActivity.this, "Sign In Success", Toast.LENGTH_SHORT).show();
+
 
                         }
 // else {
