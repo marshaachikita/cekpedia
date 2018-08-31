@@ -123,6 +123,7 @@ public class LoginActivity2 extends AppCompatActivity {
                                                     Toast.makeText(LoginActivity2.this, "Registration Successfuly", Toast.LENGTH_SHORT).show();
                                                     database.child("userbyemail").child(Email.getText().toString().replace(".", ",")).setValue(user);
                                                     Intent intent = new Intent(LoginActivity2.this, LoginActivity.class);
+                                                    onStop();
 //                                                    finish();
                                                     startActivity(intent);
 //                            else {
@@ -144,6 +145,11 @@ public class LoginActivity2 extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }
 

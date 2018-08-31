@@ -99,7 +99,6 @@
             android:layout_gravity="center"
             android:id="@+id/selectImage"
             android:text="Choose an Image"
-
             android:background="#448AFF"
             android:textColor="#FFF"
             android:onClick="selectImage"

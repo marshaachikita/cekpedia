@@ -38,6 +38,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -105,6 +107,8 @@ public class InputLokasiActivity extends AppCompatActivity {
                     selectedImage = imageReturnedIntent.getData();
                     try {
                         Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bm.compress(Bitmap.CompressFormat.JPEG, 25, baos);
                         imageView.setImageBitmap(bm);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
