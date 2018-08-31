@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Pengaturan Font
         st = (TextView) findViewById(R.id.cekpedia_login);
-        tf = Typeface.createFromAsset(getAssets(), "FRSCRIPT.TTF");
+        tf = Typeface.createFromAsset(getAssets(), "scriptmtbold.ttf");
         st.setTypeface(tf);
 
         // Button Sign In & Sign Up

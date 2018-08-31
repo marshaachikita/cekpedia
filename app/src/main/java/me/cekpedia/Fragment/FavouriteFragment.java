@@ -57,7 +57,7 @@ public class FavouriteFragment extends Fragment {
 
         //Pengaturan Font
         st = (TextView) view.findViewById(R.id.toolbar_text);
-        tf = Typeface.createFromAsset(getActivity().getAssets(), "FRSCRIPT.TTF");
+        tf = Typeface.createFromAsset(getActivity().getAssets(), "scriptmtbold.ttf");
         st.setTypeface(tf);
 
         //Pengaturan Recycler View

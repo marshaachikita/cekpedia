@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         st = (TextView) findViewById(R.id.splash_text);
-        tf = Typeface.createFromAsset(getAssets(), "FRSCRIPT.TTF");
+        tf = Typeface.createFromAsset(getAssets(), "scriptmtbold.ttf");
         st.setTypeface(tf);
 
         new Handler().postDelayed(new Runnable() {

@@ -40,7 +40,7 @@ public class NearMeFragment extends Fragment {
 
         //Pengaturan Font
         st1 = (TextView) view.findViewById(R.id.toolbar_text);
-        tf1 = Typeface.createFromAsset(getActivity().getAssets(), "FRSCRIPT.TTF");
+        tf1 = Typeface.createFromAsset(getActivity().getAssets(), "scriptmtbold.ttf");
         st1.setTypeface(tf1);
 
 //        st2 = (TextView) view.findViewById(R.id.id_nearme);

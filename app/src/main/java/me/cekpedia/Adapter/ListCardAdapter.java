@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -74,7 +75,7 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHo
 
         public int current;
         public ImageView itemGambar;
-        public TextView itemNama, itemDetail, itemJarak;
+        public TextView itemNama, itemDetail, itemJarak, detail;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -82,6 +83,7 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHo
             itemNama = (TextView)itemView.findViewById(R.id.namaTempat);
             itemDetail = (TextView)itemView.findViewById(R.id.alamatTempat);
             itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
+            detail = (TextView) itemView.findViewById(R.id.detail);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
