@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Typeface tf;
     EditText username, password;
     ProgressDialog progressDialog;
+    String photoUrl = null;
 
     public ProgressDialog mProgressDialog;
 
@@ -327,9 +328,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
                                     if(dataSnapshot.getChildrenCount()>=5) {
-                                        if (!detailprofil.get("nohp").toString().equals("")) {
+                                        if (!detailprofil.get("nohp").toString().equals("")){
+//                                                || !detailprofil.get("photourl").toString().equals("")
                                             NoHp = detailprofil.get("nohp").toString();
                                             favorit = detailprofil.get("favourite").toString();
+                                            photoUrl = detailprofil.get("photoUrl").toString();
 //                                            nohphidden.setText(NoHp);
 //                                            favhidden.setText(favorit);
                                         } else {
@@ -340,7 +343,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         NoHp = "";
                                         favorit = "";
                                     }
-                                    String photoUrl = null;
+
                                     if (account.getPhotoUrl() != null){
                                         photoUrl = account.getPhotoUrl().toString();
                                     }

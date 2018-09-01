@@ -28,6 +28,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -72,6 +75,7 @@ public class ProfileFragment extends Fragment {
     ImageView prof_pic;
     Uri selectedImage;
     StorageReference storageRef;
+    GoogleSignInAccount account;
     private StorageTask mUploadTask;
     public static final String FB_STORAGE_PATH = "fotoprofil/";
     private static final int SELECT_PHOTO = 100;
@@ -101,6 +105,7 @@ public class ProfileFragment extends Fragment {
         btnedit = view.findViewById(R.id.btn_edit_profil);
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+
         tf = Typeface.createFromAsset(getActivity().getAssets(), "scriptmtbold.ttf");
         st.setTypeface(tf);
         database = FirebaseDatabase.getInstance().getReference("users");
@@ -139,11 +144,17 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                StorageReference ref = storageRef.child(FB_STORAGE_PATH).child((firebaseUser.getEmail().replace(".", ",")) + System.currentTimeMillis() + "." + getImageExt(selectedImage));
+                StorageReference ref = storageRef.child(FB_STORAGE_PATH + System.currentTimeMillis() + "." + getImageExt(selectedImage));
                 mUploadTask = ref.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         final User user = new User(nama.getText().toString(), email.getText().toString(), taskSnapshot.getDownloadUrl().toString(), Uid, favorit, nohp.getText().toString());
+                        final User user1 = new User(nama.getText().toString(), email.getText().toString(), photoUrl, Uid, favorit, nohp.getText().toString());
+//                        if (!photoUrl.equals("")){
+//                            database.child(firebaseUser.getEmail().replace(".", ",")).setValue(user1);
+//                        }else {
+//
+//                        }
                         database.child(firebaseUser.getEmail().replace(".", ",")).setValue(user);
                         Toast.makeText(getActivity(), "simpan berhasil", Toast.LENGTH_SHORT).show();
                     }
@@ -219,8 +230,12 @@ public class ProfileFragment extends Fragment {
                 try {
                     Bitmap bm = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImage);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bm.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                    bm.compress(Bitmap.CompressFormat.PNG,10, baos);
+//                    bm.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+//                    bm.compress(Bitmap.CompressFormat.PNG,10, baos);
+//                    GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(imageReturnedIntent);
+//                    if(result.isSuccess()) {
+//                        GoogleSignInAccount account = result.getSignInAccount();
+//                    }
                     prof_pic.setImageBitmap(bm);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
