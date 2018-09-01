@@ -135,6 +135,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View view) {
                 Toast.makeText(LoginActivity.this, "fitur masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+
 //                progressDialog.setMessage("Please Wait...");
 //                progressDialog.show();
 //
@@ -168,8 +172,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                        Toast.makeText(LoginActivity.this, "No Connection", Toast.LENGTH_SHORT).show();
 //                    }
 //                }
-//                Intent intent = new Intent(view.getContext(), MainActivity.class);
-//                startActivity(intent);
+
             }
         });
 
@@ -433,21 +436,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        }
     }
 
-    public void daftarAkun(View view) {
-//        Intent intent = new Intent(this, LoginActivity2.class);
-//        startActivity(intent);
-        Toast.makeText(this, "fitur masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+        public void daftarAkun(View view) {
+    //        Intent intent = new Intent(this, LoginActivity2.class);
+    //        startActivity(intent);
+            Toast.makeText(this, "fitur masih dalam pengembangan", Toast.LENGTH_SHORT).show();
         }
-    public boolean checkInternet(){
-        boolean connectStatus = true;
-        ConnectivityManager ConnectionManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected()==true ) {
-            connectStatus = true;
+
+        public boolean checkInternet(){
+            boolean connectStatus = true;
+            ConnectivityManager ConnectionManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+            if(networkInfo != null && networkInfo.isConnected()==true ) {
+                connectStatus = true;
+            }
+            else {
+               connectStatus = false;
+            }
+            return connectStatus;
         }
-        else {
-           connectStatus = false;
-        }
-        return connectStatus;
+
     }
-}

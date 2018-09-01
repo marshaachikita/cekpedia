@@ -86,6 +86,33 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
             R.drawable.ic_apotek,
             R.drawable.ic_bidan
     };
+
+    int[] img = {
+            R.drawable.icon_penginapan,
+            R.drawable.icon_wisata,
+            R.drawable.icon_rumah_sakit,
+            R.drawable.icon_kuliner,
+            R.drawable.icon_tempat_ibadah,
+            R.drawable.icon_spbu,
+            R.drawable.icon_swalayan,
+            R.drawable.icon_belajar,
+            R.drawable.icon_transportasi,
+            R.drawable.icon_tambah_lokasi
+    };
+
+    String [] nama = {
+            "Penginapan",
+            "Wisata",
+            "Rumah Sakit",
+            "Kuliner",
+            "Tempat Ibadah",
+            "SPBU",
+            "Swalayan",
+            "Belajar",
+            "Transportasi",
+            "Tambah Lokasi"
+    };
+
     String [] namaMenu = {
             "Masjid",
             "Wisata",
@@ -145,7 +172,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
         // Pengaturan Recycler View
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        ImageAdapter myAdapter = new ImageAdapter(getActivity(), gambar, namaMenu);
+        ImageAdapter myAdapter = new ImageAdapter(getActivity(), img, nama);
         layoutManager = new GridLayoutManager(getActivity(), 4);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
