@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(View view) {
                 Toast.makeText(LoginActivity.this, "fitur masih dalam pengembangan", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(view.getContext() , MainActivity.class);
                 startActivity(intent);
 
 //                progressDialog.setMessage("Please Wait...");

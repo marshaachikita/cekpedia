@@ -72,20 +72,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //    private static final String ARG_PARAM1 = "params";
 //    private String imageUrls;
 //
-    int[] gambar = {
-            R.drawable.ic_masjid,
-            R.drawable.ic_wisata,
-            R.drawable.ic_penginapan,
-            R.drawable.ic_rumah_sakit,
-            R.drawable.ic_restoran,
-            R.drawable.ic_supermarket,
-            R.drawable.ic_sekolah,
-            R.drawable.ic_transportasi,
-            R.drawable.ic_input_lokasi,
-            R.drawable.ic_spbu,
-            R.drawable.ic_apotek,
-            R.drawable.ic_bidan
-    };
 
     int[] img = {
             R.drawable.icon_penginapan,
@@ -113,20 +99,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
             "Tambah Lokasi"
     };
 
-    String [] namaMenu = {
-            "Masjid",
-            "Wisata",
-            "Penginapan",
-            "Rumah Sakit",
-            "Restoran",
-            "Supermarket",
-            "Sekolah",
-            "Transportasi",
-            "Input Lokasi",
-            "SPBU",
-            "Apotek",
-            "Bidan"
-    };
 //    private Handler handler;
 //    private Runnable Update;
 //    static int currentPage = 0;
@@ -158,17 +130,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
         st = (TextView) view.findViewById(R.id.toolbar_text);
         tf = Typeface.createFromAsset(getActivity().getAssets(), "scriptmtbold.ttf");
         st.setTypeface(tf);
-
-        // Pengaturan Ukuran Icon DrawableLeft
-        final EditText search = (EditText) view.findViewById(R.id.cari);
-        final float density = getResources().getDisplayMetrics().density;
-        final Drawable drawable_search = getResources().getDrawable(R.drawable.ic_search);
-
-        final int width = Math.round(24 * density);
-        final int height = Math.round(24 * density);
-
-        drawable_search.setBounds(0, 0, width, height);
-        search.setCompoundDrawables(drawable_search, null, null, null);
 
         // Pengaturan Recycler View
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -354,54 +315,45 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
     public void itemClicked(View view, int position) {
         switch (position) {
             case 0:
-                Intent intentmasjid = new Intent(getActivity(), MasjidActivity.class);
-                startActivity(intentmasjid);
+                Intent intenthotel = new Intent(getActivity(), HotelActivity.class);
+                startActivity(intenthotel);
                 break;
             case 1:
                 Intent intentwisata = new Intent(getActivity(), WisataActivity.class);
                 startActivity(intentwisata);
                 break;
             case 2:
-                Intent intenthotel = new Intent(getActivity(), HotelActivity.class);
-                startActivity(intenthotel);
-                break;
-            case 3:
                 Intent intentrs = new Intent(getActivity(), RumahsakitActivity.class);
                 startActivity(intentrs);
                 break;
-            case 4:
+            case 3:
                 Intent intentrestoran = new Intent(getActivity(), RestoranActivity.class);
                 startActivity(intentrestoran);
                 break;
+            case 4:
+                Intent intentmasjid = new Intent(getActivity(), MasjidActivity.class);
+                startActivity(intentmasjid);
+                break;
             case 5:
-                Intent intentsupermarket = new Intent(getActivity(), SupermarketActivity.class);
-                startActivity(intentsupermarket);
-                break;
-            case 6:
-                Intent intentsekolah = new Intent(getActivity(), SekolahActivity.class);
-                startActivity(intentsekolah);
-                break;
-            case 7:
-                Intent intenttransport = new Intent(getActivity(), TransportasiActivity.class);
-                startActivity(intenttransport);
-                break;
-            case 8:
-                Intent intentinput = new Intent(getActivity(), InputLokasiActivity.class);
-                startActivity(intentinput);
-                break;
-            case 9:
                 Intent intentspbu = new Intent(getActivity(), SPBUActivity.class);
                 startActivity(intentspbu);
                 break;
-            case 10:
-                Intent intentapotek = new Intent(getActivity(), ApotekActivity.class);
-                startActivity(intentapotek);
+            case 6:
+                Intent intentsupermarket = new Intent(getActivity(), SupermarketActivity.class);
+                startActivity(intentsupermarket);
                 break;
-            case 11:
-                Intent intentbidan = new Intent(getActivity(), BidanActivity.class);
-                startActivity(intentbidan);
+            case 7:
+                Intent intentsekolah = new Intent(getActivity(), SekolahActivity.class);
+                startActivity(intentsekolah);
                 break;
-
+            case 8:
+                Intent intenttransport = new Intent(getActivity(), TransportasiActivity.class);
+                startActivity(intenttransport);
+                break;
+            case 9:
+                Intent intentinput = new Intent(getActivity(), InputLokasiActivity.class);
+                startActivity(intentinput);
+                break;
         }
     }
 

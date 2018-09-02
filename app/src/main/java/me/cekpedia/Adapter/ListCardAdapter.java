@@ -1,5 +1,6 @@
 package me.cekpedia.Adapter;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import me.cekpedia.Activity.RumahsakitActivity;
+import me.cekpedia.Activity.SubMenuActivity;
 import me.cekpedia.R;
 
 public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHolder> {
@@ -77,7 +80,7 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHo
         public ImageView itemGambar;
         public TextView itemNama, itemDetail, itemJarak, detail;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             itemGambar = (ImageView)itemView.findViewById(R.id.gambar);
             itemNama = (TextView)itemView.findViewById(R.id.namaTempat);
@@ -88,6 +91,9 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     int position = getAdapterPosition();
+
+                    Intent intentrs = new Intent(itemView.getContext(), SubMenuActivity.class);
+                    itemView.getContext().startActivity(intentrs);
 
                     Snackbar.make(v, "Click detected on item " + position,
                             Snackbar.LENGTH_LONG)

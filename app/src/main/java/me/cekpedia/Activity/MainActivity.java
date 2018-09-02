@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() == null){
-            mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+//        if (mAuth.getCurrentUser() == null){
+//            mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
 //        final ArrayList<Image> cekpedia = new ArrayList<>();
 //
 //        cekpedia.add(new Image(R.drawable.ic_masjid, "MASJID"));
