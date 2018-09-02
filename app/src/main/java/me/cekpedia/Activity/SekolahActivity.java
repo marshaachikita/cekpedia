@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,143 +23,161 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.cekpedia.Adapter.ImageListAdapter;
+import me.cekpedia.Adapter.ListCardAdapter;
 import me.cekpedia.R;
 import me.cekpedia.models.ImageUpload;
 
 public class SekolahActivity extends AppCompatActivity {
-    ListView listView;
-    private RecyclerView mRecyclerView;
-    private ImageListAdapter mAdapter;
-    private DatabaseReference mDatabaseRef;
-    private StorageReference mStorageRef;
-    private List<ImageUpload> imgList;
-    private ImageListAdapter adapter;
-    private ProgressDialog mProgressDialog;
-    public static final String FB_DATABASE_PATH = "cekpedia";
-    ArrayList<String>JudulList;
-    ArrayList<String>LokasiList;
-    ArrayList<String>NomorList;
-    ArrayList<String>GambarList;
-    ArrayList<String>nameSub;
-    private RecyclerView mResult;
-    SearchView searchView;
+//    ListView listView;
+//    private RecyclerView mRecyclerView;
+//    private ImageListAdapter mAdapter;
+//    private DatabaseReference mDatabaseRef;
+//    private StorageReference mStorageRef;
+//    private List<ImageUpload> imgList;
+//    private ImageListAdapter adapter;
+//    private ProgressDialog mProgressDialog;
+//    public static final String FB_DATABASE_PATH = "cekpedia";
+//    ArrayList<String>JudulList;
+//    ArrayList<String>LokasiList;
+//    ArrayList<String>NomorList;
+//    ArrayList<String>GambarList;
+//    ArrayList<String>nameSub;
+//    private RecyclerView mResult;
+//    SearchView searchView;
+
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.Adapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sekolah);
-        listView = (ListView) findViewById(R.id.listviewsekolah);
-        searchView = (SearchView) findViewById(R.id.cari);
-        mResult = (RecyclerView) findViewById(R.id.result_list_sekolah);
-        JudulList = new ArrayList<>();
-        LokasiList = new ArrayList<>();
-        NomorList = new ArrayList<>();
-        nameSub = new ArrayList<>();
-        GambarList = new ArrayList<>();
-        final ArrayList<String> Kategori = new ArrayList<>();
-        imgList = new ArrayList<>();
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
-        listView.setAdapter(arrayAdapter);
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage("Please Wait Loading List...");
-        mProgressDialog.show();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
+        //Pengaturan Recycler View
+        recyclerView = (RecyclerView) findViewById(R.id.list_sekolah);
 
-            @Override
-            public boolean onQueryTextChange(String string) {
-                if (!string.toString().isEmpty()){
-                    setAdapter(string.toString());
-//                    listView.setVisibility(View.GONE);
-                    mResult.setVisibility(View.VISIBLE);
-                }else {
-                    JudulList.clear();
-                    NomorList.clear();
-                    GambarList.clear();
-                    LokasiList.clear();
-                    nameSub.clear();
-                    mResult.setVisibility(View.GONE);
-                    listView.setVisibility(View.VISIBLE);
-                    mResult.removeAllViews();
-                }
-                return false;
-            }
-        });
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("sekolah");
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mProgressDialog.dismiss();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-                    imgList.add(img);
+        adapter = new ListCardAdapter();
+        recyclerView.setAdapter(adapter);
 
-                }
-//                String nama = dataSnapshot.child("name").getValue(String.class);
-//                String Lokasi = dataSnapshot.child("lokasi").getValue(String.class);
-//                String imgurl = dataSnapshot.child("url").getValue(String.class);
-//                Log.d("TAG", nama + " / " + Lokasi + " / " + imgurl);
-
-                mAdapter = new ImageListAdapter(SekolahActivity.this, R.layout.list_item, imgList, "sekolah");
-                listView.setAdapter(mAdapter);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(SekolahActivity.this, "Database Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        listView = (ListView) findViewById(R.id.listviewsekolah);
+//        searchView = (SearchView) findViewById(R.id.cari);
+//        mResult = (RecyclerView) findViewById(R.id.result_list_sekolah);
+//        JudulList = new ArrayList<>();
+//        LokasiList = new ArrayList<>();
+//        NomorList = new ArrayList<>();
+//        nameSub = new ArrayList<>();
+//        GambarList = new ArrayList<>();
+//        final ArrayList<String> Kategori = new ArrayList<>();
+//        imgList = new ArrayList<>();
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
+//        listView.setAdapter(arrayAdapter);
+//        mProgressDialog = new ProgressDialog(this);
+//        mProgressDialog.setMessage("Please Wait Loading List...");
+//        mProgressDialog.show();
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String string) {
+//                if (!string.toString().isEmpty()){
+//                    setAdapter(string.toString());
+////                    listView.setVisibility(View.GONE);
+//                    mResult.setVisibility(View.VISIBLE);
+//                }else {
+//                    JudulList.clear();
+//                    NomorList.clear();
+//                    GambarList.clear();
+//                    LokasiList.clear();
+//                    nameSub.clear();
+//                    mResult.setVisibility(View.GONE);
+//                    listView.setVisibility(View.VISIBLE);
+//                    mResult.removeAllViews();
+//                }
+//                return false;
+//            }
+//        });
+//        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("sekolah");
+//
+//        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                mProgressDialog.dismiss();
+//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
+//                    imgList.add(img);
+//
+//                }
+////                String nama = dataSnapshot.child("name").getValue(String.class);
+////                String Lokasi = dataSnapshot.child("lokasi").getValue(String.class);
+////                String imgurl = dataSnapshot.child("url").getValue(String.class);
+////                Log.d("TAG", nama + " / " + Lokasi + " / " + imgurl);
+//
+//                mAdapter = new ImageListAdapter(SekolahActivity.this, R.layout.list_item, imgList, "sekolah");
+//                listView.setAdapter(mAdapter);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Toast.makeText(SekolahActivity.this, "Database Error", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
-    public void tomaps(View view){
-        Intent intent = new Intent(SekolahActivity.this, SubMenuActivity.class);
-        startActivity(intent);
-    }
-    private void setAdapter(final String searchString) {
-        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int counter = 0;
-                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
-                    String judul = Snapshot.child("name").getValue(String.class);
-                    String lokasi = Snapshot.child("lokasi").getValue(String.class);
-                    String number = Snapshot.child("number").getValue(String.class);
-                    String gambar = Snapshot.child("url").getValue(String.class);
-                    String namaSub = Snapshot.child("nameSub").getValue(String.class);
 
-                    if (!judul.contains(searchString)) {
-                        listView.setVisibility(View.GONE);
-                        JudulList.add(judul);
-                        LokasiList.add(lokasi);
-                        NomorList.add(number);
-                        GambarList.add(gambar);
-                        nameSub.add(namaSub);
-                        mResult.setVisibility(View.VISIBLE);
-                        counter++;
-                    } else {
-                        listView.setVisibility(View.VISIBLE);
-                        mResult.setVisibility(View.GONE);
-                        mResult.removeAllViews();
-                        JudulList.clear();
-                        NomorList.clear();
-                        GambarList.clear();
-                        LokasiList.clear();
-                    }
-                    if (counter == 15) {
-                        break;
-                    }
+//    public void tomaps(View view){
+//        Intent intent = new Intent(SekolahActivity.this, SubMenuActivity.class);
+//        startActivity(intent);
+//    }
 
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
+//    private void setAdapter(final String searchString) {
+//        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                int counter = 0;
+//                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+//                    String judul = Snapshot.child("name").getValue(String.class);
+//                    String lokasi = Snapshot.child("lokasi").getValue(String.class);
+//                    String number = Snapshot.child("number").getValue(String.class);
+//                    String gambar = Snapshot.child("url").getValue(String.class);
+//                    String namaSub = Snapshot.child("nameSub").getValue(String.class);
+//
+//                    if (!judul.contains(searchString)) {
+//                        listView.setVisibility(View.GONE);
+//                        JudulList.add(judul);
+//                        LokasiList.add(lokasi);
+//                        NomorList.add(number);
+//                        GambarList.add(gambar);
+//                        nameSub.add(namaSub);
+//                        mResult.setVisibility(View.VISIBLE);
+//                        counter++;
+//                    } else {
+//                        listView.setVisibility(View.VISIBLE);
+//                        mResult.setVisibility(View.GONE);
+//                        mResult.removeAllViews();
+//                        JudulList.clear();
+//                        NomorList.clear();
+//                        GambarList.clear();
+//                        LokasiList.clear();
+//                    }
+//                    if (counter == 15) {
+//                        break;
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 }

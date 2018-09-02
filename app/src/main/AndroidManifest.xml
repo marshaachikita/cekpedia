@@ -55,7 +55,7 @@
         </activity>
         <activity
             android:name=".Activity.MasjidActivity"
-            android:label="MASJID"
+            android:label="Tempat Ibadah"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EditorTheme"
@@ -66,7 +66,7 @@
         </activity>
         <activity
             android:name=".Activity.WisataActivity"
-            android:label="WISATA"
+            android:label="Wisata"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EditorTheme"
@@ -77,7 +77,7 @@
         </activity>
         <activity
             android:name=".Activity.RumahsakitActivity"
-            android:label="RUMAH SAKIT"
+            android:label="Rumah Sakit"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EditorTheme"
@@ -88,7 +88,7 @@
         </activity>
         <activity
             android:name=".Activity.RestoranActivity"
-            android:label="RESTORAN"
+            android:label="Kuliner"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EditorTheme"
@@ -99,7 +99,7 @@
         </activity>
         <activity
             android:name=".Activity.SupermarketActivity"
-            android:label="SUPERMARKET"
+            android:label="Swalayan"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EditorTheme"
@@ -110,7 +110,7 @@
         </activity>
         <activity
             android:name=".Activity.SekolahActivity"
-            android:label="SEKOLAH"
+            android:label="Belajar"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EditorTheme"
@@ -121,7 +121,7 @@
         </activity>
         <activity
             android:name=".Activity.TransportasiActivity"
-            android:label="TRANSPORTASI"
+            android:label="Transportasi"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EditorTheme"
@@ -172,7 +172,7 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".Activity.InputLokasiActivity"
-            android:label="Input Location"
+            android:label="Tambah Lokasi"
             android:parentActivityName=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/EditorTheme"

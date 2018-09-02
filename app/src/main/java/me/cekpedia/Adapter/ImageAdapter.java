@@ -1,6 +1,7 @@
 package me.cekpedia.Adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,12 +55,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyHolder> {
     class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imgview;
         TextView txt;
+//        Typeface tf;
+
         public MyHolder(View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
             imgview = itemView.findViewById(R.id.image_grid);
+
+            //Pengaturan Font
             txt = itemView.findViewById(R.id.text_grid);
+//            tf = Typeface.createFromAsset(itemView.getContext().getAssets(), "arial.ttf");
+//            txt.setTypeface(tf);
         }
 
         @Override
