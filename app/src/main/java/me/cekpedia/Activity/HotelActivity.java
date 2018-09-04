@@ -30,26 +30,26 @@ import me.cekpedia.models.ImageUpload;
 
 public class HotelActivity extends AppCompatActivity {
 
-//    ListView listView;
-//    private RecyclerView mRecyclerView;
-//    private ImageListAdapter mAdapter;
-//    private DatabaseReference mDatabaseRef;
-//    private StorageReference mStorageRef;
-//    private List<ImageUpload> imgList;
-//    private ImageListAdapter adapter;
-//    private ProgressDialog mProgressDialog;
-//    public static final String FB_DATABASE_PATH = "cekpedia";
-//    ArrayList<String>JudulList;
-//    ArrayList<String>LokasiList;
-//    ArrayList<String>NomorList;
-//    ArrayList<String>GambarList;
-//    ArrayList<String>nameSub;
-//    private RecyclerView mResult;
-//    SearchView searchView;
+    ListView listView;
+    private RecyclerView mRecyclerView;
+    private ImageListAdapter mAdapter;
+    private DatabaseReference mDatabaseRef;
+    private StorageReference mStorageRef;
+    private List<ImageUpload> imgList;
+    private ImageListAdapter adapter;
+    private ProgressDialog mProgressDialog;
+    public static final String FB_DATABASE_PATH = "cekpedia";
+    ArrayList<String>JudulList;
+    ArrayList<String>LokasiList;
+    ArrayList<String>NomorList;
+    ArrayList<String>GambarList;
+    ArrayList<String>nameSub;
+    private RecyclerView mResult;
+    SearchView searchView;
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter adapter;
+//    RecyclerView recyclerView;
+//    RecyclerView.LayoutManager layoutManager;
+//    RecyclerView.Adapter adapter;
 
 
     @Override
@@ -58,29 +58,29 @@ public class HotelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hotel);
 
         //Pengaturan Recycler View
-        recyclerView = (RecyclerView) findViewById(R.id.list_penginapan);
+//        recyclerView = (RecyclerView) findViewById(R.id.list_penginapan);
+//
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//        adapter = new ListCardAdapter();
+//        recyclerView.setAdapter(adapter);
 
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new ListCardAdapter();
-        recyclerView.setAdapter(adapter);
-
-//        listView = (ListView) findViewById(R.id.listviewhotel);
+        listView = (ListView) findViewById(R.id.list_penginapan);
 //        searchView = (SearchView) findViewById(R.id.cari);
 //        mResult = (RecyclerView) findViewById(R.id.result_list_hotel);
-//        JudulList = new ArrayList<>();
-//        LokasiList = new ArrayList<>();
-//        NomorList = new ArrayList<>();
-//        nameSub = new ArrayList<>();
-//        GambarList = new ArrayList<>();
-//        final ArrayList<String> Kategori = new ArrayList<>();
-//        imgList = new ArrayList<>();
-//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
-//        listView.setAdapter(arrayAdapter);
-//        mProgressDialog = new ProgressDialog(this);
-//        mProgressDialog.setMessage("Please Wait Loading List...");
-//        mProgressDialog.show();
+        JudulList = new ArrayList<>();
+        LokasiList = new ArrayList<>();
+        NomorList = new ArrayList<>();
+        nameSub = new ArrayList<>();
+        GambarList = new ArrayList<>();
+        final ArrayList<String> Kategori = new ArrayList<>();
+        imgList = new ArrayList<>();
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
+        listView.setAdapter(arrayAdapter);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Please Wait Loading List...");
+        mProgressDialog.show();
 //        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
 //            public boolean onQueryTextSubmit(String s) {
@@ -106,71 +106,71 @@ public class HotelActivity extends AppCompatActivity {
 //                return false;
 //            }
 //        });
-//        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("hotel");
-//
-//        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                mProgressDialog.dismiss();
-//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-//                    imgList.add(img);
-//
-//                }
-//                mAdapter = new ImageListAdapter(HotelActivity.this, R.layout.list_item, imgList, "hotel");
-//                listView.setAdapter(mAdapter);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Toast.makeText(HotelActivity.this, "Database Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("hotel");
+
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mProgressDialog.dismiss();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
+                    imgList.add(img);
+
+                }
+                mAdapter = new ImageListAdapter(HotelActivity.this, R.layout.list_nearme, imgList, "hotel");
+                listView.setAdapter(mAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(HotelActivity.this, "Database Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-//    private void setAdapter(final String searchString) {
-//        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                int counter = 0;
-//                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
-//                    String judul = Snapshot.child("name").getValue(String.class);
-//                    String lokasi = Snapshot.child("lokasi").getValue(String.class);
-//                    String number = Snapshot.child("number").getValue(String.class);
-//                    String gambar = Snapshot.child("url").getValue(String.class);
-//                    String namaSub = Snapshot.child("nameSub").getValue(String.class);
-//
-//                    if (!judul.contains(searchString)) {
-//                        listView.setVisibility(View.GONE);
-//                        JudulList.add(judul);
-//                        LokasiList.add(lokasi);
-//                        NomorList.add(number);
-//                        GambarList.add(gambar);
-//                        nameSub.add(namaSub);
-//                        mResult.setVisibility(View.VISIBLE);
-//                        counter++;
-//                    } else {
-//                        listView.setVisibility(View.VISIBLE);
-//                        mResult.setVisibility(View.GONE);
-//                        mResult.removeAllViews();
-//                        JudulList.clear();
-//                        NomorList.clear();
-//                        GambarList.clear();
-//                        LokasiList.clear();
-//                    }
-//                    if (counter == 15) {
-//                        break;
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+    private void setAdapter(final String searchString) {
+        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int counter = 0;
+                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+                    String judul = Snapshot.child("name").getValue(String.class);
+                    String lokasi = Snapshot.child("lokasi").getValue(String.class);
+                    String number = Snapshot.child("number").getValue(String.class);
+                    String gambar = Snapshot.child("url").getValue(String.class);
+                    String namaSub = Snapshot.child("nameSub").getValue(String.class);
+
+                    if (!judul.contains(searchString)) {
+                        listView.setVisibility(View.GONE);
+                        JudulList.add(judul);
+                        LokasiList.add(lokasi);
+                        NomorList.add(number);
+                        GambarList.add(gambar);
+                        nameSub.add(namaSub);
+                        mResult.setVisibility(View.VISIBLE);
+                        counter++;
+                    } else {
+                        listView.setVisibility(View.VISIBLE);
+                        mResult.setVisibility(View.GONE);
+                        mResult.removeAllViews();
+                        JudulList.clear();
+                        NomorList.clear();
+                        GambarList.clear();
+                        LokasiList.clear();
+                    }
+                    if (counter == 15) {
+                        break;
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }

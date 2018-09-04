@@ -26,11 +26,25 @@
         android:background="@drawable/search_layout"
         android:textSize="14sp"/>
 
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/list_rumahsakit">
+        android:orientation="vertical">
 
-    </android.support.v7.widget.RecyclerView>
+        <ListView
+            android:id="@+id/list_rumahsakit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/list_rumahsakit">-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
 
 </LinearLayout>
