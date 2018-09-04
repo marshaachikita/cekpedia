@@ -50,18 +50,18 @@ public class ImageListAdapter extends ArrayAdapter<ImageUpload> {
 
         View listItemView = convertView;
         if(listItemView == null){
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_nearme, parent, false);
         }
-        TextView tvName = listItemView.findViewById(R.id.judul);
-        TextView tvLokasi = listItemView.findViewById(R.id.lokasi);
-        ImageView imageView = listItemView.findViewById(R.id.imgview);
+        TextView tvName = listItemView.findViewById(R.id.namaTempat);
+        TextView tvAlamat = listItemView.findViewById(R.id.alamatTempat);
+        ImageView imageView = listItemView.findViewById(R.id.gambar);
         TextView tvTelp = listItemView.findViewById(R.id.telp);
-        TextView tvDeskripsi =listItemView.findViewById(R.id.deskripsi);
+        TextView tvDeskripsi =listItemView.findViewById(R.id.deskripsiTempat);
         final TextView tvSponsor = listItemView.findViewById(R.id.tvsponsor);
 
         tvName.setText(listImage.get(position).getName());
-        tvLokasi.setText(listImage.get(position).getLokasi());
-        tvTelp.setText(listImage.get(position).getNumber());
+        tvAlamat.setText(listImage.get(position).getLokasi());
+//        tvTelp.setText(listImage.get(position).getNumber());
         tvDeskripsi.setText(listImage.get(position).getDeskripsi());
         Glide.with(context)
                 .load(listImage.get(position).getUrl())

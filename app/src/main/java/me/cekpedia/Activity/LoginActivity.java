@@ -347,9 +347,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         favorit = "";
                                     }
 
-                                    if (account.getPhotoUrl() != null){
-                                        photoUrl = account.getPhotoUrl().toString();
-                                    }
+//                                    if (account.getPhotoUrl() != null){
+//                                        photoUrl = account.getPhotoUrl().toString();
+//                                    }
                                     User user = new User(
                                             account.getDisplayName(),
 //                                            " " + account.getFamilyName(),

@@ -126,7 +126,7 @@ public class ProfileFragment extends Fragment {
                 Uid = detailprofil.get("uid").toString();
                 photoUrl = detailprofil.get("photoUrl").toString();
                 Glide.with(getContext())
-                        .load(detailprofil.get("photoUrl").toString())
+                        .load(photoUrl)
                         .into(prof_pic);
                 favorit = detailprofil.get("favourite").toString();
                 nama.setText(Nama);
