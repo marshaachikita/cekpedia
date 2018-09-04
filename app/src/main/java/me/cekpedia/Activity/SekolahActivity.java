@@ -54,8 +54,6 @@ public class SekolahActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sekolah);
 
-        // ini komentar
-
         //Pengaturan Recycler View
 //        recyclerView = (RecyclerView) findViewById(R.id.list_sekolah);
 //

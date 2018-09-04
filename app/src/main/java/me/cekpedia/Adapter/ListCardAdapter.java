@@ -128,7 +128,7 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.ViewHo
             itemGambar = (ImageView)itemView.findViewById(R.id.gambar);
             itemNama = (TextView)itemView.findViewById(R.id.namaTempat);
             itemDetail = (TextView)itemView.findViewById(R.id.alamatTempat);
-            itemDeskripsi = itemView.findViewById(R.id.deskripsiTempat);
+//            itemDeskripsi = itemView.findViewById(R.id.deskripsiTempat);
             itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
             detail = (TextView) itemView.findViewById(R.id.detail);
 
