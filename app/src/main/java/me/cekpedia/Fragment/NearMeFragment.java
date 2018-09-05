@@ -53,7 +53,7 @@ public class NearMeFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ListCardAdapter();
+//        adapter = new ListCardAdapter();
         recyclerView.setAdapter(adapter);
 
         return view;

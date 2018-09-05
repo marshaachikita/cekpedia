@@ -43,11 +43,11 @@ public class FavouriteFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
     ListView listView;
-    private ListCardAdapter mAdapter;
+    private ImageListAdapter mAdapter;
     private DatabaseReference mDatabaseRef, mDatabaseRefAll, Reference, Reference2;
     private StorageReference mStorageRef;
     private List<ImageUpload> imgList;
-    private ImageListAdapter Aadapter;
+//    private ImageListAdapter Aadapter;
     private ProgressDialog mProgressDialog;
     public static final String FB_DATABASE_PATH = "cekpedia";
     FirebaseAuth firebaseAuth;
@@ -86,13 +86,13 @@ public class FavouriteFragment extends Fragment {
         st.setTypeface(tf);
 
         //Pengaturan Recycler View
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+//        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 //
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+//        layoutManager = new LinearLayoutManager(getActivity());
+//        recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ListCardAdapter();
-        recyclerView.setAdapter(adapter);
+//        adapter = new ListCardAdapter();
+//        recyclerView.setAdapter(adapter);
         namaList = new ArrayList<>();
         detailList = new ArrayList<>();
         gambarList = new ArrayList<>();
@@ -100,13 +100,11 @@ public class FavouriteFragment extends Fragment {
         jarakList = new ArrayList<>();
         nameSubList = new ArrayList<>();
 
-
-
-//        listView = view.findViewById(R.id.listviewfav1);
-//        final ArrayList<String> Kategori = new ArrayList<>();
-//        imgList = new ArrayList<>();
-//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Kategori);
-//        listView.setAdapter(arrayAdapter);
+        listView = view.findViewById(R.id.listviewfav1);
+        final ArrayList<String> Kategori = new ArrayList<>();
+        imgList = new ArrayList<>();
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Kategori);
+        listView.setAdapter(arrayAdapter);
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Please Wait Loading List...");
         mProgressDialog.show();
@@ -130,65 +128,48 @@ public class FavouriteFragment extends Fragment {
                 final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
                 favorit = detailMenu.get("favourite").toString();
                 if (!favorit.equals("")){
-                        merchantNameLikeSize = 0;
-                        while (favorit.length() > 1) {
-                            favorit = favorit.substring(1);
-                            FavoriteNameLike[merchantNameLikeSize] = favorit.substring(0, favorit.indexOf("/"));
-                            favorit = favorit.substring(favorit.indexOf("/"));
-                            merchantNameLikeSize++;
-                        }
-                        for (int i=0; i<merchantNameLikeSize; i++){
-                            Reference = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("keterangan");
-                            final int finalI = i;
-                            Reference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    final Map<String, Object> detail = (Map<String, Object>) dataSnapshot.getValue();
-                                    final String sub = detail.get(FavoriteNameLike[finalI]).toString();
-                                    Reference2 = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child(sub).child(FavoriteNameLike[finalI]);
-                                    Reference2.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                                            for (DataSnapshot ds : dataSnapshot.getChildren()){
-                                                String nama = dataSnapshot.child("name").getValue(String.class);
-                                                String detail = dataSnapshot.child("lokasi").getValue(String.class);
-                                                String gambar = dataSnapshot.child("url").getValue(String.class);
-                                                String deskripsi = dataSnapshot.child("deskripsi").getValue(String.class);
-                                                String jarak = "2 km";
-                                                String nameSub = dataSnapshot.child("nameSub").getValue(String.class);
-                                                namaList.add(nama);
-                                                detailList.add(detail);
-                                                gambarList.add(gambar);
-                                                deskripsiList.add(deskripsi);
-                                                jarakList.add(jarak);
-                                                nameSubList.add(nameSub);
-//                                            }
-//                                            ImageUpload img = dataSnapshot.getValue(ImageUpload.class);
-//                                            imgList.add(img);
-//                                            Aadapter = new ImageListAdapter(getActivity(), R.layout.list_nearme, imgList);
-//                                            listView.setAdapter(Aadapter);
+                    merchantNameLikeSize = 0;
+                    while (favorit.length() > 1) {
+                        favorit = favorit.substring(1);
+                        FavoriteNameLike[merchantNameLikeSize] = favorit.substring(0, favorit.indexOf("/"));
+                        favorit = favorit.substring(favorit.indexOf("/"));
+                        merchantNameLikeSize++;
+                    }
+                    for (int i=0; i<merchantNameLikeSize; i++){
+                        Reference = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("keterangan");
+                        final int finalI = i;
+                        Reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final Map<String, Object> detail = (Map<String, Object>) dataSnapshot.getValue();
+                                final String sub = detail.get(FavoriteNameLike[finalI]).toString();
+                                Reference2 = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child(sub).child(FavoriteNameLike[finalI]);
+                                Reference2.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        ImageUpload img = dataSnapshot.getValue(ImageUpload.class);
+                                        imgList.add(img);
 
+                                        //Toast.makeText(getActivity(), "nama1 "+dataSnapshot., Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getActivity(), "nama2 "+img.getName().toString(), Toast.LENGTH_SHORT).show();
 
-                                            //Toast.makeText(getActivity(), "nama1 "+dataSnapshot., Toast.LENGTH_SHORT).show();
-                                            //Toast.makeText(getActivity(), "nama2 "+img.getName().toString(), Toast.LENGTH_SHORT).show();
+                                        mAdapter = new ImageListAdapter(getActivity(), R.layout.list_nearme, imgList);
+                                        listView.setAdapter(mAdapter);
+                                    }
 
-                                            mAdapter = new ListCardAdapter(getActivity(), namaList, detailList, gambarList, deskripsiList, jarakList, nameSubList);
-                                            recyclerView.setAdapter(mAdapter);
-                                        }
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
 
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
+                                    }
+                                });
+                            }
 
-                                        }
-                                    });
-                                }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
-                        }
+                            }
+                        });
+                    }
                 }
 
 
@@ -199,8 +180,9 @@ public class FavouriteFragment extends Fragment {
 
             }
         });
-//
-//        // Inflate the layout for this fragment
+
+        // Inflate the layout for this fragment
+
         return view;
     }
 }
