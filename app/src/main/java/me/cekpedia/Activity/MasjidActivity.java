@@ -88,7 +88,7 @@ public class MasjidActivity extends AppCompatActivity {
         mProgressDialog.setMessage("Please Wait Loading List...");
         mProgressDialog.show();
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("hotel");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("masjid");
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override

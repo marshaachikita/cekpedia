@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -64,14 +65,16 @@ public class ListCardAdapter
     ArrayList<String> gambarList= null;
     ArrayList<String> deskripsiList= null;
     ArrayList<String> jarakList= null;
+    ArrayList<String> noTelpList= null;
     ArrayList<String> nameSubList= null;
     private String nameSub = "";
 
-    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
+    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
         this.context = context;
         this.namaList = namaList;
         this.detailList = detailList;
         this.gambarList = gambarList;
+        this.noTelpList = noTelpList;
         this.deskripsiList = deskripsiList;
         this.jarakList = jarakList;
         this.nameSubList = nameSubList;
@@ -105,6 +108,7 @@ public class ListCardAdapter
                     intent.putExtra("SUB", nameSub);
                 else
                     intent.putExtra("SUB", nameSubList.get(viewType));
+                context.startActivity(intent);
                 }
         });
         ViewHolder viewHolder = new ViewHolder(v);
@@ -121,7 +125,7 @@ public class ListCardAdapter
         Glide.with(context)
                 .load(gambarList.get(position))
                 .into(holder.itemGambar);
-        holder.itemJarak.setText(jarakList.get(position));
+//        holder.itemJarak.setText(jarakList.get(position));
 
     }
 
@@ -134,7 +138,7 @@ public class ListCardAdapter
 
         public int current;
         public ImageView itemGambar;
-        public TextView itemNama, itemDetail, itemJarak, detail, itemDeskripsi;
+        public TextView itemNama, itemDetail, itemJarak, detail, itemDeskripsi, itemNoTelp;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -142,6 +146,7 @@ public class ListCardAdapter
             itemNama = (TextView)itemView.findViewById(R.id.namaTempat);
             itemDetail = (TextView)itemView.findViewById(R.id.alamatTempat);
             itemDeskripsi = itemView.findViewById(R.id.deskripsiTempat);
+            itemNoTelp = itemView.findViewById(R.id.noTelpTempat);
             itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
             detail = (TextView) itemView.findViewById(R.id.detail);
 //

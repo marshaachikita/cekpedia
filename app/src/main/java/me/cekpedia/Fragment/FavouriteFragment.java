@@ -63,6 +63,7 @@ public class FavouriteFragment extends Fragment {
     ArrayList<String> deskripsiList;
     ArrayList<String> jarakList;
     ArrayList<String> nameSubList;
+    ArrayList<String> noTelpList;
 
     public FavouriteFragment() {
         // Required empty public constructor
@@ -99,6 +100,7 @@ public class FavouriteFragment extends Fragment {
         deskripsiList = new ArrayList<>();
         jarakList = new ArrayList<>();
         nameSubList = new ArrayList<>();
+        noTelpList = new ArrayList<>();
 
 //        listView = view.findViewById(R.id.listviewfav1);
 //        final ArrayList<String> Kategori = new ArrayList<>();
@@ -154,13 +156,17 @@ public class FavouriteFragment extends Fragment {
                                         String deskripsi = dataSnapshot.child("deskripsi").getValue(String.class);
                                         String gambar = dataSnapshot.child("url").getValue(String.class);
                                         String namaSub = dataSnapshot.child("nameSub").getValue(String.class);
+                                        String noTelp = dataSnapshot.child("number").getValue(String.class);
+                                        String jarak = "";
                                         namaList.add(judul);
                                         detailList.add(lokasi);
                                         gambarList.add(gambar);
                                         deskripsiList.add(deskripsi);
+                                        jarakList.add(jarak);
                                         nameSubList.add(namaSub);
+                                        noTelpList.add(noTelp);
 
-                                        mAdapter = new ListCardAdapter(getActivity(), namaList, detailList, gambarList, deskripsiList, nameSubList);
+                                        mAdapter = new ListCardAdapter(getActivity(), namaList, detailList, gambarList, noTelpList, deskripsiList, jarakList, nameSubList);
                                         recyclerView.setAdapter(mAdapter);
                                     }
 

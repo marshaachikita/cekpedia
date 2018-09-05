@@ -43,6 +43,7 @@ public class RestoranActivity extends AppCompatActivity {
     ArrayList<String> deskripsiList;
     ArrayList<String> jarakList;
     ArrayList<String> nameSubList;
+    ArrayList<String> noTelpList;
     private RecyclerView mResult;
     SearchView searchView;
 
@@ -73,6 +74,7 @@ public class RestoranActivity extends AppCompatActivity {
         gambarList = new ArrayList<>();
         deskripsiList = new ArrayList<>();
         jarakList = new ArrayList<>();
+        noTelpList = new ArrayList<>();
         nameSubList = new ArrayList<>();
         final ArrayList<String> Kategori = new ArrayList<>();
         imgList = new ArrayList<>();
@@ -108,7 +110,7 @@ public class RestoranActivity extends AppCompatActivity {
 //            }
 //        });
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("hotel");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("restoran");
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -120,13 +122,18 @@ public class RestoranActivity extends AppCompatActivity {
                     String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
                     String gambar = postSnapshot.child("url").getValue(String.class);
                     String namaSub = postSnapshot.child("nameSub").getValue(String.class);
+                    String noTelp = dataSnapshot.child("number").getValue(String.class);
+                    String jarak = "";
                     namaList.add(judul);
                     detailList.add(lokasi);
                     gambarList.add(gambar);
                     deskripsiList.add(deskripsi);
+                    jarakList.add(jarak);
                     nameSubList.add(namaSub);
 
-                    mAdapter = new ListCardAdapter(RestoranActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+                    noTelpList.add(noTelp);
+
+                    mAdapter = new ListCardAdapter(RestoranActivity.this, namaList, detailList, gambarList, noTelpList, deskripsiList, jarakList, nameSubList);
                     recyclerView.setAdapter(mAdapter);
                 }
             }

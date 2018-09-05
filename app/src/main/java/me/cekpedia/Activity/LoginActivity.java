@@ -336,8 +336,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             NoHp = detailprofil.get("nohp").toString();
                                             favorit = detailprofil.get("favourite").toString();
                                             photoUrl = detailprofil.get("photoUrl").toString();
-//                                            nohphidden.setText(NoHp);
-//                                            favhidden.setText(favorit);
+                                            if (detailprofil.get("photoUrl").toString().equals("")){
+                                                photoUrl = account.getPhotoUrl().toString();
+                                            }
                                         } else {
                                             NoHp = "";
                                             favorit = "";
@@ -347,9 +348,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         favorit = "";
                                     }
 
-//                                    if (account.getPhotoUrl() != null){
-//                                        photoUrl = account.getPhotoUrl().toString();
-//                                    }
+                                    if (account.getPhotoUrl() != null){
+                                        photoUrl = account.getPhotoUrl().toString();
+                                    }
                                     User user = new User(
                                             account.getDisplayName(),
 //                                            " " + account.getFamilyName(),

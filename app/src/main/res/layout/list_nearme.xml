@@ -44,6 +44,14 @@
                 android:paddingLeft="16dp"
                 android:textSize="12sp"
                 android:text="Jl. Pelajar Pejuang 45 No.  121, Turangga, Lengkong, Kota Bandung, Jawa Barat, 40264" />
+
+            <TextView
+                android:id="@+id/noTelpTempat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:textSize="12sp"
+                android:text="0829292922" />
             <TextView
                 android:id="@+id/deskripsiTempat"
                 android:layout_width="match_parent"
