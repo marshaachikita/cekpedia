@@ -43,11 +43,11 @@ public class FavouriteFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
     ListView listView;
-    private ImageListAdapter mAdapter;
+//    private ImageListAdapter mAdapter;
     private DatabaseReference mDatabaseRef, mDatabaseRefAll, Reference, Reference2;
     private StorageReference mStorageRef;
     private List<ImageUpload> imgList;
-//    private ImageListAdapter Aadapter;
+    private ListCardAdapter mAdapter;
     private ProgressDialog mProgressDialog;
     public static final String FB_DATABASE_PATH = "cekpedia";
     FirebaseAuth firebaseAuth;
@@ -86,10 +86,10 @@ public class FavouriteFragment extends Fragment {
         st.setTypeface(tf);
 
         //Pengaturan Recycler View
-//        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-//
-//        layoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
 
 //        adapter = new ListCardAdapter();
 //        recyclerView.setAdapter(adapter);
@@ -100,11 +100,11 @@ public class FavouriteFragment extends Fragment {
         jarakList = new ArrayList<>();
         nameSubList = new ArrayList<>();
 
-        listView = view.findViewById(R.id.listviewfav1);
-        final ArrayList<String> Kategori = new ArrayList<>();
-        imgList = new ArrayList<>();
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Kategori);
-        listView.setAdapter(arrayAdapter);
+//        listView = view.findViewById(R.id.listviewfav1);
+//        final ArrayList<String> Kategori = new ArrayList<>();
+//        imgList = new ArrayList<>();
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Kategori);
+//        listView.setAdapter(arrayAdapter);
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Please Wait Loading List...");
         mProgressDialog.show();
@@ -147,14 +147,21 @@ public class FavouriteFragment extends Fragment {
                                 Reference2.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        ImageUpload img = dataSnapshot.getValue(ImageUpload.class);
-                                        imgList.add(img);
+//                                        ImageUpload img = dataSnapshot.getValue(ImageUpload.class);
+//                                        imgList.add(img);
+                                        String judul = dataSnapshot.child("name").getValue(String.class);
+                                        String lokasi = dataSnapshot.child("lokasi").getValue(String.class);
+                                        String deskripsi = dataSnapshot.child("deskripsi").getValue(String.class);
+                                        String gambar = dataSnapshot.child("url").getValue(String.class);
+                                        String namaSub = dataSnapshot.child("nameSub").getValue(String.class);
+                                        namaList.add(judul);
+                                        detailList.add(lokasi);
+                                        gambarList.add(gambar);
+                                        deskripsiList.add(deskripsi);
+                                        nameSubList.add(namaSub);
 
-                                        //Toast.makeText(getActivity(), "nama1 "+dataSnapshot., Toast.LENGTH_SHORT).show();
-                                        //Toast.makeText(getActivity(), "nama2 "+img.getName().toString(), Toast.LENGTH_SHORT).show();
-
-                                        mAdapter = new ImageListAdapter(getActivity(), R.layout.list_nearme, imgList);
-                                        listView.setAdapter(mAdapter);
+                                        mAdapter = new ListCardAdapter(getActivity(), namaList, detailList, gambarList, deskripsiList, nameSubList);
+                                        recyclerView.setAdapter(mAdapter);
                                     }
 
                                     @Override

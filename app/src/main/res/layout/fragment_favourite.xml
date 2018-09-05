@@ -54,19 +54,19 @@
         android:layout_marginLeft="15dp"
         android:layout_below="@id/cari"/>
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/id_fav"-->
-        <!--android:id="@+id/recycler_view">-->
-
-    <!--</android.support.v7.widget.RecyclerView>-->
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listviewfav1"
-        android:layout_below="@+id/id_fav">
+        android:layout_below="@id/id_fav"
+        android:id="@+id/recycler_view">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/listviewfav1"-->
+        <!--android:layout_below="@+id/id_fav">-->
+
+    <!--</ListView>-->
 
 </RelativeLayout>

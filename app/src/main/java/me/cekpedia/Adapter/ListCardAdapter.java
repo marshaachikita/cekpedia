@@ -1,5 +1,6 @@
 package me.cekpedia.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -20,7 +21,7 @@ import me.cekpedia.Activity.SubMenuActivity;
 import me.cekpedia.R;
 
 public class ListCardAdapter
-//        extends RecyclerView.Adapter<ListCardAdapter.ViewHolder>
+        extends RecyclerView.Adapter<ListCardAdapter.ViewHolder>
 {
 //
 ////    private String[] nama = {"Nama Tempat 1",
@@ -56,83 +57,93 @@ public class ListCardAdapter
 ////            R.drawable.masjidraya,
 ////            R.drawable.rshasansadikin };
 ////
-//    Context context;
-//    ArrayList<String> namaList = null;
-//    ArrayList<String> detailList= null;
-//    ArrayList<String> gambarList= null;
-//    ArrayList<String> deskripsiList= null;
-//    ArrayList<String> jarakList= null;
-//    ArrayList<String> nameSubList= null;
-//    private String nameSub = "";
-//
-////    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
-////        this.context = context;
-////        this.namaList = namaList;
-////        this.detailList = detailList;
-////        this.gambarList = gambarList;
-////        this.deskripsiList = deskripsiList;
-////        this.jarakList = jarakList;
-////        this.nameSubList = nameSubList;
-////    }
-//    public ListCardAdapter(){
-//
-//    }
-//
-//    @Override
-//    public ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
-//
-//        View v = LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.list_nearme, parent, false);
-//
-////        v.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-//////                int position = getAdapterPosition();
-////                Intent intent = new Intent(context, SubMenuActivity.class);
-////                intent.putExtra("JUDUL", namaList.get(viewType));
-////                if (!nameSub.equals(""))
-////                    intent.putExtra("SUB", nameSub);
-////                else
-////                    intent.putExtra("SUB", nameSubList.get(viewType));
-////                }
-////        });
-//        ViewHolder viewHolder = new ViewHolder(v);
-//
-//        return viewHolder;
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(ViewHolder holder, int position) {
-//
-//        holder.itemNama.setText(namaList.get(position));
-//        holder.itemDetail.setText(detailList.get(position));
-//        holder.itemDeskripsi.setText(deskripsiList.get(position));
-//        Glide.with(context)
-//                .load(gambarList.get(position))
-//                .into(holder.itemGambar);
-//        holder.itemJarak.setText(jarakList.get(position));
-//
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return namaList.size();
-//    }
-//
-//    public class ViewHolder extends RecyclerView.ViewHolder {
-//
-//        public int current;
-//        public ImageView itemGambar;
-//        public TextView itemNama, itemDetail, itemJarak, detail, itemDeskripsi;
-//
-//        public ViewHolder(final View itemView) {
-//            super(itemView);
-//            itemGambar = (ImageView)itemView.findViewById(R.id.gambar);
-//            itemNama = (TextView)itemView.findViewById(R.id.namaTempat);
-//            itemDetail = (TextView)itemView.findViewById(R.id.alamatTempat);
-////            itemDeskripsi = itemView.findViewById(R.id.deskripsiTempat);
-//            itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
-//            detail = (TextView) itemView.findViewById(R.id.detail);
+    Context context;
+    Activity activity;
+    ArrayList<String> namaList = null;
+    ArrayList<String> detailList= null;
+    ArrayList<String> gambarList= null;
+    ArrayList<String> deskripsiList= null;
+    ArrayList<String> jarakList= null;
+    ArrayList<String> nameSubList= null;
+    private String nameSub = "";
+
+    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
+        this.context = context;
+        this.namaList = namaList;
+        this.detailList = detailList;
+        this.gambarList = gambarList;
+        this.deskripsiList = deskripsiList;
+        this.jarakList = jarakList;
+        this.nameSubList = nameSubList;
+    }
+    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
+        this.context = context;
+        this.namaList = namaList;
+        this.detailList = detailList;
+        this.gambarList = gambarList;
+        this.deskripsiList = deskripsiList;
+        this.nameSubList = nameSubList;
+    }
+
+    public ListCardAdapter(){
+
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
+
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_nearme, parent, false);
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                int position = getAdapterPosition();
+                Intent intent = new Intent(context, SubMenuActivity.class);
+                intent.putExtra("JUDUL", namaList.get(viewType));
+                if (!nameSub.equals(""))
+                    intent.putExtra("SUB", nameSub);
+                else
+                    intent.putExtra("SUB", nameSubList.get(viewType));
+                }
+        });
+        ViewHolder viewHolder = new ViewHolder(v);
+
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
+        holder.itemNama.setText(namaList.get(position));
+        holder.itemDetail.setText(detailList.get(position));
+        holder.itemDeskripsi.setText(deskripsiList.get(position));
+        Glide.with(context)
+                .load(gambarList.get(position))
+                .into(holder.itemGambar);
+        holder.itemJarak.setText(jarakList.get(position));
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return namaList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public int current;
+        public ImageView itemGambar;
+        public TextView itemNama, itemDetail, itemJarak, detail, itemDeskripsi;
+
+        public ViewHolder(final View itemView) {
+            super(itemView);
+            itemGambar = (ImageView)itemView.findViewById(R.id.gambar);
+            itemNama = (TextView)itemView.findViewById(R.id.namaTempat);
+            itemDetail = (TextView)itemView.findViewById(R.id.alamatTempat);
+            itemDeskripsi = itemView.findViewById(R.id.deskripsiTempat);
+            itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
+            detail = (TextView) itemView.findViewById(R.id.detail);
 //
 //
 ////                    Snackbar.make(v, "Click detected on item " + position,
@@ -140,6 +151,6 @@ public class ListCardAdapter
 ////                            .setAction("Action", null).show();
 //
 //
-//        }
-//    }
+        }
+    }
 }
