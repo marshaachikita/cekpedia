@@ -30,23 +30,24 @@ import me.cekpedia.models.ImageUpload;
 public class RumahsakitActivity extends AppCompatActivity {
     ListView listView;
     private RecyclerView mRecyclerView;
-    private ImageListAdapter mAdapter;
+    private ListCardAdapter mAdapter;
     private DatabaseReference mDatabaseRef;
     private StorageReference mStorageRef;
     private List<ImageUpload> imgList;
     private ImageListAdapter adapter;
     private ProgressDialog mProgressDialog;
     public static final String FB_DATABASE_PATH = "cekpedia";
-    ArrayList<String>JudulList;
-    ArrayList<String>LokasiList;
-    ArrayList<String>NomorList;
-    ArrayList<String>GambarList;
-    ArrayList<String>nameSub;
+    ArrayList<String> namaList;
+    ArrayList<String> detailList;
+    ArrayList<String> gambarList;
+    ArrayList<String> deskripsiList;
+    ArrayList<String> jarakList;
+    ArrayList<String> nameSubList;
     private RecyclerView mResult;
     SearchView searchView;
 
-//    RecyclerView recyclerView;
-//    RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 //    RecyclerView.Adapter adapter;
 
     @Override
@@ -55,27 +56,29 @@ public class RumahsakitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rumahsakit);
 
         //Pengaturan Recycler View
-//        recyclerView = (RecyclerView) findViewById(R.id.list_rumahsakit);
-//
-//        layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = (RecyclerView) findViewById(R.id.list_rumahsakit);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 //
 //        adapter = new ListCardAdapter();
 //        recyclerView.setAdapter(adapter);
 
 
-        listView = (ListView) findViewById(R.id.list_rumahsakit);
+//        listView = (ListView) findViewById(R.id.list_rumahsakit);
 //        searchView = (SearchView) findViewById(R.id.cari);
 //        mResult = (RecyclerView) findViewById(R.id.result_list_rumahsakit);
-        JudulList = new ArrayList<>();
-        LokasiList = new ArrayList<>();
-        NomorList = new ArrayList<>();
-        nameSub = new ArrayList<>();
-        GambarList = new ArrayList<>();
+
+        namaList = new ArrayList<>();
+        detailList = new ArrayList<>();
+        gambarList = new ArrayList<>();
+        deskripsiList = new ArrayList<>();
+        jarakList = new ArrayList<>();
+        nameSubList = new ArrayList<>();
         final ArrayList<String> Kategori = new ArrayList<>();
         imgList = new ArrayList<>();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
-        listView.setAdapter(arrayAdapter);
+//        listView.setAdapter(arrayAdapter);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Please Wait Loading List...");
         mProgressDialog.show();
@@ -105,25 +108,27 @@ public class RumahsakitActivity extends AppCompatActivity {
 //                return false;
 //            }
 //        });
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("rumah sakit");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("hotel");
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mProgressDialog.dismiss();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-                    imgList.add(img);
+                    String judul = postSnapshot.child("name").getValue(String.class);
+                    String lokasi = postSnapshot.child("lokasi").getValue(String.class);
+                    String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
+                    String gambar = postSnapshot.child("url").getValue(String.class);
+                    String namaSub = postSnapshot.child("nameSub").getValue(String.class);
+                    namaList.add(judul);
+                    detailList.add(lokasi);
+                    gambarList.add(gambar);
+                    deskripsiList.add(deskripsi);
+                    nameSubList.add(namaSub);
 
+                    mAdapter = new ListCardAdapter(RumahsakitActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+                    recyclerView.setAdapter(mAdapter);
                 }
-//                String nama = dataSnapshot.child("name").getValue(String.class);
-//                String Lokasi = dataSnapshot.child("lokasi").getValue(String.class);
-//                String imgurl = dataSnapshot.child("url").getValue(String.class);
-//                Log.d("TAG", nama + " / " + Lokasi + " / " + imgurl);
-
-                mAdapter = new ImageListAdapter(RumahsakitActivity.this, R.layout.list_item, imgList, "rumah sakit");
-                listView.setAdapter(mAdapter);
-
             }
 
             @Override
@@ -133,52 +138,46 @@ public class RumahsakitActivity extends AppCompatActivity {
         });
     }
 
-//    public void tomaps(View view){
-//        Intent intent = new Intent(RumahsakitActivity.this, SubMenuActivity.class);
-//        startActivity(intent);
-//    }
+    private void setAdapter(final String searchString) {
+        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int counter = 0;
+                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+                    String judul = Snapshot.child("name").getValue(String.class);
+                    String lokasi = Snapshot.child("lokasi").getValue(String.class);
+                    String deskripsi = Snapshot.child("deskripsi").getValue(String.class);
+                    String gambar = Snapshot.child("url").getValue(String.class);
+                    String namaSub = Snapshot.child("nameSub").getValue(String.class);
 
-//    private void setAdapter(final String searchString) {
-//        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                int counter = 0;
-//                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
-//                    String judul = Snapshot.child("name").getValue(String.class);
-//                    String lokasi = Snapshot.child("lokasi").getValue(String.class);
-//                    String number = Snapshot.child("number").getValue(String.class);
-//                    String gambar = Snapshot.child("url").getValue(String.class);
-//                    String namaSub = Snapshot.child("nameSub").getValue(String.class);
-//
-//                    if (!judul.contains(searchString)) {
-//                        listView.setVisibility(View.GONE);
-//                        JudulList.add(judul);
-//                        LokasiList.add(lokasi);
-//                        NomorList.add(number);
-//                        GambarList.add(gambar);
-//                        nameSub.add(namaSub);
-//                        mResult.setVisibility(View.VISIBLE);
-//                        counter++;
-//                    } else {
-//                        listView.setVisibility(View.VISIBLE);
-//                        mResult.setVisibility(View.GONE);
-//                        mResult.removeAllViews();
-//                        JudulList.clear();
-//                        NomorList.clear();
-//                        GambarList.clear();
-//                        LokasiList.clear();
-//                    }
-//                    if (counter == 15) {
+                    if (!judul.contains(searchString)) {
+                        listView.setVisibility(View.GONE);
+                        namaList.add(judul);
+                        detailList.add(lokasi);
+                        gambarList.add(gambar);
+                        deskripsiList.add(deskripsi);
+                        nameSubList.add(namaSub);
+                        mResult.setVisibility(View.VISIBLE);
+                        counter++;
 //                        break;
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+                    } else {
+                        listView.setVisibility(View.VISIBLE);
+                        mResult.setVisibility(View.GONE);
+                        mResult.removeAllViews();
+                        namaList.clear();
+                        detailList.clear();
+                        gambarList.clear();
+                        deskripsiList.clear();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

@@ -63,7 +63,7 @@ public class HotelActivity extends AppCompatActivity {
 
         //Pengaturan Recycler View
         recyclerView = (RecyclerView) findViewById(R.id.list_penginapan);
-//
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 //

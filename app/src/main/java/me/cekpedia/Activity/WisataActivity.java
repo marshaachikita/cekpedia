@@ -30,23 +30,24 @@ import me.cekpedia.models.ImageUpload;
 public class WisataActivity extends AppCompatActivity {
     ListView listView;
     private RecyclerView mRecyclerView;
-    private ImageListAdapter mAdapter;
+    private ListCardAdapter mAdapter;
     private DatabaseReference mDatabaseRef;
     private StorageReference mStorageRef;
     private List<ImageUpload> imgList;
     private ImageListAdapter adapter;
-    ArrayList<String>JudulList;
-    ArrayList<String>LokasiList;
-    ArrayList<String>NomorList;
-    ArrayList<String>GambarList;
-    ArrayList<String>nameSub;
+    ArrayList<String> namaList;
+    ArrayList<String> detailList;
+    ArrayList<String> gambarList;
+    ArrayList<String> deskripsiList;
+    ArrayList<String> jarakList;
+    ArrayList<String> nameSubList;
     private RecyclerView mResult;
     private ProgressDialog mProgressDialog;
     public static final String FB_DATABASE_PATH = "cekpedia";
     SearchView searchView;
 
-//    RecyclerView recyclerView;
-//    RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 //    RecyclerView.Adapter adapter;
 
     @Override
@@ -55,45 +56,53 @@ public class WisataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wisata);
 
         //Pengaturan Recycler View
-//        recyclerView = (RecyclerView) findViewById(R.id.list_wisata);
-//
-//        layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = (RecyclerView) findViewById(R.id.list_wisata);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 //
 //        adapter = new ListCardAdapter();
 //        recyclerView.setAdapter(adapter);
 
-        listView = (ListView) findViewById(R.id.list_wisata);
+//        listView = (ListView) findViewById(R.id.list_wisata);
 //        searchView = (SearchView) findViewById(R.id.cari);
 //        mResult = (RecyclerView) findViewById(R.id.reult_list_wisata);
+        namaList = new ArrayList<>();
+        detailList = new ArrayList<>();
+        gambarList = new ArrayList<>();
+        deskripsiList = new ArrayList<>();
+        jarakList = new ArrayList<>();
+        nameSubList = new ArrayList<>();
         final ArrayList<String> Kategori = new ArrayList<>();
         imgList = new ArrayList<>();
-        JudulList = new ArrayList<>();
-        LokasiList = new ArrayList<>();
-        NomorList = new ArrayList<>();
-        nameSub = new ArrayList<>();
-        GambarList = new ArrayList<>();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
-        listView.setAdapter(arrayAdapter);
+//        listView.setAdapter(arrayAdapter);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Please Wait Loading List...");
         mProgressDialog.show();
 
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("wisata");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("hotel");
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mProgressDialog.dismiss();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-                    imgList.add(img);
+                    String judul = postSnapshot.child("name").getValue(String.class);
+                    String lokasi = postSnapshot.child("lokasi").getValue(String.class);
+                    String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
+                    String gambar = postSnapshot.child("url").getValue(String.class);
+                    String namaSub = postSnapshot.child("nameSub").getValue(String.class);
+                    namaList.add(judul);
+                    detailList.add(lokasi);
+                    gambarList.add(gambar);
+                    deskripsiList.add(deskripsi);
+                    nameSubList.add(namaSub);
 
+                    mAdapter = new ListCardAdapter(WisataActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+                    recyclerView.setAdapter(mAdapter);
                 }
-                mAdapter = new ImageListAdapter(WisataActivity.this, R.layout.list_item, imgList, "wisata");
-                listView.setAdapter(mAdapter);
-
             }
 
             @Override
@@ -127,44 +136,37 @@ public class WisataActivity extends AppCompatActivity {
 //            }
 //        });
     }
-    public void tomaps(View view){
-        Intent intent = new Intent(WisataActivity.this, SubMenuActivity.class);
-        startActivity(intent);
-    }
 
     private void setAdapter(final String searchString) {
         mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int counter = 0;
-                for (DataSnapshot Snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
                     String judul = Snapshot.child("name").getValue(String.class);
                     String lokasi = Snapshot.child("lokasi").getValue(String.class);
-                    String number = Snapshot.child("number").getValue(String.class);
+                    String deskripsi = Snapshot.child("deskripsi").getValue(String.class);
                     String gambar = Snapshot.child("url").getValue(String.class);
                     String namaSub = Snapshot.child("nameSub").getValue(String.class);
 
-                    if (!judul.contains(searchString)){
+                    if (!judul.contains(searchString)) {
                         listView.setVisibility(View.GONE);
-                        JudulList.add(judul);
-                        LokasiList.add(lokasi);
-                        NomorList.add(number);
-                        GambarList.add(gambar);
-                        nameSub.add(namaSub);
+                        namaList.add(judul);
+                        detailList.add(lokasi);
+                        gambarList.add(gambar);
+                        deskripsiList.add(deskripsi);
+                        nameSubList.add(namaSub);
                         mResult.setVisibility(View.VISIBLE);
                         counter++;
-                    }
-                    else {
+//                        break;
+                    } else {
                         listView.setVisibility(View.VISIBLE);
                         mResult.setVisibility(View.GONE);
                         mResult.removeAllViews();
-                        JudulList.clear();
-                        NomorList.clear();
-                        GambarList.clear();
-                        LokasiList.clear();
-                    }
-                    if (counter == 15){
-                        break;
+                        namaList.clear();
+                        detailList.clear();
+                        gambarList.clear();
+                        deskripsiList.clear();
                     }
 
                 }

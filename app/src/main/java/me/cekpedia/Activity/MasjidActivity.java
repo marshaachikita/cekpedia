@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,26 +33,27 @@ import me.cekpedia.models.ImageUpload;
 public class MasjidActivity extends AppCompatActivity {
     ListView listView;
     private RecyclerView mRecyclerView;
-    private ImageListAdapter mAdapter;
+    private ListCardAdapter mAdapter;
     private DatabaseReference mDatabaseRef;
     private SearchView searchView;
     private StorageReference mStorageRef;
     private List<ImageUpload> imgList;
     private ImageListAdapter adapter;
     private ProgressDialog mProgressDialog;
-    ArrayList<String>JudulList;
-    ArrayList<String>LokasiList;
-    ArrayList<String>NomorList;
-    ArrayList<String>GambarList;
-    ArrayList<String>nameSub;
+    ArrayList<String> namaList;
+    ArrayList<String> detailList;
+    ArrayList<String> gambarList;
+    ArrayList<String> deskripsiList;
+    ArrayList<String> jarakList;
+    ArrayList<String> nameSubList;
     private RecyclerView mResult;
     private String namaMenu, namaSub;
     public static final String FB_DATABASE_PATH = "cekpedia";
     SearchAdapter searchAdapter;
     FirebaseUser firebaseUser;
 
-//    RecyclerView recyclerView;
-//    RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 //    RecyclerView.Adapter adapter;
 
     @Override
@@ -60,57 +62,58 @@ public class MasjidActivity extends AppCompatActivity {
         setContentView(R.layout.activity_masjid);
 
         //Pengaturan Recycler View
-//        recyclerView = (RecyclerView) findViewById(R.id.list_tempatibadah);
-//
-//        layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = (RecyclerView) findViewById(R.id.list_tempatibadah);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 //
 //        adapter = new ListCardAdapter();
 //        recyclerView.setAdapter(adapter);
 
-        listView = (ListView) findViewById(R.id.list_tempatibadah);
+//        listView = (ListView) findViewById(R.id.list_tempatibadah);
 //        searchView = (SearchView) findViewById(R.id.cari);
 //        mResult = (RecyclerView) findViewById(R.id.reult_list_masjid);
-        JudulList = new ArrayList<>();
-        LokasiList = new ArrayList<>();
-        NomorList = new ArrayList<>();
-        nameSub = new ArrayList<>();
-        GambarList = new ArrayList<>();
+
+        namaList = new ArrayList<>();
+        detailList = new ArrayList<>();
+        gambarList = new ArrayList<>();
+        deskripsiList = new ArrayList<>();
+        jarakList = new ArrayList<>();
+        nameSubList = new ArrayList<>();
         final ArrayList<String> Kategori = new ArrayList<>();
         imgList = new ArrayList<>();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
-        listView.setAdapter(arrayAdapter);
-        Intent i = getIntent();
-        namaMenu = i.getStringExtra("JUDUL");
-        namaSub = i.getStringExtra("SUB");
-//        mResult = (RecyclerView) findViewById(R.id.reult_list_masjid);
-//        mResult.setHasFixedSize(true);
-//        mResult.setLayoutManager(new LinearLayoutManager(this));
-//        mResult.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+//        listView.setAdapter(arrayAdapter);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Please Wait Loading List...");
         mProgressDialog.show();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("masjid");
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("hotel");
+
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mProgressDialog.dismiss();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-//                    String judul = postSnapshot.child("name").getValue(String.class);
-//                    String lokasi = postSnapshot.child("lokasi").getValue(String.class);
-//                    String number = postSnapshot.child("number").getValue(String.class);
-//                    String gambar = postSnapshot.child("url").getValue(String.class);
-//                    String namaSub = postSnapshot.child("nameSub").getValue(String.class);
-                    imgList.add(img);
+                    String judul = postSnapshot.child("name").getValue(String.class);
+                    String lokasi = postSnapshot.child("lokasi").getValue(String.class);
+                    String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
+                    String gambar = postSnapshot.child("url").getValue(String.class);
+                    String namaSub = postSnapshot.child("nameSub").getValue(String.class);
+                    namaList.add(judul);
+                    detailList.add(lokasi);
+                    gambarList.add(gambar);
+                    deskripsiList.add(deskripsi);
+                    nameSubList.add(namaSub);
+
+                    mAdapter = new ListCardAdapter(MasjidActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+                    recyclerView.setAdapter(mAdapter);
                 }
-                mAdapter = new ImageListAdapter(MasjidActivity.this, R.layout.list_item,  imgList, "masjid");
-                listView.setAdapter(mAdapter);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(MasjidActivity.this, "Database Error", Toast.LENGTH_SHORT).show();
             }
         });
 //        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -163,34 +166,31 @@ public class MasjidActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int counter = 0;
-                for (DataSnapshot Snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
                     String judul = Snapshot.child("name").getValue(String.class);
                     String lokasi = Snapshot.child("lokasi").getValue(String.class);
-                    String number = Snapshot.child("number").getValue(String.class);
+                    String deskripsi = Snapshot.child("deskripsi").getValue(String.class);
                     String gambar = Snapshot.child("url").getValue(String.class);
                     String namaSub = Snapshot.child("nameSub").getValue(String.class);
 
-                    if (!judul.contains(searchString)){
+                    if (!judul.contains(searchString)) {
                         listView.setVisibility(View.GONE);
-                        JudulList.add(judul);
-                        LokasiList.add(lokasi);
-                        NomorList.add(number);
-                        GambarList.add(gambar);
-                        nameSub.add(namaSub);
+                        namaList.add(judul);
+                        detailList.add(lokasi);
+                        gambarList.add(gambar);
+                        deskripsiList.add(deskripsi);
+                        nameSubList.add(namaSub);
                         mResult.setVisibility(View.VISIBLE);
                         counter++;
-                    }
-                    else {
+//                        break;
+                    } else {
                         listView.setVisibility(View.VISIBLE);
                         mResult.setVisibility(View.GONE);
                         mResult.removeAllViews();
-                        JudulList.clear();
-                        NomorList.clear();
-                        GambarList.clear();
-                        LokasiList.clear();
-                    }
-                    if (counter == 15){
-                        break;
+                        namaList.clear();
+                        detailList.clear();
+                        gambarList.clear();
+                        deskripsiList.clear();
                     }
 
                 }
@@ -201,59 +201,6 @@ public class MasjidActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        final ArrayList<String> Kategori = new ArrayList<>();
-//        imgList = new ArrayList<>();
-//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
-//        listView.setAdapter(arrayAdapter);
-//        mResult = (RecyclerView) findViewById(R.id.reult_list_masjid);
-//        mResult.setHasFixedSize(true);
-//        mResult.setLayoutManager(new LinearLayoutManager(this));
-//        mResult.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-//        JudulList = new ArrayList<>();
-//        LokasiList = new ArrayList<>();
-//        NomorList = new ArrayList<>();
-//        nameSub = new ArrayList<>();
-//        GambarList = new ArrayList<>();
-//        mProgressDialog = new ProgressDialog(this);
-//        mProgressDialog.setMax(100);
-//        mProgressDialog.setMessage("Loading...");
-//        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//        mProgressDialog.show();
-//        mProgressDialog.setCancelable(false);
-//        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("masjid");
-//        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                mProgressDialog.dismiss();
-//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-//                    String judul = postSnapshot.child("name").getValue(String.class);
-//                    String lokasi = postSnapshot.child("lokasi").getValue(String.class);
-//                    String number = postSnapshot.child("number").getValue(String.class);
-//                    String gambar = postSnapshot.child("url").getValue(String.class);
-//                    String namaSub = postSnapshot.child("nameSub").getValue(String.class);
-////                    imgList.add(img);
-//
-//                }
-//                searchAdapter = new SearchAdapter(MasjidActivity.this, JudulList, LokasiList, NomorList, GambarList, nameSub);
-//                mResult.setAdapter(searchAdapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-    }
-
-    public void tomaps(View view){
-        Intent intent = new Intent(MasjidActivity.this, SubMenuActivity.class);
-        startActivity(intent);
     }
 
 }
