@@ -55,13 +55,13 @@ public class ImageListAdapter extends ArrayAdapter<ImageUpload> {
         TextView tvName = listItemView.findViewById(R.id.namaTempat);
         TextView tvLokasi = listItemView.findViewById(R.id.alamatTempat);
         ImageView imageView = listItemView.findViewById(R.id.gambar);
-        TextView tvJarak = listItemView.findViewById(R.id.jarakTempat);
+//        TextView tvJarak = listItemView.findViewById(R.id.jarakTempat);
         TextView tvDeskripsi =listItemView.findViewById(R.id.deskripsiTempat);
         final TextView tvSponsor = listItemView.findViewById(R.id.tvsponsor);
 
         tvName.setText(listImage.get(position).getName());
         tvLokasi.setText(listImage.get(position).getLokasi());
-        tvJarak.setText(listImage.get(position).getNumber());
+//        tvJarak.setText(listImage.get(position).getNumber());
         tvDeskripsi.setText(listImage.get(position).getDeskripsi());
         Glide.with(context)
                 .load(listImage.get(position).getUrl())

@@ -64,6 +64,7 @@ public class FavouriteFragment extends Fragment {
     ArrayList<String> jarakList;
     ArrayList<String> nameSubList;
     ArrayList<String> noTelpList;
+    List<ImageUpload> listData;
 
     public FavouriteFragment() {
         // Required empty public constructor
@@ -101,7 +102,7 @@ public class FavouriteFragment extends Fragment {
         jarakList = new ArrayList<>();
         nameSubList = new ArrayList<>();
         noTelpList = new ArrayList<>();
-
+        listData = new ArrayList<>();
 //        listView = view.findViewById(R.id.listviewfav1);
 //        final ArrayList<String> Kategori = new ArrayList<>();
 //        imgList = new ArrayList<>();
@@ -146,28 +147,32 @@ public class FavouriteFragment extends Fragment {
                                 final Map<String, Object> detail = (Map<String, Object>) dataSnapshot.getValue();
                                 final String sub = detail.get(FavoriteNameLike[finalI]).toString();
                                 Reference2 = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child(sub).child(FavoriteNameLike[finalI]);
-                                Reference2.addValueEventListener(new ValueEventListener() {
+                                Reference2.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-//                                        ImageUpload img = dataSnapshot.getValue(ImageUpload.class);
+                                        ImageUpload img = dataSnapshot.getValue(ImageUpload.class);
 //                                        imgList.add(img);
-                                        String judul = dataSnapshot.child("name").getValue(String.class);
-                                        String lokasi = dataSnapshot.child("lokasi").getValue(String.class);
-                                        String deskripsi = dataSnapshot.child("deskripsi").getValue(String.class);
-                                        String gambar = dataSnapshot.child("url").getValue(String.class);
-                                        String namaSub = dataSnapshot.child("nameSub").getValue(String.class);
-                                        String noTelp = dataSnapshot.child("number").getValue(String.class);
-                                        String jarak = "";
-                                        namaList.add(judul);
-                                        detailList.add(lokasi);
-                                        gambarList.add(gambar);
-                                        deskripsiList.add(deskripsi);
-                                        jarakList.add(jarak);
-                                        nameSubList.add(namaSub);
-                                        noTelpList.add(noTelp);
+//                                        listData.add(img);
+//                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                            String judul = dataSnapshot.child("name").getValue(String.class);
+                                            String lokasi = dataSnapshot.child("lokasi").getValue(String.class);
+                                            String deskripsi = dataSnapshot.child("deskripsi").getValue(String.class);
+                                            String gambar = dataSnapshot.child("url").getValue(String.class);
+                                            String namaSub = dataSnapshot.child("nameSub").getValue(String.class);
+                                            String noTelp = dataSnapshot.child("number").getValue(String.class);
+                                            String jarak = "";
+                                            namaList.add(judul);
+                                            detailList.add(lokasi);
+                                            gambarList.add(gambar);
+                                            deskripsiList.add(deskripsi);
+                                            jarakList.add(jarak);
+                                            nameSubList.add(namaSub);
+                                            noTelpList.add(noTelp);
+                                            mAdapter = new ListCardAdapter(getActivity(), namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
+                                            recyclerView.setAdapter(mAdapter);
+                                            mAdapter.notifyDataSetChanged();
+//                                        }
 
-                                        mAdapter = new ListCardAdapter(getActivity(), namaList, detailList, gambarList, noTelpList, deskripsiList, jarakList, nameSubList);
-                                        recyclerView.setAdapter(mAdapter);
                                     }
 
                                     @Override

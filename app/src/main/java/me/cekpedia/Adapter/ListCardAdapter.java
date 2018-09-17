@@ -16,10 +16,13 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import me.cekpedia.Activity.RestoranActivity;
 import me.cekpedia.Activity.RumahsakitActivity;
 import me.cekpedia.Activity.SubMenuActivity;
 import me.cekpedia.R;
+import me.cekpedia.models.ImageUpload;
 
 public class ListCardAdapter
         extends RecyclerView.Adapter<ListCardAdapter.ViewHolder>
@@ -67,8 +70,13 @@ public class ListCardAdapter
     ArrayList<String> jarakList= null;
     ArrayList<String> noTelpList= null;
     ArrayList<String> nameSubList= null;
+    List<ImageUpload> listArray = null;
+
     private String nameSub = "";
 
+//    public ListCardAdapter(List<ImageUpload> list){
+//        this.listArray = list;
+//    }
     public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
         this.context = context;
         this.namaList = namaList;
@@ -77,6 +85,15 @@ public class ListCardAdapter
         this.noTelpList = noTelpList;
         this.deskripsiList = deskripsiList;
         this.jarakList = jarakList;
+        this.nameSubList = nameSubList;
+    }
+    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
+        this.context = context;
+        this.namaList = namaList;
+        this.detailList = detailList;
+        this.gambarList = gambarList;
+        this.noTelpList = noTelpList;
+        this.deskripsiList = deskripsiList;
         this.nameSubList = nameSubList;
     }
     public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
@@ -120,11 +137,13 @@ public class ListCardAdapter
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.itemNama.setText(namaList.get(position));
+        Toast.makeText(context, namaList.get(position), Toast.LENGTH_SHORT).show();
         holder.itemDetail.setText(detailList.get(position));
         holder.itemDeskripsi.setText(deskripsiList.get(position));
         Glide.with(context)
                 .load(gambarList.get(position))
                 .into(holder.itemGambar);
+        holder.itemNoTelp.setText(noTelpList.get(position));
 //        holder.itemJarak.setText(jarakList.get(position));
 
     }
@@ -147,8 +166,13 @@ public class ListCardAdapter
             itemDetail = (TextView)itemView.findViewById(R.id.alamatTempat);
             itemDeskripsi = itemView.findViewById(R.id.deskripsiTempat);
             itemNoTelp = itemView.findViewById(R.id.noTelpTempat);
-            itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
-            detail = (TextView) itemView.findViewById(R.id.detail);
+//            itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
+//            detail = (TextView) itemView.findViewById(R.id.detail);
+//            if (namaList.size() >= 1){
+//                detail.setVisibility(View.VISIBLE);
+//            }else {
+//                detail.setVisibility(View.GONE);
+//            }
 //
 //
 ////                    Snackbar.make(v, "Click detected on item " + position,

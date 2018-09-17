@@ -112,7 +112,7 @@ public class RestoranActivity extends AppCompatActivity {
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("restoran");
 
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mProgressDialog.dismiss();
@@ -130,12 +130,12 @@ public class RestoranActivity extends AppCompatActivity {
                     deskripsiList.add(deskripsi);
                     jarakList.add(jarak);
                     nameSubList.add(namaSub);
-
                     noTelpList.add(noTelp);
 
-                    mAdapter = new ListCardAdapter(RestoranActivity.this, namaList, detailList, gambarList, noTelpList, deskripsiList, jarakList, nameSubList);
-                    recyclerView.setAdapter(mAdapter);
+
                 }
+                mAdapter = new ListCardAdapter(RestoranActivity.this, namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
+                recyclerView.setAdapter(mAdapter);
             }
 
             @Override

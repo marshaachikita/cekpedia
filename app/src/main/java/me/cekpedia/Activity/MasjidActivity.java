@@ -46,6 +46,7 @@ public class MasjidActivity extends AppCompatActivity {
     ArrayList<String> deskripsiList;
     ArrayList<String> jarakList;
     ArrayList<String> nameSubList;
+    ArrayList<String> noTelpList;
     private RecyclerView mResult;
     private String namaMenu, namaSub;
     public static final String FB_DATABASE_PATH = "cekpedia";
@@ -80,6 +81,7 @@ public class MasjidActivity extends AppCompatActivity {
         deskripsiList = new ArrayList<>();
         jarakList = new ArrayList<>();
         nameSubList = new ArrayList<>();
+        noTelpList = new ArrayList<>();
         final ArrayList<String> Kategori = new ArrayList<>();
         imgList = new ArrayList<>();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
@@ -100,13 +102,18 @@ public class MasjidActivity extends AppCompatActivity {
                     String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
                     String gambar = postSnapshot.child("url").getValue(String.class);
                     String namaSub = postSnapshot.child("nameSub").getValue(String.class);
+                    String noTelp = dataSnapshot.child("number").getValue(String.class);
+                    String jarak = "";
                     namaList.add(judul);
                     detailList.add(lokasi);
                     gambarList.add(gambar);
                     deskripsiList.add(deskripsi);
+                    jarakList.add(jarak);
                     nameSubList.add(namaSub);
 
-                    mAdapter = new ListCardAdapter(MasjidActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+                    noTelpList.add(noTelp);
+
+                    mAdapter = new ListCardAdapter(MasjidActivity.this, namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
                     recyclerView.setAdapter(mAdapter);
                 }
             }

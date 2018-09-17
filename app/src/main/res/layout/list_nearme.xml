@@ -60,27 +60,28 @@
                 android:textSize="12sp"
                 android:text="Bandara satu - satunya di bandung" />
 
-            <TextView
-                android:id="@+id/jarakTempat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:textSize="12sp"
-                android:text="2 km" />
+            <!--<TextView-->
+                <!--android:id="@+id/jarakTempat"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="16dp"-->
+                <!--android:textSize="12sp"-->
+                <!--android:text="2 km" />-->
 
-            <TextView
-                android:id="@+id/detail"
-                android:layout_width="75dp"
-                android:layout_height="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                android:text="Cek Detail"
-                android:layout_gravity="right"
-                android:textColor="@android:color/white"
-                android:background="@drawable/search_layout"
-                android:backgroundTint="#61B1BE" />
+            <!--<TextView-->
+                <!--android:id="@+id/detail"-->
+                <!--android:layout_width="75dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textAlignment="center"-->
+                <!--android:text="Cek Detail"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:textColor="@android:color/white"-->
+                <!--android:background="@drawable/search_layout"-->
+                <!--android:visibility="visible"-->
+                <!--android:backgroundTint="#61B1BE" />-->
 
         </LinearLayout>
 
