@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ import me.cekpedia.Activity.HotelActivity;
 import me.cekpedia.Adapter.ImageAdapter;
 import me.cekpedia.Activity.InputLokasiActivity;
 import me.cekpedia.Activity.MasjidActivity;
+import me.cekpedia.Adapter.ImageSlideAdapter;
 import me.cekpedia.R;
 import me.cekpedia.Activity.RestoranActivity;
 import me.cekpedia.Activity.RumahsakitActivity;
@@ -99,6 +101,13 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
             "Tambah Lokasi"
     };
 
+    int[] slider = {
+            R.drawable.hotelhorison,
+            R.drawable.bandarahusein,
+            R.drawable.bidandelima,
+            R.drawable.apotekk24gerlong
+    };
+
 //    private Handler handler;
 //    private Runnable Update;
 //    static int currentPage = 0;
@@ -108,6 +117,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
     private SliderLayout sliderLayout;
     private RecyclerView recyclerView;
+    private ViewPager viewPager;
     GridLayoutManager layoutManager;
     View view;
     TextView st;
@@ -126,6 +136,11 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // Pengaturan Image Slider
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        ImageSlideAdapter viewPagerAdapter = new ImageSlideAdapter(getActivity(), slider);
+        viewPager.setAdapter(viewPagerAdapter);
+
         //Pengaturan Font
         st = (TextView) view.findViewById(R.id.toolbar_text);
         tf = Typeface.createFromAsset(getActivity().getAssets(), "scriptmtbold.ttf");
@@ -139,6 +154,8 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myAdapter);
         myAdapter.setClickListener(this);
+
+
         // Slider Layout
         sliderLayout = view.findViewById(R.id.slider);
 //        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();

@@ -2,7 +2,9 @@ package me.cekpedia.Adapter;
 
 import android.content.Context;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,88 +25,46 @@ import me.cekpedia.R;
  */
 
 public class ImageSlideAdapter extends PagerAdapter {
-    private ArrayList<Integer> IMAGES;
+
+    private int icons[];
     private LayoutInflater inflater;
     private Context context;
-    HomeFragment homeFragment;
 
-    String[] aMerchantPhoto;
-    int merchantSize;
-
-    public ImageSlideAdapter(Context context, ArrayList<Integer> IMAGES,HomeFragment homeFragment) {
+    public ImageSlideAdapter(Context context, int[] icons) {
         this.context = context;
-        this.IMAGES=IMAGES;
-        this.homeFragment = homeFragment;
-        inflater = LayoutInflater.from(context);
-    }
+        this.icons = icons;
 
-    public ImageSlideAdapter(Context context, String[] aMerchantPhotoAds, int merchantSize, HomeFragment homeFragment) {
-        this.context = context;
-        this.aMerchantPhoto = aMerchantPhotoAds;
-        this.merchantSize = merchantSize;
-        this.homeFragment = homeFragment;
-//        inflater = LayoutInflater.from(context);
-    }
-
-    public ImageSlideAdapter(Context context, String[] aMerchantPhotoAds, int merchantSize) {
-        this.context = context;
-        this.aMerchantPhoto = aMerchantPhotoAds;
-        this.merchantSize = merchantSize;
-        this.homeFragment = homeFragment;
-        inflater = LayoutInflater.from(context);
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
     }
 
     @Override
     public int getCount() {
-        return merchantSize;
+        return icons.length;
     }
 
     @Override
-    public Object instantiateItem(ViewGroup view, final int position) {
-        View imageLayout = LayoutInflater.from(view.getContext()).inflate(R.layout.sliding_images, view, false);
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return view == object;
+    }
 
-        assert imageLayout != null;
-        final ImageView imageViewSlideEvent = (ImageView) imageLayout.findViewById(R.id.slider);
-        final CardView cardViewAds = (CardView) imageLayout.findViewById(R.id.card);
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl(aMerchantPhoto[position]);
-        Glide.with(homeFragment)
-                .load(storageRef)
-                .into(imageViewSlideEvent);
+        inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.sliding_images, null);
 
-        //imageViewSlideEvent.setImageResource(IMAGES.get(position));
+        ImageView img = (ImageView) view.findViewById(R.id.slider);
+        img.setImageResource(icons[position]);
 
-        view.addView(imageLayout, 0);
-
-        /*imageViewSlideEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
-
-
-        return imageLayout;
+        ViewPager vp = (ViewPager) container;
+        vp.addView(view,0);
+        return  view;
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return view.equals(object);
-    }
-
-    @Override
-    public void restoreState(Parcelable state, ClassLoader loader) {
-    }
-
-    @Override
-    public Parcelable saveState() {
-        return null;
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        ViewPager vp = (ViewPager) container;
+        View view = (View) object;
+        vp.removeView(view);
     }
 }

@@ -9,6 +9,8 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -43,6 +45,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import me.cekpedia.Adapter.ImageAdapter;
 import me.cekpedia.R;
 import me.cekpedia.models.ImageUpload;
 import me.cekpedia.utils.Constants;
@@ -61,6 +64,7 @@ public class InputLokasiActivity extends AppCompatActivity {
     private MapView mMapView;
     private GoogleMap m_map;
     private StorageTask mUploadTask;
+    private RecyclerView recyclerView;
     Uri selectedImage;
     FirebaseStorage storage;
     StorageReference storageRef,imageRef;
@@ -82,19 +86,20 @@ public class InputLokasiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_lokasi);
-        btCamera = (Button) findViewById(R.id.bt_camera);
+
+//        btCamera = (Button) findViewById(R.id.bt_camera);
         etNama = (EditText)findViewById(R.id.etNamaTempat);
         etLokasi = (EditText)findViewById(R.id.etSetLokasi);
-        etPhone = findViewById(R.id.etPhone);
-        etDeskripsi = (EditText) findViewById(R.id.etdeskripsi);
+//        etPhone = findViewById(R.id.etPhone);
+//        etDeskripsi = (EditText) findViewById(R.id.etdeskripsi);
         progressDialog = new ProgressDialog(this);
         imageView = (ImageView) findViewById(R.id.iv_camera);
-        submit = (Button)findViewById(R.id.bt_camera);
+//        submit = (Button)findViewById(R.id.bt_camera);
         storage = FirebaseStorage.getInstance();
         database = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
         //creates a storage reference
         storageRef = storage.getReference();
-        myspinner = findViewById(R.id.spinner);
+//        myspinner = findViewById(R.id.spinner);
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
