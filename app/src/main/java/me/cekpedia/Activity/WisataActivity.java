@@ -100,7 +100,7 @@ public class WisataActivity extends AppCompatActivity {
                     deskripsiList.add(deskripsi);
                     nameSubList.add(namaSub);
 
-                    mAdapter = new ListCardAdapter(WisataActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+//                    mAdapter = new ListCardAdapter(WisataActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
                     recyclerView.setAdapter(mAdapter);
                 }
             }

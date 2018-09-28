@@ -129,7 +129,7 @@ public class HotelActivity extends AppCompatActivity {
                     deskripsiList.add(deskripsi);
                     nameSubList.add(namaSub);
 
-                    mAdapter = new ListCardAdapter(HotelActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+//                    mAdapter = new ListCardAdapter(HotelActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
                     recyclerView.setAdapter(mAdapter);
                 }
             }

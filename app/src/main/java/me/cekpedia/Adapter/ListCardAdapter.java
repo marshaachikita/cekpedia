@@ -63,7 +63,8 @@ public class ListCardAdapter
 ////
     Context context;
     Activity activity;
-    ArrayList<String> namaList = null;
+    ArrayList<String> namaeList = null;
+    List<ImageUpload> namaList = null;
     ArrayList<String> detailList= null;
     ArrayList<String> gambarList= null;
     ArrayList<String> deskripsiList= null;
@@ -74,10 +75,10 @@ public class ListCardAdapter
 
     private String nameSub = "";
 
-//    public ListCardAdapter(List<ImageUpload> list){
-//        this.listArray = list;
-//    }
-    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
+    public ListCardAdapter(List<ImageUpload> list){
+        this.namaList = list;
+    }
+    public ListCardAdapter(Context context, List<ImageUpload> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
         this.context = context;
         this.namaList = namaList;
         this.detailList = detailList;
@@ -87,7 +88,17 @@ public class ListCardAdapter
         this.jarakList = jarakList;
         this.nameSubList = nameSubList;
     }
-    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
+    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
+        this.context = context;
+        this.namaeList = namaList;
+        this.detailList = detailList;
+        this.gambarList = gambarList;
+        this.noTelpList = noTelpList;
+        this.deskripsiList = deskripsiList;
+        this.jarakList = jarakList;
+        this.nameSubList = nameSubList;
+    }
+    public ListCardAdapter(Context context, List<ImageUpload> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
         this.context = context;
         this.namaList = namaList;
         this.detailList = detailList;
@@ -96,7 +107,7 @@ public class ListCardAdapter
         this.deskripsiList = deskripsiList;
         this.nameSubList = nameSubList;
     }
-    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
+    public ListCardAdapter(Context context, List<ImageUpload> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
         this.context = context;
         this.namaList = namaList;
         this.detailList = detailList;
@@ -120,30 +131,32 @@ public class ListCardAdapter
             public void onClick(View v) {
 //                int position = getAdapterPosition();
                 Intent intent = new Intent(context, SubMenuActivity.class);
-                intent.putExtra("JUDUL", namaList.get(viewType));
+                intent.putExtra("JUDUL", namaList.get(viewType).getName());
                 if (!nameSub.equals(""))
                     intent.putExtra("SUB", nameSub);
                 else
                     intent.putExtra("SUB", nameSubList.get(viewType));
                 context.startActivity(intent);
-                }
+            }
         });
         ViewHolder viewHolder = new ViewHolder(v);
-
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        holder.itemNama.setText(namaList.get(position));
-        Toast.makeText(context, namaList.get(position), Toast.LENGTH_SHORT).show();
-        holder.itemDetail.setText(detailList.get(position));
-        holder.itemDeskripsi.setText(deskripsiList.get(position));
-        Glide.with(context)
-                .load(gambarList.get(position))
-                .into(holder.itemGambar);
-        holder.itemNoTelp.setText(noTelpList.get(position));
+        holder.itemNama.setText(namaList.get(position).getName());
+//        Toast.makeText(context, (CharSequence) namaList.get(position), Toast.LENGTH_SHORT).show();
+        holder.itemDetail.setText(namaList.get(position).getLokasi());
+        holder.itemDeskripsi.setText(namaList.get(position).getDeskripsi());
+        if (context != null) {
+            Glide.with(context)
+                    .load(namaList.get(position).getUrl())
+                    .into(holder.itemGambar);
+        }
+        holder.itemNoTelp.setText(namaList.get(position).getNumber());
+
 //        holder.itemJarak.setText(jarakList.get(position));
 
     }
@@ -166,6 +179,9 @@ public class ListCardAdapter
             itemDetail = (TextView)itemView.findViewById(R.id.alamatTempat);
             itemDeskripsi = itemView.findViewById(R.id.deskripsiTempat);
             itemNoTelp = itemView.findViewById(R.id.noTelpTempat);
+
+
+//            return viewHolder;
 //            itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
 //            detail = (TextView) itemView.findViewById(R.id.detail);
 //            if (namaList.size() >= 1){

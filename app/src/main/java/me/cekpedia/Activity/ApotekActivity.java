@@ -122,7 +122,7 @@ public class ApotekActivity extends AppCompatActivity {
                     deskripsiList.add(deskripsi);
                     nameSubList.add(namaSub);
 
-                    mAdapter = new ListCardAdapter(ApotekActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+//                    mAdapter = new ListCardAdapter(ApotekActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
                     mResult.setAdapter(mAdapter);
             }
 

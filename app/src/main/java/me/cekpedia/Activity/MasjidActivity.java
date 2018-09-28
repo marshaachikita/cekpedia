@@ -40,7 +40,7 @@ public class MasjidActivity extends AppCompatActivity {
     private List<ImageUpload> imgList;
     private ImageListAdapter adapter;
     private ProgressDialog mProgressDialog;
-    ArrayList<String> namaList;
+    List<ImageUpload> namaList;
     ArrayList<String> detailList;
     ArrayList<String> gambarList;
     ArrayList<String> deskripsiList;
@@ -97,6 +97,7 @@ public class MasjidActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mProgressDialog.dismiss();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
                     String judul = postSnapshot.child("name").getValue(String.class);
                     String lokasi = postSnapshot.child("lokasi").getValue(String.class);
                     String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
@@ -104,7 +105,7 @@ public class MasjidActivity extends AppCompatActivity {
                     String namaSub = postSnapshot.child("nameSub").getValue(String.class);
                     String noTelp = dataSnapshot.child("number").getValue(String.class);
                     String jarak = "";
-                    namaList.add(judul);
+                    namaList.add(img);
                     detailList.add(lokasi);
                     gambarList.add(gambar);
                     deskripsiList.add(deskripsi);
@@ -174,6 +175,7 @@ public class MasjidActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int counter = 0;
                 for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+                    ImageUpload img = Snapshot.getValue(ImageUpload.class);
                     String judul = Snapshot.child("name").getValue(String.class);
                     String lokasi = Snapshot.child("lokasi").getValue(String.class);
                     String deskripsi = Snapshot.child("deskripsi").getValue(String.class);
@@ -182,7 +184,7 @@ public class MasjidActivity extends AppCompatActivity {
 
                     if (!judul.contains(searchString)) {
                         listView.setVisibility(View.GONE);
-                        namaList.add(judul);
+                        namaList.add(img);
                         detailList.add(lokasi);
                         gambarList.add(gambar);
                         deskripsiList.add(deskripsi);

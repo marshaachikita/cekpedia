@@ -126,7 +126,7 @@ public class RumahsakitActivity extends AppCompatActivity {
                     deskripsiList.add(deskripsi);
                     nameSubList.add(namaSub);
 
-                    mAdapter = new ListCardAdapter(RumahsakitActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
+//                    mAdapter = new ListCardAdapter(RumahsakitActivity.this, namaList, detailList, gambarList, deskripsiList, nameSubList);
                     recyclerView.setAdapter(mAdapter);
                 }
             }
