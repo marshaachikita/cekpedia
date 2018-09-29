@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -44,7 +45,6 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 import java.util.Map;
 
-import me.cekpedia.Adapter.ImageSlideAdapter;
 import me.cekpedia.Adapter.SliderGambarAdapter;
 import me.cekpedia.Adapter.ImageListAdapter;
 import me.cekpedia.Fragment.FavouriteFragment;
@@ -87,7 +87,7 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
     private String favoritTemp;
 
     private RecyclerView recyclerView;
-    private ViewPager viewPager;
+    private LinearLayoutManager linearLayoutManager;
     TextView st;
     Typeface tf;
 
@@ -101,14 +101,21 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sub_menu);
+
+        //Slider Image
+        //Pengaturan ImageSlider Recycler View Baru
+        recyclerView = (RecyclerView) findViewById(R.id.rv_main);
+        SliderGambarAdapter adapter = new SliderGambarAdapter(img, this);
+        linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
 
         //Pengaturan Font
 //        st = (TextView) findViewById(R.id.toolbar_text);
 //        tf = Typeface.createFromAsset(this.getAssets(), "scriptmtbold.ttf");
 //        st.setTypeface(tf);
 
-
-//        setContentView(R.layout.activity_sub_menu);
 //        info = findViewById(R.id.imageButtonInfo);
 //        info1 = findViewById(R.id.imageButtonInfo1);
 //        RateUs = findViewById(R.id.imageButtonRateUs);
@@ -337,51 +344,51 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
 //        });
     }
 
-    public void LOADFavorite(){
-        FirebaseDatabase.getInstance().getReference(Constants.USER_KEY)
-                .child(FBUser.getEmail().replace(".", ","))
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
-                        favorit = detailMenu.get("favourite").toString();
-                        favoritTemp = favorit;
-                        if (!favoritTemp.equals("")){
-                            merchantNameLikeSize=0;
-                            while (favoritTemp.length()>1){
-//                                Toast.makeText(SubMenuActivity.this, "size "+merchantNameLikeSize+"", Toast.LENGTH_SHORT).show();
-                                favoritTemp = favoritTemp.substring(1);
-                                FavoriteNameLike[merchantNameLikeSize] = favoritTemp.substring(0, favoritTemp.indexOf("/"));
-
-//                                Toast.makeText(SubMenuActivity.this, "fav= "+FavoriteNameLike[merchantNameLikeSize], Toast.LENGTH_SHORT).show();
-                                favoritTemp = favoritTemp.substring(favoritTemp.indexOf("/"));
-                                merchantNameLikeSize++;
-                            }
-                            for (int i = 0; i < merchantNameLikeSize; i++){
-                                if (FavoriteNameLike[i].equals(namaMenu)){
-                                    fav.setBackgroundResource(R.drawable.ic_favorite_black_24dp);
-                                    isFavorite = true;
-//                                    Toast.makeText(SubMenuActivity.this, "is "+isFavorite+"", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }else {
-                                    fav.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp);
-                                    isFavorite = false;
-                                }
-
-                            }
-                        }
-                        else {
-                            fav.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp);
-                            isFavorite = false;
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-    }
+//    public void LOADFavorite(){
+//        FirebaseDatabase.getInstance().getReference(Constants.USER_KEY)
+//                .child(FBUser.getEmail().replace(".", ","))
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
+//                        favorit = detailMenu.get("favourite").toString();
+//                        favoritTemp = favorit;
+//                        if (!favoritTemp.equals("")){
+//                            merchantNameLikeSize=0;
+//                            while (favoritTemp.length()>1){
+////                                Toast.makeText(SubMenuActivity.this, "size "+merchantNameLikeSize+"", Toast.LENGTH_SHORT).show();
+//                                favoritTemp = favoritTemp.substring(1);
+//                                FavoriteNameLike[merchantNameLikeSize] = favoritTemp.substring(0, favoritTemp.indexOf("/"));
+//
+////                                Toast.makeText(SubMenuActivity.this, "fav= "+FavoriteNameLike[merchantNameLikeSize], Toast.LENGTH_SHORT).show();
+//                                favoritTemp = favoritTemp.substring(favoritTemp.indexOf("/"));
+//                                merchantNameLikeSize++;
+//                            }
+//                            for (int i = 0; i < merchantNameLikeSize; i++){
+//                                if (FavoriteNameLike[i].equals(namaMenu)){
+//                                    fav.setBackgroundResource(R.drawable.ic_favorite_black_24dp);
+//                                    isFavorite = true;
+////                                    Toast.makeText(SubMenuActivity.this, "is "+isFavorite+"", Toast.LENGTH_SHORT).show();
+//                                    return;
+//                                }else {
+//                                    fav.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp);
+//                                    isFavorite = false;
+//                                }
+//
+//                            }
+//                        }
+//                        else {
+//                            fav.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp);
+//                            isFavorite = false;
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+//    }
 //
     @Override
     public void onBackPressed() {

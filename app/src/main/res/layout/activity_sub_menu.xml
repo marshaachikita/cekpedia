@@ -52,57 +52,54 @@
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
-            <FrameLayout
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewpager"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp" />
-
-            </FrameLayout>
+                android:layout_marginTop="10dp"
+                android:id="@+id/rv_main"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp">
 
                 <ImageButton
                     android:id="@+id/detail_info"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:padding="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo_detail_putih"
                     android:background="#00FFFFFF"/>
 
                 <ImageButton
                     android:id="@+id/cari_lokasi"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:padding="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo_navigasi"
                     android:background="#00FFFFFF"/>
 
                 <ImageButton
                     android:id="@+id/telepon"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:padding="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo_telepon_putih"
                     android:background="#00FFFFFF"/>
 
                 <ImageButton
                     android:id="@+id/favorit"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="105dp"
-                    android:padding="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="120dp"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo_favorite_putih"
                     android:background="#00FFFFFF"/>

@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ import me.cekpedia.Activity.HotelActivity;
 import me.cekpedia.Adapter.ImageAdapter;
 import me.cekpedia.Activity.InputLokasiActivity;
 import me.cekpedia.Activity.MasjidActivity;
-import me.cekpedia.Adapter.ImageSlideAdapter;
+import me.cekpedia.Adapter.SliderGambarAdapter;
 import me.cekpedia.R;
 import me.cekpedia.Activity.RestoranActivity;
 import me.cekpedia.Activity.RumahsakitActivity;
@@ -116,8 +117,9 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //    private HomeFragment homeFragment;
 
     private SliderLayout sliderLayout;
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView, recyclerView1;
     private ViewPager viewPager;
+    private LinearLayoutManager linearLayoutManager;
     GridLayoutManager layoutManager;
     View view;
     TextView st;
@@ -136,11 +138,6 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Pengaturan Image Slider
-        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        ImageSlideAdapter viewPagerAdapter = new ImageSlideAdapter(getActivity(), slider);
-        viewPager.setAdapter(viewPagerAdapter);
-
         //Pengaturan Font
         st = (TextView) view.findViewById(R.id.toolbar_text);
         tf = Typeface.createFromAsset(getActivity().getAssets(), "scriptmtbold.ttf");
@@ -154,6 +151,13 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myAdapter);
         myAdapter.setClickListener(this);
+
+        //Pengaturan ImageSlider Recycler View Baru
+        recyclerView1 = (RecyclerView) view.findViewById(R.id.rv_main);
+        SliderGambarAdapter adapter = new SliderGambarAdapter(slider, getActivity());
+        linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        recyclerView1.setLayoutManager(linearLayoutManager);
+        recyclerView1.setAdapter(adapter);
 
 
         // Slider Layout

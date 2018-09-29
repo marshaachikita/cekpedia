@@ -6,6 +6,9 @@
         android:color="#FFFFFF"
         android:width="2dp"/>
 
+    <corners
+        android:radius="6dp"/>
+
     <size android:width="300dp"
         android:height="200dp"/>
 
