@@ -7,13 +7,12 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="#FFFFFF"
-    android:padding="16dp"
     tools:context="me.cekpedia.Activity.InputLokasiActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -29,6 +28,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/batal"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
@@ -36,10 +36,10 @@
                 android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/ellips_button"
-                android:id="@+id/batal"
                 android:backgroundTint="#4394A2"/>
 
             <TextView
+                android:id="@+id/simpan"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -47,7 +47,6 @@
                 android:text="Selesai"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/ellips_button"
-                android:id="@+id/simpan"
                 android:backgroundTint="#4394A2"/>
 
         </LinearLayout>
@@ -87,6 +86,7 @@
             android:text="Alamat"
             android:textStyle="bold"
             android:textColor="#4394A2"
+            android:layout_marginTop="10dp"
             />
 
         <Button
@@ -104,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#4394A2"
+            android:layout_marginTop="5dp"
             android:enabled="false"
             android:hint="Set Lokasi"/>
 
@@ -128,6 +129,7 @@
             android:layout_height="wrap_content"
             android:text="Kategori"
             android:textStyle="bold"
+            android:layout_marginTop="10dp"
             android:textColor="#4394A2"/>
 
         <LinearLayout
@@ -139,31 +141,40 @@
                 android:id="@+id/cb_penginapan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Penginapan"
                 android:textColor="#000000"
-                android:layout_weight="1"
-                android:textSize="11sp"
-                android:buttonTint="#000000"/>
+                android:textSize="12sp"/>
 
             <CheckBox
                 android:id="@+id/cb_tempat_ibadah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Tempat Ibadah"
                 android:textColor="#000000"
-                android:textSize="11sp"
-                android:layout_weight="3"
-                android:buttonTint="#000000"/>
+                android:textSize="12sp"/>
 
             <CheckBox
                 android:id="@+id/cb_SPBU"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:buttonTint="#000000"
+                android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="SPBU"
                 android:textColor="#000000"
-                android:textSize="11sp"/>
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
@@ -176,33 +187,43 @@
                 android:id="@+id/cb_wisata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Wisata"
                 android:textColor="#000000"
-                android:textSize="11sp"
-                android:layout_weight="2"
-                android:buttonTint="#000000"/>
+                android:textSize="12sp"/>
 
             <CheckBox
                 android:id="@+id/cb_swalayan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mall/Swalayan"
-                android:layout_weight="1"
-                android:layout_marginLeft="12dp"
-                android:textColor="#000000"
-                android:textSize="11sp"
+                android:layout_marginLeft="27dp"
                 android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mall/Swalayan"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
 
             <CheckBox
                 android:id="@+id/cb_transportasi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="1dp"
+                android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Transportasi"
                 android:textColor="#000000"
-                android:textSize="11sp"
-                android:buttonTint="#000000"/>
+                android:textSize="12sp"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -214,32 +235,42 @@
                 android:id="@+id/cb_kuliner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Kuliner"
-                android:buttonTint="#000000"
                 android:textColor="#000000"
-                android:textSize="11sp"/>
+                android:textSize="12sp"/>
+
             <CheckBox
                 android:id="@+id/cb_belajar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Belajar "
-                android:layout_weight="2"
-                android:textColor="#000000"
-                android:textSize="11sp"
+                android:layout_marginLeft="27dp"
                 android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belajar"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
 
             <CheckBox
                 android:id="@+id/cb_rumahsakit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="36dp"
-                android:textColor="#000000"
-                android:textSize="11sp"
-                android:text="Rumah Sakit"
+                android:layout_marginLeft="43dp"
                 android:buttonTint="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rumah Sakit"
+                android:textColor="#000000"
+                android:textSize="12sp"/>
 
         </LinearLayout>
 

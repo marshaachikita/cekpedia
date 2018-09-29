@@ -181,7 +181,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.MainActivity" />
         </activity>
-        <activity android:name=".Activity.SubMenuActivity" />
+        <activity android:name=".Activity.SubMenuActivity"
+            android:theme="@style/EditorTheme"/>
         <activity android:name=".Activity.FavouriteActivity" />
         <activity android:name=".Activity.ListCariActivity" />
         <activity
