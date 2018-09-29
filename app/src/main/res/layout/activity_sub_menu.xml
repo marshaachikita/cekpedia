@@ -39,6 +39,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -65,12 +66,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp">
 
                 <ImageButton
                     android:id="@+id/detail_info"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo_detail_putih"
@@ -78,17 +80,17 @@
 
                 <ImageButton
                     android:id="@+id/cari_lokasi"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:padding="5dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/logo_navigasi"
+                    android:src="@drawable/logo_navigasi_putih"
                     android:background="#00FFFFFF"/>
 
                 <ImageButton
                     android:id="@+id/telepon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo_telepon_putih"
@@ -96,9 +98,9 @@
 
                 <ImageButton
                     android:id="@+id/favorit"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="120dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="200dp"
                     android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo_favorite_putih"
@@ -115,6 +117,7 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:layout_marginTop="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"

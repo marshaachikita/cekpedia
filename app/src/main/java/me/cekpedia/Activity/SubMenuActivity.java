@@ -55,7 +55,7 @@ import me.cekpedia.utils.Constants;
 public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final int LOCATION_REQUEST = 500;
     private String namaMenu, title, address, nmphone, nomortelp, UserID, favorit, favorit1, favorit2, url;
-    private ImageButton info, MyLoc, RateUs, Telp, Sent, info1;
+    private ImageButton info, MyLoc, RateUs, Telp, Sent, info1, detail, lokasi, telfon, favorite;
     private Button navigasi;
     Uri openNavigation;
     private ImageView imgMenu, fav, favfull;
@@ -103,13 +103,45 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_menu);
 
-        //Slider Image
         //Pengaturan ImageSlider Recycler View Baru
         recyclerView = (RecyclerView) findViewById(R.id.rv_main);
         SliderGambarAdapter adapter = new SliderGambarAdapter(img, this);
         linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        detail = (ImageButton) findViewById(R.id.detail_info);
+        lokasi = (ImageButton) findViewById(R.id.cari_lokasi);
+        telfon = (ImageButton) findViewById(R.id.telepon);
+        favorite = (ImageButton) findViewById(R.id.favorit);
+        View.OnClickListener detailInfo = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detail.setImageResource(R.drawable.logo_detail_hitam);
+            }
+        };
+        View.OnClickListener detailLokasi = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lokasi.setImageResource(R.drawable.logo_navigasi_hitam);
+            }
+        };
+        View.OnClickListener detailKontak = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                telfon.setImageResource(R.drawable.logo_telepon_hitam);
+            }
+        };
+        View.OnClickListener fav = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favorite.setImageResource(R.drawable.logo_favorite_emas);
+            }
+        };
+        detail.setOnClickListener(detailInfo);
+        lokasi.setOnClickListener(detailLokasi);
+        telfon.setOnClickListener(detailKontak);
+        favorite.setOnClickListener(fav);
 
         //Pengaturan Font
 //        st = (TextView) findViewById(R.id.toolbar_text);
@@ -409,4 +441,5 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
 
     }
+
 }
