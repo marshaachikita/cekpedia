@@ -82,7 +82,7 @@ public class InputLokasiActivity extends AppCompatActivity {
             cb_swalayan, cb_rumahsakit;
     final FirebaseDatabase FBdatabase = FirebaseDatabase.getInstance();
     final DatabaseReference mDatabaseRef = FBdatabase.getReference(Constants.USER_KEY);
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +144,7 @@ public class InputLokasiActivity extends AppCompatActivity {
                                     , langitude, longitude, etDeskripsi.getText().toString(), false, kategori + "");
 
 //                            final FirebaseUser FBUser = firebaseAuth.getCurrentUser();
-                            database.child("waitinglist").child(kategori).child(etNama.getText().toString()).setValue(imageUpload);
+                            database.child("cekpediaItem").child(kategori).child(etNama.getText().toString()).setValue(imageUpload);
                             ImageUpload imageUploadket = new ImageUpload(kategori);
                             database.child("keterangan").child(etNama.getText().toString()).setValue(kategori);
 
@@ -498,8 +498,8 @@ public class InputLokasiActivity extends AppCompatActivity {
     private void inisialisasi(){
         etNama = (EditText)findViewById(R.id.etNamaTempat);
         etLokasi = (EditText)findViewById(R.id.etSetLokasi);
-//        etPhone = findViewById(R.id.etPhone);
-//        etDeskripsi = (EditText) findViewById(R.id.etdeskripsi);
+        etPhone = findViewById(R.id.etNoTelp);
+        etDeskripsi = (EditText) findViewById(R.id.etDeskripsi);
         progressDialog = new ProgressDialog(this);
         imageView = (ImageView) findViewById(R.id.iv_camera);
 //        submit = (Button)findViewById(R.id.bt_camera);

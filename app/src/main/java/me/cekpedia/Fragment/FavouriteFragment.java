@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import me.cekpedia.Activity.MasjidActivity;
 import me.cekpedia.Adapter.ImageListAdapter;
 import me.cekpedia.Adapter.ListCardAdapter;
 import me.cekpedia.R;
@@ -57,7 +58,8 @@ public class FavouriteFragment extends Fragment {
     boolean FavoriteNameLikeIsEmpty;
     private int merchantNameLikeSize;
     private String favoritTemp;
-    ArrayList<ImageUpload> namaList;
+//    List<ImageUpload> namaList;
+    ArrayList<String> namaList;
     ArrayList<String> detailList;
     ArrayList<String> gambarList;
     ArrayList<String> deskripsiList;
@@ -92,9 +94,6 @@ public class FavouriteFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
-//        adapter = new ListCardAdapter();
-//        recyclerView.setAdapter(adapter);
         namaList = new ArrayList<>();
         detailList = new ArrayList<>();
         gambarList = new ArrayList<>();
@@ -103,11 +102,7 @@ public class FavouriteFragment extends Fragment {
         nameSubList = new ArrayList<>();
         noTelpList = new ArrayList<>();
         listData = new ArrayList<>();
-//        listView = view.findViewById(R.id.listviewfav1);
-//        final ArrayList<String> Kategori = new ArrayList<>();
         imgList = new ArrayList<>();
-//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, Kategori);
-//        listView.setAdapter(arrayAdapter);
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Please Wait Loading List...");
         mProgressDialog.show();
@@ -147,33 +142,25 @@ public class FavouriteFragment extends Fragment {
                                 final Map<String, Object> detail = (Map<String, Object>) dataSnapshot.getValue();
                                 final String sub = detail.get(FavoriteNameLike[finalI]).toString();
                                 Reference2 = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child(sub).child(FavoriteNameLike[finalI]);
-                                Reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                Reference2.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-
-//                                        listData.add(img);
-                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                            ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-                                            namaList.add(img);
-                                        }
-//                                            String judul = dataSnapshot.child("name").getValue(String.class);
-//                                            String lokasi = dataSnapshot.child("lokasi").getValue(String.class);
-//                                            String deskripsi = dataSnapshot.child("deskripsi").getValue(String.class);
-//                                            String gambar = dataSnapshot.child("url").getValue(String.class);
-//                                            String namaSub = dataSnapshot.child("nameSub").getValue(String.class);
-//                                            String noTelp = dataSnapshot.child("number").getValue(String.class);
-//                                            String jarak = "";
-//                                            namaList.add(img);
-//                                            detailList.add(lokasi);
-//                                            gambarList.add(gambar);
-//                                            deskripsiList.add(deskripsi);
-//                                            jarakList.add(jarak);
-//                                            nameSubList.add(namaSub);
-//                                            noTelpList.add(noTelp);
-                                        mAdapter = new ListCardAdapter(getActivity(), namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
+                                        String judul = dataSnapshot.child("name").getValue(String.class);
+                                        String lokasi = dataSnapshot.child("lokasi").getValue(String.class);
+                                        String deskripsi = dataSnapshot.child("deskripsi").getValue(String.class);
+                                        String gambar = dataSnapshot.child("url").getValue(String.class);
+                                        String namaSub = dataSnapshot.child("nameSub").getValue(String.class);
+                                        String noTelp = dataSnapshot.child("number").getValue(String.class);
+                                        String jarak = "";
+                                        namaList.add(judul);
+                                        detailList.add(lokasi);
+                                        gambarList.add(gambar);
+                                        deskripsiList.add(deskripsi);
+                                        jarakList.add(jarak);
+                                        nameSubList.add(namaSub);
+                                        noTelpList.add(noTelp);
+                                        mAdapter = new ListCardAdapter(getContext(), namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
                                         recyclerView.setAdapter(mAdapter);
-//                                            mAdapter.notifyDataSetChanged();
-
                                     }
 
                                     @Override

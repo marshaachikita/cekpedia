@@ -88,14 +88,14 @@ public class ListCardAdapter
         this.jarakList = jarakList;
         this.nameSubList = nameSubList;
     }
-    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> jarakList, ArrayList<String> nameSubList) {
+    public ListCardAdapter(Context context, ArrayList<String> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
         this.context = context;
         this.namaeList = namaList;
         this.detailList = detailList;
         this.gambarList = gambarList;
         this.noTelpList = noTelpList;
         this.deskripsiList = deskripsiList;
-        this.jarakList = jarakList;
+//        this.jarakList = jarakList;
         this.nameSubList = nameSubList;
     }
     public ListCardAdapter(Context context, List<ImageUpload> namaList, ArrayList<String> detailList, ArrayList<String> gambarList, ArrayList<String> noTelpList, ArrayList<String> deskripsiList, ArrayList<String> nameSubList) {
@@ -116,9 +116,14 @@ public class ListCardAdapter
         this.nameSubList = nameSubList;
     }
 
+    public ListCardAdapter(Activity activity, List<ImageUpload> namaList){
+        this.activity = activity;
+        this.namaList = namaList;
+    }
     public ListCardAdapter(){
 
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
@@ -126,19 +131,19 @@ public class ListCardAdapter
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_nearme, parent, false);
 
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                int position = getAdapterPosition();
-                Intent intent = new Intent(context, SubMenuActivity.class);
-                intent.putExtra("JUDUL", namaList.get(viewType).getName());
-                if (!nameSub.equals(""))
-                    intent.putExtra("SUB", nameSub);
-                else
-                    intent.putExtra("SUB", nameSubList.get(viewType));
-                context.startActivity(intent);
-            }
-        });
+//        v.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                int position = getAdapterPosition();
+//                Intent intent = new Intent(context, SubMenuActivity.class);
+//                intent.putExtra("JUDUL", namaList.get(viewType).getName());
+//                if (!nameSub.equals(""))
+//                    intent.putExtra("SUB", nameSub);
+//                else
+//                    intent.putExtra("SUB", namaList.get(viewType).getNameSub());
+//                context.startActivity(intent);
+//            }
+//        });
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -146,16 +151,88 @@ public class ListCardAdapter
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        holder.itemNama.setText(namaList.get(position).getName());
+        holder.itemNama.setText(namaeList.get(position));
 //        Toast.makeText(context, (CharSequence) namaList.get(position), Toast.LENGTH_SHORT).show();
-        holder.itemDetail.setText(namaList.get(position).getLokasi());
-        holder.itemDeskripsi.setText(namaList.get(position).getDeskripsi());
+        holder.itemDetail.setText(detailList.get(position));
+        holder.itemDeskripsi.setText(deskripsiList.get(position));
+        holder.itemNama.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SubMenuActivity.class);
+                intent.putExtra("JUDUL", namaeList.get(position));
+                if (!nameSub.equals(""))
+                    intent.putExtra("SUB", nameSub);
+                else
+                    intent.putExtra("SUB", namaeList.get(position));
+                context.startActivity(intent);
+            }
+        });
         if (context != null) {
             Glide.with(context)
-                    .load(namaList.get(position).getUrl())
+                    .load(gambarList.get(position))
                     .into(holder.itemGambar);
         }
-        holder.itemNoTelp.setText(namaList.get(position).getNumber());
+        holder.itemNoTelp.setText(noTelpList.get(position));
+//        holder.itemNama.setText(namaList.get(position).getName());
+////        Toast.makeText(context, (CharSequence) namaList.get(position), Toast.LENGTH_SHORT).show();
+//        holder.itemDetail.setText(namaList.get(position).getLokasi());
+//        holder.itemDeskripsi.setText(namaList.get(position).getDeskripsi());
+//        holder.itemNama.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, SubMenuActivity.class);
+//                intent.putExtra("JUDUL", namaList.get(position).getName());
+//                if (!nameSub.equals(""))
+//                    intent.putExtra("SUB", nameSub);
+//                else
+//                    intent.putExtra("SUB", namaList.get(position).getNameSub());
+//                context.startActivity(intent);
+//            }
+//        });
+//        holder.itemDeskripsi.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, SubMenuActivity.class);
+//                intent.putExtra("JUDUL", namaList.get(position).getName());
+//                if (!nameSub.equals(""))
+//                    intent.putExtra("SUB", nameSub);
+//                else
+//                    intent.putExtra("SUB", namaList.get(position).getNameSub());
+//                context.startActivity(intent);
+//            }
+//        });
+//        holder.itemGambar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, SubMenuActivity.class);
+//                intent.putExtra("JUDUL", namaList.get(position).getName());
+//                if (!nameSub.equals(""))
+//                    intent.putExtra("SUB", nameSub);
+//                else
+//                    intent.putExtra("SUB", namaList.get(position).getNameSub());
+//                context.startActivity(intent);
+//            }
+//        });
+//        holder.itemDetail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, SubMenuActivity.class);
+//                intent.putExtra("JUDUL", namaList.get(position).getName());
+//                if (!nameSub.equals(""))
+//                    intent.putExtra("SUB", nameSub);
+//                else
+//                    intent.putExtra("SUB", namaList.get(position).getNameSub());
+//                context.startActivity(intent);
+//            }
+//        });
+//        if (context != null) {
+//            Glide.with(context)
+//                    .load(namaList.get(position).getUrl())
+//                    .into(holder.itemGambar);
+//        }
+//        holder.itemNoTelp.setText(namaList.get(position).getNumber());
+
+
 
 //        holder.itemJarak.setText(jarakList.get(position));
 
@@ -163,7 +240,7 @@ public class ListCardAdapter
 
     @Override
     public int getItemCount() {
-        return namaList.size();
+        return namaeList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

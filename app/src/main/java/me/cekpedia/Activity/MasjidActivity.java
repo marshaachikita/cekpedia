@@ -40,7 +40,8 @@ public class MasjidActivity extends AppCompatActivity {
     private List<ImageUpload> imgList;
     private ImageListAdapter adapter;
     private ProgressDialog mProgressDialog;
-    List<ImageUpload> namaList;
+//    List<ImageUpload> namaList;
+    ArrayList<String> namaList;
     ArrayList<String> detailList;
     ArrayList<String> gambarList;
     ArrayList<String> deskripsiList;
@@ -90,29 +91,29 @@ public class MasjidActivity extends AppCompatActivity {
         mProgressDialog.setMessage("Please Wait Loading List...");
         mProgressDialog.show();
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("masjid");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("tempatibadah");
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mProgressDialog.dismiss();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
+//                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
                     String judul = postSnapshot.child("name").getValue(String.class);
                     String lokasi = postSnapshot.child("lokasi").getValue(String.class);
                     String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
                     String gambar = postSnapshot.child("url").getValue(String.class);
                     String namaSub = postSnapshot.child("nameSub").getValue(String.class);
-                    String noTelp = dataSnapshot.child("number").getValue(String.class);
+                    Integer noTelp = dataSnapshot.child("number").getValue(Integer.class);
                     String jarak = "";
-                    namaList.add(img);
+                    namaList.add(judul);
                     detailList.add(lokasi);
                     gambarList.add(gambar);
                     deskripsiList.add(deskripsi);
                     jarakList.add(jarak);
                     nameSubList.add(namaSub);
-
-                    noTelpList.add(noTelp);
+                    String ab = String.valueOf(noTelp);
+                    noTelpList.add(ab);
 
                     mAdapter = new ListCardAdapter(MasjidActivity.this, namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
                     recyclerView.setAdapter(mAdapter);
@@ -175,7 +176,7 @@ public class MasjidActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int counter = 0;
                 for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
-                    ImageUpload img = Snapshot.getValue(ImageUpload.class);
+//                    ImageUpload img = Snapshot.getValue(ImageUpload.class);
                     String judul = Snapshot.child("name").getValue(String.class);
                     String lokasi = Snapshot.child("lokasi").getValue(String.class);
                     String deskripsi = Snapshot.child("deskripsi").getValue(String.class);
@@ -184,7 +185,7 @@ public class MasjidActivity extends AppCompatActivity {
 
                     if (!judul.contains(searchString)) {
                         listView.setVisibility(View.GONE);
-                        namaList.add(img);
+                        namaList.add(judul);
                         detailList.add(lokasi);
                         gambarList.add(gambar);
                         deskripsiList.add(deskripsi);
@@ -211,5 +212,4 @@ public class MasjidActivity extends AppCompatActivity {
             }
         });
     }
-
 }
