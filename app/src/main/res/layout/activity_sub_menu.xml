@@ -67,44 +67,84 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
-                <ImageButton
+                <ToggleButton
                     android:id="@+id/detail_info"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/logo_detail_putih"
-                    android:background="#00FFFFFF"/>
+                    android:background="@drawable/toggle_detail_info"
+                    android:textOff=""
+                    android:textOn=""/>
 
-                <ImageButton
+                <ToggleButton
                     android:id="@+id/cari_lokasi"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
                     android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/logo_navigasi_putih"
-                    android:background="#00FFFFFF"/>
+                    android:background="@drawable/toggle_cari_lokasi"
+                    android:textOff=""
+                    android:textOn=""/>
 
-                <ImageButton
+                <ToggleButton
                     android:id="@+id/telepon"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
                     android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/logo_telepon_putih"
-                    android:background="#00FFFFFF"/>
+                    android:background="@drawable/toggle_telfon"
+                    android:textOff=""
+                    android:textOn=""/>
 
-                <ImageButton
+                <ToggleButton
                     android:id="@+id/favorit"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="200dp"
                     android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/logo_favorite_putih"
-                    android:background="#00FFFFFF"/>
+                    android:background="@drawable/toggle_favorit"
+                    android:textOff=""
+                    android:textOn=""/>
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/detail_info"-->
+                    <!--android:layout_width="35dp"-->
+                    <!--android:layout_height="35dp"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/logo_detail_putih"-->
+                    <!--android:background="#00FFFFFF"/>-->
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/cari_lokasi"-->
+                    <!--android:layout_width="35dp"-->
+                    <!--android:layout_height="35dp"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/logo_navigasi_putih"-->
+                    <!--android:background="#00FFFFFF"/>-->
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/telepon"-->
+                    <!--android:layout_width="35dp"-->
+                    <!--android:layout_height="35dp"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/logo_telepon_putih"-->
+                    <!--android:background="#00FFFFFF"/>-->
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/favorit"-->
+                    <!--android:layout_width="35dp"-->
+                    <!--android:layout_height="35dp"-->
+                    <!--android:layout_marginLeft="200dp"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/logo_favorite_putih"-->
+                    <!--android:background="#00FFFFFF"/>-->
 
 
             </LinearLayout>

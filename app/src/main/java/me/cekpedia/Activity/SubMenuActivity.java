@@ -110,39 +110,6 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        detail = (ImageButton) findViewById(R.id.detail_info);
-        lokasi = (ImageButton) findViewById(R.id.cari_lokasi);
-        telfon = (ImageButton) findViewById(R.id.telepon);
-        favorite = (ImageButton) findViewById(R.id.favorit);
-        View.OnClickListener detailInfo = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                detail.setImageResource(R.drawable.logo_detail_hitam);
-            }
-        };
-        View.OnClickListener detailLokasi = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                lokasi.setImageResource(R.drawable.logo_navigasi_hitam);
-            }
-        };
-        View.OnClickListener detailKontak = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                telfon.setImageResource(R.drawable.logo_telepon_hitam);
-            }
-        };
-        View.OnClickListener fav = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                favorite.setImageResource(R.drawable.logo_favorite_emas);
-            }
-        };
-        detail.setOnClickListener(detailInfo);
-        lokasi.setOnClickListener(detailLokasi);
-        telfon.setOnClickListener(detailKontak);
-        favorite.setOnClickListener(fav);
-
         //Pengaturan Font
 //        st = (TextView) findViewById(R.id.toolbar_text);
 //        tf = Typeface.createFromAsset(this.getAssets(), "scriptmtbold.ttf");

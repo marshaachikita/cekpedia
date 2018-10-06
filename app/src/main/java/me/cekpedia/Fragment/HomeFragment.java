@@ -161,7 +161,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 
 
         // Slider Layout
-        sliderLayout = view.findViewById(R.id.slider);
+//        sliderLayout = view.findViewById(R.id.slider);
 //        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 //        file_maps.put("Apotek K24 Gerlong", R.drawable.apotekk24gerlong);
 //        file_maps.put("RM Bakul Daun", R.drawable.rmbakuldaun);
@@ -210,7 +210,7 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
 //            }
 //        });
         mDb = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
-        sliderLayout = view.findViewById(R.id.slider);
+//        sliderLayout = view.findViewById(R.id.slider);
         mDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -237,13 +237,13 @@ public class HomeFragment extends Fragment implements ImageAdapter.ClickListener
                         textSliderView.bundle(new Bundle());
                         textSliderView.getBundle()
                                 .putString("extra", name);
-                        sliderLayout.addSlider(textSliderView);
+//                        sliderLayout.addSlider(textSliderView);
                     }
                 }
-                sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-                sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-                sliderLayout.setCustomAnimation(new DescriptionAnimation());
-                sliderLayout.setDuration(4000);
+//                sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
+//                sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+//                sliderLayout.setCustomAnimation(new DescriptionAnimation());
+//                sliderLayout.setDuration(4000);
             }
 
             @Override
