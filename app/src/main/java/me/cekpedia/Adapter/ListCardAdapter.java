@@ -173,69 +173,54 @@ public class ListCardAdapter
                     .into(holder.itemGambar);
         }
         holder.itemNoTelp.setText(noTelpList.get(position));
-//        holder.itemNama.setText(namaList.get(position).getName());
-////        Toast.makeText(context, (CharSequence) namaList.get(position), Toast.LENGTH_SHORT).show();
-//        holder.itemDetail.setText(namaList.get(position).getLokasi());
-//        holder.itemDeskripsi.setText(namaList.get(position).getDeskripsi());
-//        holder.itemNama.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, SubMenuActivity.class);
-//                intent.putExtra("JUDUL", namaList.get(position).getName());
-//                if (!nameSub.equals(""))
-//                    intent.putExtra("SUB", nameSub);
-//                else
-//                    intent.putExtra("SUB", namaList.get(position).getNameSub());
-//                context.startActivity(intent);
-//            }
-//        });
-//        holder.itemDeskripsi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, SubMenuActivity.class);
-//                intent.putExtra("JUDUL", namaList.get(position).getName());
-//                if (!nameSub.equals(""))
-//                    intent.putExtra("SUB", nameSub);
-//                else
-//                    intent.putExtra("SUB", namaList.get(position).getNameSub());
-//                context.startActivity(intent);
-//            }
-//        });
-//        holder.itemGambar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, SubMenuActivity.class);
-//                intent.putExtra("JUDUL", namaList.get(position).getName());
-//                if (!nameSub.equals(""))
-//                    intent.putExtra("SUB", nameSub);
-//                else
-//                    intent.putExtra("SUB", namaList.get(position).getNameSub());
-//                context.startActivity(intent);
-//            }
-//        });
-//        holder.itemDetail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, SubMenuActivity.class);
-//                intent.putExtra("JUDUL", namaList.get(position).getName());
-//                if (!nameSub.equals(""))
-//                    intent.putExtra("SUB", nameSub);
-//                else
-//                    intent.putExtra("SUB", namaList.get(position).getNameSub());
-//                context.startActivity(intent);
-//            }
-//        });
-//        if (context != null) {
-//            Glide.with(context)
-//                    .load(namaList.get(position).getUrl())
-//                    .into(holder.itemGambar);
-//        }
-//        holder.itemNoTelp.setText(namaList.get(position).getNumber());
-
-
-
-//        holder.itemJarak.setText(jarakList.get(position));
-
+        holder.itemNoTelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SubMenuActivity.class);
+                intent.putExtra("JUDUL", namaeList.get(position));
+                if (!nameSub.equals(""))
+                    intent.putExtra("SUB", nameSub);
+                else
+                    intent.putExtra("SUB", namaeList.get(position));
+                context.startActivity(intent);
+            }
+        });
+        holder.itemDeskripsi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SubMenuActivity.class);
+                intent.putExtra("JUDUL", namaeList.get(position));
+                if (!nameSub.equals(""))
+                    intent.putExtra("SUB", nameSub);
+                else
+                    intent.putExtra("SUB", namaeList.get(position));
+                context.startActivity(intent);
+            }
+        });
+        holder.itemGambar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SubMenuActivity.class);
+                intent.putExtra("JUDUL", namaeList.get(position));
+                if (!nameSub.equals(""))
+                    intent.putExtra("SUB", nameSub);
+                else
+                    intent.putExtra("SUB", namaeList.get(position));
+                context.startActivity(intent);
+            }
+        });
+        holder.itemDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SubMenuActivity.class);
+                intent.putExtra("JUDUL", namaeList.get(position));
+                if (!nameSub.equals(""))
+                    intent.putExtra("SUB", nameSub);
+                else
+                    intent.putExtra("SUB", namaeList.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
