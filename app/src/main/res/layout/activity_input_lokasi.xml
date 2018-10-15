@@ -308,7 +308,7 @@
             android:id="@+id/etDeskripsi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nomor Telepon"
+            android:hint="Deskripsi"
             android:backgroundTint="#4394A2"/>
         <Button
             android:layout_width="200dp"

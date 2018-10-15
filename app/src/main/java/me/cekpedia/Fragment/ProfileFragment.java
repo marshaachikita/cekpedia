@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
@@ -65,7 +66,7 @@ public class ProfileFragment extends Fragment {
     View view;
     TextView st;
     EditText nama, email, nohp;
-    String Nama, Email, NoHp, Uid, photoUrl, favorit;
+    String Nama, Email, NoHp, Uid, photoUrl, favorit, temp;
     Typeface tf;
     FirebaseDatabase mDb;
     DatabaseReference database;
@@ -79,6 +80,7 @@ public class ProfileFragment extends Fragment {
     private StorageTask mUploadTask;
     public static final String FB_STORAGE_PATH = "fotoprofil/";
     private static final int SELECT_PHOTO = 100;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -106,6 +108,8 @@ public class ProfileFragment extends Fragment {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
+        final UploadTask.TaskSnapshot taskSnapshot = null;
+
         tf = Typeface.createFromAsset(getActivity().getAssets(), "scriptmtbold.ttf");
         st.setTypeface(tf);
         database = FirebaseDatabase.getInstance().getReference("users");
@@ -120,6 +124,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
+                if (getActivity() == null){
+                    return;
+                }
                 Nama = detailprofil.get("user").toString();
                 Email = detailprofil.get("email").toString();
                 NoHp = detailprofil.get("nohp").toString();
@@ -132,6 +139,7 @@ public class ProfileFragment extends Fragment {
                 nama.setText(Nama);
                 email.setText(Email);
                 nohp.setText(NoHp);
+                temp = detailprofil.get("temp").toString();
             }
 
             @Override
@@ -145,21 +153,35 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
 
                 StorageReference ref = storageRef.child(FB_STORAGE_PATH + System.currentTimeMillis() + "." + getImageExt(selectedImage));
-                mUploadTask = ref.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        final User user = new User(nama.getText().toString(), email.getText().toString(), taskSnapshot.getDownloadUrl().toString(), Uid, favorit, nohp.getText().toString());
-                        final User user1 = new User(nama.getText().toString(), email.getText().toString(), photoUrl, Uid, favorit, nohp.getText().toString());
-//                        if (!photoUrl.equals("")){
-//                            database.child(firebaseUser.getEmail().replace(".", ",")).setValue(user1);
-//                        }else {
-//
-//                        }
-                        database.child(firebaseUser.getEmail().replace(".", ",")).setValue(user);
-                        Toast.makeText(getActivity(), "simpan berhasil", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+//                if (photoUrl.equals(temp)){
+//                    database.child(firebaseUser.getEmail().replace(".", ",")).setValue(user1);
+//                    Toast.makeText(getActivity(), "done", Toast.LENGTH_SHORT).show();
+//                }else {
+
+                taskSnapshot.getDownloadUrl().toString();
+                final String img = taskSnapshot.getDownloadUrl().toString();
+                if (!img.equals("")) {
+                    mUploadTask = ref.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            final User user = new User(nama.getText().toString(), email.getText().toString(), img, Uid, favorit, nohp.getText().toString(), temp);
+                            database.child(firebaseUser.getEmail().replace(".", ",")).setValue(user);
+                            Toast.makeText(getActivity(), "simpan berhasil", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    final User user1 = new User(nama.getText().toString(), email.getText().toString(), photoUrl, Uid, favorit, nohp.getText().toString());
+                    database.child(firebaseUser.getEmail().replace(".", ",")).setValue(user1);
+                }
             }
+//            }
         });
 
         prof_pic.setOnClickListener(new View.OnClickListener() {
@@ -243,6 +265,9 @@ public class ProfileFragment extends Fragment {
                     e.printStackTrace();
                 }
 //
+            }
+            else {
+                return;
             }
         }
     }

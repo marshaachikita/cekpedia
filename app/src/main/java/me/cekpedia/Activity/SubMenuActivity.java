@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -54,14 +56,14 @@ import me.cekpedia.utils.Constants;
 
 public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final int LOCATION_REQUEST = 500;
-    private String namaMenu, title, address, nmphone, nomortelp, UserID, favorit, favorit1, favorit2, url;
+    private String namaMenu, title, address, nmphone, nomortelp, UserID, favorit, favorit1, favorit2, url, desk;
     private ImageButton info, MyLoc, RateUs, Telp, Sent, info1, detail, lokasi, telfon, favorite;
     private Button navigasi;
     Uri openNavigation;
     private ImageView imgMenu, fav, favfull;
     private double kordinatMaps1, kordinatMaps2;
     private FirebaseDatabase mDb;
-    private TextView judul, alamat, nomor;
+    private TextView judul, alamat, nomor, deskripsi;
     private GoogleMap m_map;
     MapView mMapView;
     FirebaseStorage storage;
@@ -85,7 +87,8 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
     private int merchantNameLikeSize;
     private boolean isFavorite;
     private String favoritTemp;
-
+    ConstraintLayout clInfo, clMap;
+    ToggleButton toggle_info, toggle_map, toggle_telp, toggle_fav;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     TextView st;
@@ -109,7 +112,41 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
         linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+        clInfo = findViewById(R.id.const_info);
+        clMap = findViewById(R.id.const_maps);
+        toggle_info = findViewById(R.id.detail_info);
+        toggle_map = findViewById(R.id.cari_lokasi);
+        toggle_telp = findViewById(R.id.telepon);
+        alamat = findViewById(R.id.tvalamat);
+        judul = findViewById(R.id.tvjudul);
+        nomor = findViewById(R.id.tvphonenumber);
+        deskripsi = findViewById(R.id.tvdeskripsi);
+        toggle_info.setChecked(true);
+        toggle_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clMap.setVisibility(View.GONE);
+                toggle_map.setChecked(false);
+                toggle_telp.setChecked(false);
+                clInfo.setVisibility(View.VISIBLE);
+                if (toggle_info.isChecked() == false){
+                    clInfo.setVisibility(View.GONE);
+                }
+            }
+        });
 
+        toggle_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clInfo.setVisibility(View.GONE);
+                toggle_info.setChecked(false);
+                toggle_telp.setChecked(false);
+                clMap.setVisibility(View.VISIBLE);
+                if (!toggle_map.isChecked()){
+                    clMap.setVisibility(View.GONE);
+                }
+            }
+        });
         //Pengaturan Font
 //        st = (TextView) findViewById(R.id.toolbar_text);
 //        tf = Typeface.createFromAsset(this.getAssets(), "scriptmtbold.ttf");
@@ -124,9 +161,8 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
 //        mMapView = findViewById(R.id.map);
 //        fav = findViewById(R.id.imgfav);
 //        favfull = findViewById(R.id.imgfavmark);
-//        judul = findViewById(R.id.tvjudul);
-//        alamat = findViewById(R.id.tvalamat);
-//        nomor = findViewById(R.id.tvphonenumber);
+
+
 //        navigasi = findViewById(R.id.buttonNavigation);
 //        MyLoc = findViewById(R.id.imageButtonPos);
 //        storage = FirebaseStorage.getInstance();
@@ -145,10 +181,10 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
 //        FavoriteNameSize = 0;
 //        FavoriteNameLikeIsEmpty = false;
 //
-//        mDb = FirebaseDatabase.getInstance();
-//        Intent i = getIntent();
-//        namaMenu = i.getStringExtra("JUDUL");
-//        namaSub = i.getStringExtra("SUB");
+        mDb = FirebaseDatabase.getInstance();
+        Intent i = getIntent();
+        namaMenu = i.getStringExtra("JUDUL");
+        namaSub = i.getStringExtra("SUB");
 //        nmphone = i.getStringExtra("NUMBER");
 
 //        Bundle bundle = new Bundle();
@@ -205,32 +241,34 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
 //        m_map.setMyLocationEnabled(true);
 
 
-//        final DatabaseReference submenu = mDb.getReference("cekpedia").child("cekpediaItem").child(namaSub).child(namaMenu);
+        final DatabaseReference submenu = mDb.getReference("cekpedia").child("cekpediaItem").child(namaSub).child(namaMenu);
 //        final DatabaseReference submenusub = mDb.getReference(Constants.USER_KEY).child(FBUser.getEmail().replace(".", ","));
 //        final DatabaseReference submenufav = mDb.getReference(Constants.USER_KEY).child(FBUser.getEmail().replace(".", ","));
 
 
-//        submenu.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
-//                //String s = detailMenu.get("lokasi").toString();
-//                kordinatMaps1 = Double.parseDouble(detailMenu.get("longi").toString());
-//                kordinatMaps2 = Double.parseDouble(detailMenu.get("lang").toString());
-//
+        submenu.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
+                //String s = detailMenu.get("lokasi").toString();
+                kordinatMaps1 = Double.parseDouble(detailMenu.get("longi").toString());
+                kordinatMaps2 = Double.parseDouble(detailMenu.get("lang").toString());
+
 //                Glide.with(getBaseContext())
 //                        .load(detailMenu.get("url").toString())
 //                        .into(imgMenu);
-//
-//                title = detailMenu.get("name").toString();
-//                address = detailMenu.get("lokasi").toString();
-//                nomortelp = detailMenu.get("number").toString();
+
+                title = detailMenu.get("name").toString();
+                address = detailMenu.get("lokasi").toString();
+                nomortelp = detailMenu.get("number").toString();
+                desk = detailMenu.get("deskripsi").toString();
 //                url = detailMenu.get("url").toString();
 //                LOADFavorite();
-//                judul.setText(title);
-//                alamat.setText(address);
-//                nomor.setText(nomortelp);
-//
+                judul.setText(title);
+                alamat.setText(address);
+                nomor.setText(nomortelp);
+                deskripsi.setText(desk);
+
 //                Telp.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {
@@ -239,30 +277,30 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
 //                        startActivity(intent);
 //                    }
 //                });
-//                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                        .findFragmentById(R.id.map);
-//                mapFragment.getMapAsync(new OnMapReadyCallback() {
-//                    //                    @SuppressLint("MissingPermission")
-//
-//                    @Override
-//                    public void onMapReady(GoogleMap googleMap) {
-//                        m_map = googleMap;
-//                        final LatLng klinik = new LatLng(kordinatMaps1, kordinatMaps2);
-//                        m_map.addMarker(new MarkerOptions().position(klinik).title(namaMenu));
-//                        CameraPosition cameraPosition = new CameraPosition.Builder().target(klinik).zoom(17).build();
-//                        m_map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//
-//                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                            // TODO: Consider calling
-//                            //    ActivityCompat#requestPermissions
-//                            // here to request the missing permissions, and then overriding
-//                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                            //                                          int[] grantResults)
-//                            // to handle the case where the user grants the permission. See the documentation
-//                            // for ActivityCompat#requestPermissions for more details.
-//                            return;
-//                        }
-//                        m_map.setMyLocationEnabled(true);
+                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.map);
+                mapFragment.getMapAsync(new OnMapReadyCallback() {
+                    //                    @SuppressLint("MissingPermission")
+
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        m_map = googleMap;
+                        final LatLng klinik = new LatLng(kordinatMaps1, kordinatMaps2);
+                        m_map.addMarker(new MarkerOptions().position(klinik).title(namaMenu));
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(klinik).zoom(17).build();
+                        m_map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return;
+                        }
+                        m_map.setMyLocationEnabled(true);
 //                        MyLoc.setOnClickListener(new View.OnClickListener() {
 //                            @Override
 //                            public void onClick(View view) {
@@ -283,17 +321,17 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
 //                                }
 //                            }
 //                        });
-//
-//                    }
-//                });
 
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 //        fav.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

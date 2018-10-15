@@ -14,6 +14,7 @@ public class User {
     private String favourite;
     private String nohp;
     private String Password;
+    private String temp;
     public User(String user, String email, String photoUrl, String uid, String favourite, String nohp) {
         this.User = user;
         this.email = email;
@@ -22,7 +23,24 @@ public class User {
         this.favourite = favourite;
         this.nohp = nohp;
     }
-//    public User(String user, String email, String photoUrl, String uid) {
+    public User(String user, String email, String photoUrl, String uid, String favourite, String nohp, String Temp) {
+        this.User = user;
+        this.email = email;
+        this.photoUrl = photoUrl;
+        this.Uid = uid;
+        this.favourite = favourite;
+        this.nohp = nohp;
+        this.temp = Temp;
+    }
+
+    public String getTemp() {
+        return temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
+    }
+    //    public User(String user, String email, String photoUrl, String uid) {
 //        this.User = user;
 //        this.email = email;
 //        this.photoUrl = photoUrl;

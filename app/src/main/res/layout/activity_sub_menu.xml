@@ -43,127 +43,219 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/nama_tempat"
+                android:id="@+id/tvjudul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="Hotel Horison Bandung"
-                android:layout_gravity="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:id="@+id/rv_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content"/>
+                android:layout_marginTop="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <ToggleButton
                     android:id="@+id/detail_info"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:padding="5dp"
                     android:background="@drawable/toggle_detail_info"
+                    android:padding="5dp"
                     android:textOff=""
-                    android:textOn=""/>
+                    android:textOn="" />
 
                 <ToggleButton
                     android:id="@+id/cari_lokasi"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
-                    android:padding="5dp"
                     android:background="@drawable/toggle_cari_lokasi"
+                    android:padding="5dp"
                     android:textOff=""
-                    android:textOn=""/>
+                    android:textOn="" />
 
                 <ToggleButton
                     android:id="@+id/telepon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
-                    android:padding="5dp"
                     android:background="@drawable/toggle_telfon"
-                    android:textOff=""
-                    android:textOn=""/>
-
-                <ToggleButton
-                    android:id="@+id/favorit"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="200dp"
                     android:padding="5dp"
-                    android:background="@drawable/toggle_favorit"
                     android:textOff=""
-                    android:textOn=""/>
+                    android:textOn="" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
+
+                    <ToggleButton
+                        android:id="@+id/favorit"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/toggle_favorit"
+                        android:padding="5dp"
+                        android:textOff=""
+                        android:textOn="" />
+                </LinearLayout>
+
 
                 <!--<ImageButton-->
-                    <!--android:id="@+id/detail_info"-->
-                    <!--android:layout_width="35dp"-->
-                    <!--android:layout_height="35dp"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/logo_detail_putih"-->
-                    <!--android:background="#00FFFFFF"/>-->
+                <!--android:id="@+id/detail_info"-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/logo_detail_putih"-->
+                <!--android:background="#00FFFFFF"/>-->
 
                 <!--<ImageButton-->
-                    <!--android:id="@+id/cari_lokasi"-->
-                    <!--android:layout_width="35dp"-->
-                    <!--android:layout_height="35dp"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/logo_navigasi_putih"-->
-                    <!--android:background="#00FFFFFF"/>-->
+                <!--android:id="@+id/cari_lokasi"-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/logo_navigasi_putih"-->
+                <!--android:background="#00FFFFFF"/>-->
 
                 <!--<ImageButton-->
-                    <!--android:id="@+id/telepon"-->
-                    <!--android:layout_width="35dp"-->
-                    <!--android:layout_height="35dp"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/logo_telepon_putih"-->
-                    <!--android:background="#00FFFFFF"/>-->
+                <!--android:id="@+id/telepon"-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/logo_telepon_putih"-->
+                <!--android:background="#00FFFFFF"/>-->
 
                 <!--<ImageButton-->
-                    <!--android:id="@+id/favorit"-->
-                    <!--android:layout_width="35dp"-->
-                    <!--android:layout_height="35dp"-->
-                    <!--android:layout_marginLeft="200dp"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/logo_favorite_putih"-->
-                    <!--android:background="#00FFFFFF"/>-->
+                <!--android:id="@+id/favorit"-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:layout_marginLeft="200dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/logo_favorite_putih"-->
+                <!--android:background="#00FFFFFF"/>-->
 
 
             </LinearLayout>
 
-            <fragment
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:map="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+
+
+
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                tools:context="me.cekpedia.MapsActivity" />
+                android:layout_height="match_parent"
+                android:id="@+id/const_info"
+                android:visibility="visible">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat :"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:layout_marginLeft="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:id="@+id/al"
+                    tools:textColor="@color/black" />
 
+                <TextView
+                    android:id="@+id/tvalamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="isi alamat"
+                    android:layout_below="@+id/al"
+                    android:layout_margin="16dp"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="28dp"
+                    tools:ignore="MissingConstraints" />
 
+                <TextView
+                    android:id="@+id/tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tvalamat"
+                    android:text="No Telp :"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="47dp"
+                    tools:layout_marginLeft="16dp"
+                    tools:textColor="@color/black"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tvphonenumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvalamat"
+                    android:padding="12dp"
+                    android:text="no telp"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="66dp" />
+
+                <TextView
+                    android:id="@+id/des"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tvalamat"
+                    android:text="Deskripsi :"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="61dp"
+                    tools:layout_editor_absoluteY="109dp"
+                    tools:layout_marginLeft="16dp"
+                    tools:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvdeskripsi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvalamat"
+                    android:padding="12dp"
+                    android:text="ini deskripsi"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="126dp" />
+            </android.support.constraint.ConstraintLayout>
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/const_maps"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:map="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
+                    android:visibility="invisible"
+                    tools:context="me.cekpedia.MapsActivity" />
+            </android.support.constraint.ConstraintLayout>
         </LinearLayout>
 
     </ScrollView>
@@ -333,14 +425,7 @@
                 <!--android:visibility="invisible"-->
                 <!--android:padding="12dp"-->
                 <!--android:id="@+id/tvalamat"/>-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="alamat"-->
-                <!--android:layout_below="@+id/tvjudul"-->
-                <!--android:visibility="invisible"-->
-                <!--android:padding="12dp"-->
-                <!--android:id="@+id/tvphonenumber"/>-->
+
 
 
         <!--</LinearLayout>-->

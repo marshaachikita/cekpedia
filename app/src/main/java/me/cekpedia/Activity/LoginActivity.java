@@ -71,17 +71,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mFirebaseUser;
     private static final String TAG = LoginActivity.class.getSimpleName();
-    String NoHp, favorit;
+    String NoHp, favorit, temp;
     Button sign_in;
     TextView st, favhidden, nohphidden;
     Typeface tf;
     EditText username, password;
     ProgressDialog progressDialog;
     String photoUrl = null;
-
     public ProgressDialog mProgressDialog;
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -330,14 +329,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
-                                    if(dataSnapshot.getChildrenCount()>=5) {
+                                    if(dataSnapshot.getChildrenCount()>=6) {
                                         if (!detailprofil.get("nohp").toString().equals("")){
 //                                                || !detailprofil.get("photourl").toString().equals("")
                                             NoHp = detailprofil.get("nohp").toString();
                                             favorit = detailprofil.get("favourite").toString();
                                             photoUrl = detailprofil.get("photoUrl").toString();
+                                            temp = detailprofil.get("temp").toString();
                                             if (detailprofil.get("photoUrl").toString().equals("")){
                                                 photoUrl = account.getPhotoUrl().toString();
+                                                temp = account.getPhotoUrl().toString();
                                             }
                                         } else {
                                             NoHp = "";
@@ -351,12 +352,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (account.getPhotoUrl() != null){
                                         photoUrl = account.getPhotoUrl().toString();
                                     }
+                                    if (account.getPhotoUrl()!= null){
+                                        temp = account.getPhotoUrl().toString();
+                                    }
                                     User user = new User(
                                             account.getDisplayName(),
 //                                            " " + account.getFamilyName(),
                                             account.getEmail(),
                                             photoUrl,
-                                            FirebaseAuth.getInstance().getCurrentUser().getUid(),favorit,NoHp
+                                            FirebaseAuth.getInstance().getCurrentUser().getUid(),favorit,NoHp, temp
                                     );
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference userRef = database.getReference(Constants.USER_KEY);

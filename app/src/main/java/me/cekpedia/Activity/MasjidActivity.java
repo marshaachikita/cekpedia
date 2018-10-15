@@ -104,7 +104,7 @@ public class MasjidActivity extends AppCompatActivity {
                     String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
                     String gambar = postSnapshot.child("url").getValue(String.class);
                     String namaSub = postSnapshot.child("nameSub").getValue(String.class);
-                    Integer noTelp = dataSnapshot.child("number").getValue(Integer.class);
+                    String noTelp = postSnapshot.child("number").getValue(String.class);
                     String jarak = "";
                     namaList.add(judul);
                     detailList.add(lokasi);
@@ -113,7 +113,7 @@ public class MasjidActivity extends AppCompatActivity {
                     jarakList.add(jarak);
                     nameSubList.add(namaSub);
                     String ab = String.valueOf(noTelp);
-                    noTelpList.add(ab);
+                    noTelpList.add(noTelp);
 
                     mAdapter = new ListCardAdapter(MasjidActivity.this, namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
                     recyclerView.setAdapter(mAdapter);
