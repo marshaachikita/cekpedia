@@ -99,7 +99,7 @@ public class MasjidActivity extends AppCompatActivity {
                 mProgressDialog.dismiss();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 //                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-                    String judul = postSnapshot.child("name").getValue(String.class);
+                    String judul = postSnapshot.child("name").getValue(String.class).toUpperCase();
                     String lokasi = postSnapshot.child("lokasi").getValue(String.class);
                     String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
                     String gambar = postSnapshot.child("url").getValue(String.class);

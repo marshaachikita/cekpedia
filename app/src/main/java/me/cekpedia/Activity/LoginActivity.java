@@ -330,7 +330,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Map<String, Object> detailprofil = (Map<String, Object>) dataSnapshot.getValue();
                                     if(dataSnapshot.getChildrenCount()>=6) {
-                                        if (!detailprofil.get("nohp").toString().equals("")){
+                                        if (!detailprofil.get("email").toString().equals("")){
 //                                                || !detailprofil.get("photourl").toString().equals("")
                                             NoHp = detailprofil.get("nohp").toString();
                                             favorit = detailprofil.get("favourite").toString();
