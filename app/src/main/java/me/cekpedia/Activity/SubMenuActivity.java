@@ -258,7 +258,7 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
 //                        .load(detailMenu.get("url").toString())
 //                        .into(imgMenu);
 
-                title = detailMenu.get("name").toString();
+                title = detailMenu.get("name").toString().toUpperCase();
                 address = detailMenu.get("lokasi").toString();
                 nomortelp = detailMenu.get("number").toString();
                 desk = detailMenu.get("deskripsi").toString();
