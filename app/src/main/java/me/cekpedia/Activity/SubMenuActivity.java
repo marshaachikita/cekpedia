@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +64,7 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
     private ImageView imgMenu, fav, favfull;
     private double kordinatMaps1, kordinatMaps2;
     private FirebaseDatabase mDb;
-    private TextView judul, alamat, nomor, deskripsi;
+    private TextView judul, alamat, detail_, deskripsi;
     private GoogleMap m_map;
     MapView mMapView;
     FirebaseStorage storage;
@@ -88,6 +89,7 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
     private boolean isFavorite;
     private String favoritTemp;
     ConstraintLayout clInfo, clMap;
+    LinearLayout info_;
     ToggleButton toggle_info, toggle_map, toggle_telp, toggle_fav;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -112,14 +114,14 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
         linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
-        clInfo = findViewById(R.id.const_info);
+        info_ = findViewById(R.id.info_);
         clMap = findViewById(R.id.const_maps);
         toggle_info = findViewById(R.id.detail_info);
         toggle_map = findViewById(R.id.cari_lokasi);
         toggle_telp = findViewById(R.id.telepon);
         alamat = findViewById(R.id.tvalamat);
         judul = findViewById(R.id.tvjudul);
-        nomor = findViewById(R.id.tvphonenumber);
+        detail_ = findViewById(R.id.tvdetail);
         deskripsi = findViewById(R.id.tvdeskripsi);
         toggle_info.setChecked(true);
         toggle_info.setOnClickListener(new View.OnClickListener() {
@@ -128,9 +130,9 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
                 clMap.setVisibility(View.GONE);
                 toggle_map.setChecked(false);
                 toggle_telp.setChecked(false);
-                clInfo.setVisibility(View.VISIBLE);
+                info_.setVisibility(View.VISIBLE);
                 if (toggle_info.isChecked() == false){
-                    clInfo.setVisibility(View.GONE);
+                    info_.setVisibility(View.GONE);
                 }
             }
         });
@@ -138,7 +140,7 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
         toggle_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clInfo.setVisibility(View.GONE);
+                info_.setVisibility(View.GONE);
                 toggle_info.setChecked(false);
                 toggle_telp.setChecked(false);
                 clMap.setVisibility(View.VISIBLE);
@@ -246,92 +248,92 @@ public class SubMenuActivity extends FragmentActivity implements OnMapReadyCallb
 //        final DatabaseReference submenufav = mDb.getReference(Constants.USER_KEY).child(FBUser.getEmail().replace(".", ","));
 
 
-        submenu.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
-                //String s = detailMenu.get("lokasi").toString();
-                kordinatMaps1 = Double.parseDouble(detailMenu.get("longi").toString());
-                kordinatMaps2 = Double.parseDouble(detailMenu.get("lang").toString());
-
-//                Glide.with(getBaseContext())
-//                        .load(detailMenu.get("url").toString())
-//                        .into(imgMenu);
-
-                title = detailMenu.get("name").toString().toUpperCase();
-                address = detailMenu.get("lokasi").toString();
-                nomortelp = detailMenu.get("number").toString();
-                desk = detailMenu.get("deskripsi").toString();
-//                url = detailMenu.get("url").toString();
-//                LOADFavorite();
-                judul.setText(title);
-                alamat.setText(address);
-                nomor.setText(nomortelp);
-                deskripsi.setText(desk);
-
-//                Telp.setOnClickListener(new View.OnClickListener() {
+//        submenu.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                final Map<String, Object> detailMenu = (Map<String, Object>) dataSnapshot.getValue();
+//                //String s = detailMenu.get("lokasi").toString();
+//                kordinatMaps1 = Double.parseDouble(detailMenu.get("longi").toString());
+//                kordinatMaps2 = Double.parseDouble(detailMenu.get("lang").toString());
+//
+////                Glide.with(getBaseContext())
+////                        .load(detailMenu.get("url").toString())
+////                        .into(imgMenu);
+//
+//                title = detailMenu.get("name").toString().toUpperCase();
+//                address = detailMenu.get("lokasi").toString();
+//                nomortelp = detailMenu.get("number").toString();
+//                desk = detailMenu.get("deskripsi").toString();
+////                url = detailMenu.get("url").toString();
+////                LOADFavorite();
+//                judul.setText(title);
+//                alamat.setText(address);
+//                nomor.setText(nomortelp);
+//                deskripsi.setText(desk);
+//
+////                Telp.setOnClickListener(new View.OnClickListener() {
+////                    @Override
+////                    public void onClick(View view) {
+////                        Intent intent = new Intent(Intent.ACTION_DIAL);
+////                        intent.setData(Uri.parse("tel:" + nomortelp));
+////                        startActivity(intent);
+////                    }
+////                });
+//                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                        .findFragmentById(R.id.map);
+//                mapFragment.getMapAsync(new OnMapReadyCallback() {
+//                    //                    @SuppressLint("MissingPermission")
+//
 //                    @Override
-//                    public void onClick(View view) {
-//                        Intent intent = new Intent(Intent.ACTION_DIAL);
-//                        intent.setData(Uri.parse("tel:" + nomortelp));
-//                        startActivity(intent);
+//                    public void onMapReady(GoogleMap googleMap) {
+//                        m_map = googleMap;
+//                        final LatLng klinik = new LatLng(kordinatMaps1, kordinatMaps2);
+//                        m_map.addMarker(new MarkerOptions().position(klinik).title(namaMenu));
+//                        CameraPosition cameraPosition = new CameraPosition.Builder().target(klinik).zoom(17).build();
+//                        m_map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//
+//                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                            // TODO: Consider calling
+//                            //    ActivityCompat#requestPermissions
+//                            // here to request the missing permissions, and then overriding
+//                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                            //                                          int[] grantResults)
+//                            // to handle the case where the user grants the permission. See the documentation
+//                            // for ActivityCompat#requestPermissions for more details.
+//                            return;
+//                        }
+//                        m_map.setMyLocationEnabled(true);
+////                        MyLoc.setOnClickListener(new View.OnClickListener() {
+////                            @Override
+////                            public void onClick(View view) {
+////                                m_map.addMarker(new MarkerOptions().position(klinik).title(namaMenu));
+////                                CameraPosition cameraPosition = new CameraPosition.Builder().target(klinik).zoom(17).build();
+////                                m_map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+////                            }
+////                        });
+////                        navigasi.setOnClickListener(new View.OnClickListener() {
+////                            @Override
+////                            public void onClick(View view) {
+////                                String googleMaps = "com.google.android.apps.maps";
+////                                openNavigation = Uri.parse("google.navigation:q=" + address);
+////                                Intent intent = new Intent(Intent.ACTION_VIEW, openNavigation);
+////                                intent.setPackage(googleMaps);
+////                                if (intent.resolveActivity(getPackageManager()) != null) {
+////                                    startActivity(intent);
+////                                }
+////                            }
+////                        });
+//
 //                    }
 //                });
-                SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.map);
-                mapFragment.getMapAsync(new OnMapReadyCallback() {
-                    //                    @SuppressLint("MissingPermission")
-
-                    @Override
-                    public void onMapReady(GoogleMap googleMap) {
-                        m_map = googleMap;
-                        final LatLng klinik = new LatLng(kordinatMaps1, kordinatMaps2);
-                        m_map.addMarker(new MarkerOptions().position(klinik).title(namaMenu));
-                        CameraPosition cameraPosition = new CameraPosition.Builder().target(klinik).zoom(17).build();
-                        m_map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
-                            return;
-                        }
-                        m_map.setMyLocationEnabled(true);
-//                        MyLoc.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                m_map.addMarker(new MarkerOptions().position(klinik).title(namaMenu));
-//                                CameraPosition cameraPosition = new CameraPosition.Builder().target(klinik).zoom(17).build();
-//                                m_map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//                            }
-//                        });
-//                        navigasi.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                String googleMaps = "com.google.android.apps.maps";
-//                                openNavigation = Uri.parse("google.navigation:q=" + address);
-//                                Intent intent = new Intent(Intent.ACTION_VIEW, openNavigation);
-//                                intent.setPackage(googleMaps);
-//                                if (intent.resolveActivity(getPackageManager()) != null) {
-//                                    startActivity(intent);
-//                                }
-//                            }
-//                        });
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 //        fav.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
