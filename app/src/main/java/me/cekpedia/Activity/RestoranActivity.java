@@ -37,7 +37,8 @@ public class RestoranActivity extends AppCompatActivity {
     private ImageListAdapter adapter;
     private ProgressDialog mProgressDialog;
     public static final String FB_DATABASE_PATH = "cekpedia";
-    List<ImageUpload> namaList;
+//    List<ImageUpload> namaList;
+    ArrayList<String> namaList;
     ArrayList<String> detailList;
     ArrayList<String> gambarList;
     ArrayList<String> deskripsiList;
@@ -74,8 +75,8 @@ public class RestoranActivity extends AppCompatActivity {
         gambarList = new ArrayList<>();
         deskripsiList = new ArrayList<>();
         jarakList = new ArrayList<>();
-        noTelpList = new ArrayList<>();
         nameSubList = new ArrayList<>();
+        noTelpList = new ArrayList<>();
         final ArrayList<String> Kategori = new ArrayList<>();
         imgList = new ArrayList<>();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Kategori);
@@ -112,33 +113,32 @@ public class RestoranActivity extends AppCompatActivity {
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH).child("cekpediaItem").child("restoran");
 
-        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mProgressDialog.dismiss();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
-                    String judul = postSnapshot.child("name").getValue(String.class);
+//                    ImageUpload img = postSnapshot.getValue(ImageUpload.class);
+                    String judul = postSnapshot.child("name").getValue(String.class).toUpperCase();
                     String lokasi = postSnapshot.child("lokasi").getValue(String.class);
                     String deskripsi = postSnapshot.child("deskripsi").getValue(String.class);
                     String gambar = postSnapshot.child("url").getValue(String.class);
                     String namaSub = postSnapshot.child("nameSub").getValue(String.class);
-                    String noTelp = dataSnapshot.child("number").getValue(String.class);
+                    String noTelp = postSnapshot.child("number").getValue(String.class);
                     String jarak = "";
-                    namaList.add(img);
+                    namaList.add(judul);
                     detailList.add(lokasi);
                     gambarList.add(gambar);
                     deskripsiList.add(deskripsi);
                     jarakList.add(jarak);
                     nameSubList.add(namaSub);
+                    String ab = String.valueOf(noTelp);
                     noTelpList.add(noTelp);
 
-
+                    mAdapter = new ListCardAdapter(RestoranActivity.this, namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
+                    recyclerView.setAdapter(mAdapter);
                 }
-                mAdapter = new ListCardAdapter(RestoranActivity.this, namaList, detailList, gambarList, noTelpList, deskripsiList, nameSubList);
-                recyclerView.setAdapter(mAdapter);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(RestoranActivity.this, "Database Error", Toast.LENGTH_SHORT).show();
@@ -146,46 +146,46 @@ public class RestoranActivity extends AppCompatActivity {
         });
     }
 
-    private void setAdapter(final String searchString) {
-        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int counter = 0;
-                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
-                    ImageUpload img = Snapshot.getValue(ImageUpload.class);
-                    String judul = Snapshot.child("name").getValue(String.class);
-                    String lokasi = Snapshot.child("lokasi").getValue(String.class);
-                    String deskripsi = Snapshot.child("deskripsi").getValue(String.class);
-                    String gambar = Snapshot.child("url").getValue(String.class);
-                    String namaSub = Snapshot.child("nameSub").getValue(String.class);
-
-                    if (!judul.contains(searchString)) {
-                        listView.setVisibility(View.GONE);
-                        namaList.add(img);
-                        detailList.add(lokasi);
-                        gambarList.add(gambar);
-                        deskripsiList.add(deskripsi);
-                        nameSubList.add(namaSub);
-                        mResult.setVisibility(View.VISIBLE);
-                        counter++;
-//                        break;
-                    } else {
-                        listView.setVisibility(View.VISIBLE);
-                        mResult.setVisibility(View.GONE);
-                        mResult.removeAllViews();
-                        namaList.clear();
-                        detailList.clear();
-                        gambarList.clear();
-                        deskripsiList.clear();
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
+//    private void setAdapter(final String searchString) {
+//        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                int counter = 0;
+//                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+//                    ImageUpload img = Snapshot.getValue(ImageUpload.class);
+//                    String judul = Snapshot.child("name").getValue(String.class);
+//                    String lokasi = Snapshot.child("lokasi").getValue(String.class);
+//                    String deskripsi = Snapshot.child("deskripsi").getValue(String.class);
+//                    String gambar = Snapshot.child("url").getValue(String.class);
+//                    String namaSub = Snapshot.child("nameSub").getValue(String.class);
+//
+//                    if (!judul.contains(searchString)) {
+//                        listView.setVisibility(View.GONE);
+//                        namaList.add(img);
+//                        detailList.add(lokasi);
+//                        gambarList.add(gambar);
+//                        deskripsiList.add(deskripsi);
+//                        nameSubList.add(namaSub);
+//                        mResult.setVisibility(View.VISIBLE);
+//                        counter++;
+////                        break;
+//                    } else {
+//                        listView.setVisibility(View.VISIBLE);
+//                        mResult.setVisibility(View.GONE);
+//                        mResult.removeAllViews();
+//                        namaList.clear();
+//                        detailList.clear();
+//                        gambarList.clear();
+//                        deskripsiList.clear();
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 }

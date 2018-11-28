@@ -184,110 +184,139 @@
                     android:textColor="@color/black"
                     android:text="ini deskripsi" />
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Detail: "
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    tools:textColor="@color/black" />
+                <!--<TextView-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:text="Detail: "-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:visibility="visible"-->
+                    <!--tools:textColor="@color/black" />-->
 
-                <TextView
-                    android:id="@+id/tvdetail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="3dp"
-                    android:text="ini deskripsi"
-                    android:textColor="@color/black"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/tvdetail"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginTop="3dp"-->
+                    <!--android:text="ini deskripsi"-->
+                    <!--android:textColor="@color/black"/>-->
 
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:background="#94cad3"
+            android:visibility="gone"
+            android:id="@+id/Telp_">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telepon :"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ini telepon"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:id="@+id/tvTelp"/>
+        </LinearLayout>
+
             <!--<android.support.constraint.ConstraintLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:paddingTop="10dp"-->
-                <!--android:paddingBottom="10dp"-->
-                <!--android:id="@+id/const_info"-->
-                <!--android:background="#94cad3"-->
-                <!--android:visibility="visible">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:id="@+id/const_info"-->
+            <!--android:background="#94cad3"-->
+            <!--android:visibility="visible">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Alamat :"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:visibility="visible"-->
-                    <!--app:layout_constraintLeft_toRightOf="parent"-->
-                    <!--android:layout_marginLeft="16dp"-->
-                    <!--android:id="@+id/al"-->
-                    <!--tools:textColor="@color/black" />-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Alamat :"-->
+            <!--android:textStyle="bold"-->
+            <!--android:visibility="visible"-->
+            <!--app:layout_constraintLeft_toRightOf="parent"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:id="@+id/al"-->
+            <!--tools:textColor="@color/black" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tvalamat"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="5dp"-->
-                    <!--android:text="isi alamat"-->
-                    <!--app:layout_constraintBottom_toBottomOf="@id/al"-->
-                    <!--android:layout_below="@+id/al"-->
-                    <!--android:layout_margin="16dp"-->
-                    <!--tools:layout_editor_absoluteX="0dp"-->
-                    <!--tools:layout_editor_absoluteY="28dp"-->
-                    <!--tools:ignore="MissingConstraints" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tvalamat"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:text="isi alamat"-->
+            <!--app:layout_constraintBottom_toBottomOf="@id/al"-->
+            <!--android:layout_below="@+id/al"-->
+            <!--android:layout_margin="16dp"-->
+            <!--tools:layout_editor_absoluteX="0dp"-->
+            <!--tools:layout_editor_absoluteY="28dp"-->
+            <!--tools:ignore="MissingConstraints" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tel"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_below="@+id/tvalamat"-->
-                    <!--android:text="No Telp :"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:visibility="visible"-->
-                    <!--tools:layout_editor_absoluteX="16dp"-->
-                    <!--tools:layout_editor_absoluteY="47dp"-->
-                    <!--tools:layout_marginLeft="16dp"-->
-                    <!--tools:textColor="@color/black"-->
-                    <!--tools:ignore="MissingConstraints" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tel"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_below="@+id/tvalamat"-->
+            <!--android:text="No Telp :"-->
+            <!--android:textStyle="bold"-->
+            <!--android:visibility="visible"-->
+            <!--tools:layout_editor_absoluteX="16dp"-->
+            <!--tools:layout_editor_absoluteY="47dp"-->
+            <!--tools:layout_marginLeft="16dp"-->
+            <!--tools:textColor="@color/black"-->
+            <!--tools:ignore="MissingConstraints" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tvphonenumber"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/tvalamat"-->
-                    <!--android:layout_marginTop="5dp"-->
-                    <!--android:text="no telp"-->
-                    <!--tools:ignore="MissingConstraints"-->
-                    <!--tools:layout_editor_absoluteX="16dp"-->
-                    <!--tools:layout_editor_absoluteY="66dp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tvphonenumber"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/tvalamat"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:text="no telp"-->
+            <!--tools:ignore="MissingConstraints"-->
+            <!--tools:layout_editor_absoluteX="16dp"-->
+            <!--tools:layout_editor_absoluteY="66dp" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/des"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_below="@+id/tvalamat"-->
-                    <!--android:text="Deskripsi :"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:visibility="visible"-->
-                    <!--tools:ignore="MissingConstraints"-->
-                    <!--tools:layout_editor_absoluteX="61dp"-->
-                    <!--tools:layout_editor_absoluteY="109dp"-->
-                    <!--tools:layout_marginLeft="16dp"-->
-                    <!--tools:textColor="@color/black" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/des"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_below="@+id/tvalamat"-->
+            <!--android:text="Deskripsi :"-->
+            <!--android:textStyle="bold"-->
+            <!--android:visibility="visible"-->
+            <!--tools:ignore="MissingConstraints"-->
+            <!--tools:layout_editor_absoluteX="61dp"-->
+            <!--tools:layout_editor_absoluteY="109dp"-->
+            <!--tools:layout_marginLeft="16dp"-->
+            <!--tools:textColor="@color/black" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tvdeskripsi"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/tvalamat"-->
-                    <!--android:padding="12dp"-->
-                    <!--android:text="ini deskripsi"-->
-                    <!--tools:ignore="MissingConstraints"-->
-                    <!--tools:layout_editor_absoluteX="16dp"-->
-                    <!--tools:layout_editor_absoluteY="126dp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tvdeskripsi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/tvalamat"-->
+            <!--android:padding="12dp"-->
+            <!--android:text="ini deskripsi"-->
+            <!--tools:ignore="MissingConstraints"-->
+            <!--tools:layout_editor_absoluteX="16dp"-->
+            <!--tools:layout_editor_absoluteY="126dp" />-->
             <!--</android.support.constraint.ConstraintLayout>-->
 
 
@@ -306,19 +335,19 @@
 
     <!--</LinearLayout>-->
 
-<!--<fragment-->
-<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:map="http://schemas.android.com/apk/res-auto"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:id="@+id/map"-->
-<!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="300dp"-->
-<!--android:layout_alignParentBottom="true"-->
-<!--android:layout_alignParentStart="true"-->
-<!--android:layout_alignParentLeft="true"-->
-<!--android:layout_below="@id/buttonNavigation"-->
-<!--tools:context="me.cekpedia.MapsActivity" />-->
+    <!--<fragment-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:map="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/map"-->
+    <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="300dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_below="@id/buttonNavigation"-->
+    <!--tools:context="me.cekpedia.MapsActivity" />-->
     <!--<com.google.android.gms.maps.MapView-->
     <!--android:id="@+id/map"-->
     <!--android:layout_width="match_parent"-->
@@ -327,22 +356,22 @@
     <!--android:layout_alignParentStart="true"-->
     <!--android:layout_alignParentLeft="true"-->
     <!--/>-->
-<!--<Button-->
-<!--android:id="@+id/buttonNavigation"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_below="@id/image_buttons"-->
-<!--android:text="Start Navigation"-->
-<!--android:backgroundTint="@android:color/holo_blue_light"/>-->
+    <!--<Button-->
+    <!--android:id="@+id/buttonNavigation"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/image_buttons"-->
+    <!--android:text="Start Navigation"-->
+    <!--android:backgroundTint="@android:color/holo_blue_light"/>-->
 
-<!--<LinearLayout-->
-<!--android:id="@+id/image_buttons"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_below="@id/scroll"-->
-<!--android:orientation="horizontal">-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/image_buttons"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/scroll"-->
+    <!--android:orientation="horizontal">-->
 
-<!--<ImageButton-->
+    <!--<ImageButton-->
     <!--android:layout_width="45dp"-->
     <!--android:layout_height="45dp"-->
     <!--android:padding="10dp"-->
@@ -351,7 +380,7 @@
     <!--android:background="00FFFFFF"-->
     <!--/>-->
 
-<!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
     <!--<ImageButton-->
     <!--android:id="@+id/imageButtonInfo"-->
@@ -420,78 +449,78 @@
     <!--android:tint="#FFFF"-->
     <!--android:src="@drawable/ic_send_black_24dp"/>-->
 
-<!--<ScrollView-->
-<!--android:id="@+id/scroll"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_below="@id/my_toolbar">-->
+    <!--<ScrollView-->
+    <!--android:id="@+id/scroll"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/my_toolbar">-->
 
-<!--<RelativeLayout-->
+    <!--<RelativeLayout-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="135dp"-->
     <!--android:background="#FFF">-->
 
     <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal">-->
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="8"-->
-            <!--android:orientation="vertical">-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textStyle="bold"-->
-                <!--android:paddingTop="12dp"-->
-                <!--android:paddingLeft="12dp"-->
-                <!--android:paddingRight="12dp"-->
-                <!--android:text="judul"-->
-                <!--android:textSize="20dp"-->
-                <!--android:visibility="invisible"-->
-                <!--android:id="@+id/tvjudul"/>-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="alamat"-->
-                <!--android:layout_below="@+id/tvjudul"-->
-                <!--android:visibility="invisible"-->
-                <!--android:padding="12dp"-->
-                <!--android:id="@+id/tvalamat"/>-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="8"-->
+    <!--android:orientation="vertical">-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textStyle="bold"-->
+    <!--android:paddingTop="12dp"-->
+    <!--android:paddingLeft="12dp"-->
+    <!--android:paddingRight="12dp"-->
+    <!--android:text="judul"-->
+    <!--android:textSize="20dp"-->
+    <!--android:visibility="invisible"-->
+    <!--android:id="@+id/tvjudul"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="alamat"-->
+    <!--android:layout_below="@+id/tvjudul"-->
+    <!--android:visibility="invisible"-->
+    <!--android:padding="12dp"-->
+    <!--android:id="@+id/tvalamat"/>-->
 
 
 
-        <!--</LinearLayout>-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_margin="8dp"-->
-            <!--android:paddingTop="8dp"-->
-            <!--android:id="@+id/imgfav"-->
-            <!--android:visibility="invisible"-->
-            <!--android:tint="#EC407A" />-->
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_margin="8dp"-->
-        <!--android:paddingTop="8dp"-->
-        <!--android:id="@+id/imgfavmark"-->
-        <!--android:visibility="invisible"-->
-        <!--android:src="@drawable/ic_favorite_black_24dp"-->
-        <!--android:tint="#EC407A" />-->
     <!--</LinearLayout>-->
 
     <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="160dp"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:id="@+id/gambarmenu"-->
-        <!--android:src="@drawable/bidandelima"/>-->
-<!--</RelativeLayout>-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_margin="8dp"-->
+    <!--android:paddingTop="8dp"-->
+    <!--android:id="@+id/imgfav"-->
+    <!--android:visibility="invisible"-->
+    <!--android:tint="#EC407A" />-->
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_margin="8dp"-->
+    <!--android:paddingTop="8dp"-->
+    <!--android:id="@+id/imgfavmark"-->
+    <!--android:visibility="invisible"-->
+    <!--android:src="@drawable/ic_favorite_black_24dp"-->
+    <!--android:tint="#EC407A" />-->
+    <!--</LinearLayout>-->
 
-<!--</ScrollView>-->
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="160dp"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--android:id="@+id/gambarmenu"-->
+    <!--android:src="@drawable/bidandelima"/>-->
+    <!--</RelativeLayout>-->
+
+    <!--</ScrollView>-->

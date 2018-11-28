@@ -235,7 +235,7 @@ public class ListCardAdapter
 
         public int current;
         public ImageView itemGambar;
-        public TextView itemNama, itemDetail, itemJarak, detail, itemDeskripsi, itemNoTelp;
+        public TextView itemNama, itemDetail, itemJarak, itemDeskripsi, itemNoTelp;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -248,29 +248,15 @@ public class ListCardAdapter
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                ImageUpload ListCard = (ImageUpload)view.getTag();
-                Intent intent = new Intent(context, SubMenuActivity.class);
-                int position = getAdapterPosition();
-                intent.putExtra("JUDUL", namaeList.get(position).toString());
-//                    Toast.makeText(context, "posisi : " + position, Toast.LENGTH_SHORT).show();
-                if (!nameSub.equals(""))
+                    Intent intent = new Intent(context, SubMenuActivity.class);
+                    int position = getAdapterPosition();
                     intent.putExtra("SUB", nameSubList.get(position).toString());
-                else
-                    intent.putExtra("SUB", nameSubList.get(position).toString());
-                context.startActivity(intent);
+                    intent.putExtra("JUDUL", namaeList.get(position).toString());
+                    context.startActivity(intent);
                 }
             });
 
 //            return viewHolder;
-//            itemJarak = (TextView)itemView.findViewById(R.id.jarakTempat);
-//            detail = (TextView) itemView.findViewById(R.id.detail);
-//            if (namaList.size() >= 1){
-//                detail.setVisibility(View.VISIBLE);
-//            }else {
-//                detail.setVisibility(View.GONE);
-//            }
-//
-//
 //                    Snackbar.make(v, "Click detected on item " + position,
 //                            Snackbar.LENGTH_LONG)
 //                            .setAction("Action", null).show();

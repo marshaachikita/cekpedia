@@ -11,16 +11,16 @@ public class ImageUpload {
     private String url, nameSub, deskripsi;
     private ImageView imageView;
     private String lokasi, number;
-    private Double lang, longi;
+    private Double lat, lng;
     private boolean sponsor;
 
-    public ImageUpload(String name, String lokasi, String number, String url, Double lang, Double longi, String deskripsi, boolean sponsor, String nameSub) {
+    public ImageUpload(String name, String lokasi, String number, String url, Double lat, Double lng, String deskripsi, boolean sponsor, String nameSub) {
         this.name = name;
         this.lokasi = lokasi;
         this.number = number;
         this.url = url;
-        this.lang = lang;
-        this.longi = longi;
+        this.lat = lat;
+        this.lng = lng;
         this.deskripsi = deskripsi;
         this.sponsor = sponsor;
         this.nameSub = nameSub;
@@ -76,12 +76,12 @@ public class ImageUpload {
         this.number = number;
     }
 
-    public void setLang(Double lang) {
-        this.lang = lang;
+    public void setLat(Double lat) {
+        this.lat = lat;
     }
 
-    public void setLongi(Double longi) {
-        this.longi = longi;
+    public void setLng(Double lng) {
+        this.lng = lng;
     }
 
     public void setSponsor(boolean sponsor) {
@@ -103,8 +103,8 @@ public class ImageUpload {
 
     }
 
-    public Double getLang() {
-        return lang;
+    public Double getLat() {
+        return lat;
     }
     public boolean isFavourite() {
         return sponsor;
@@ -118,8 +118,8 @@ public class ImageUpload {
         return number;
     }
 
-    public Double getLongi() {
-        return longi;
+    public Double getLng() {
+        return lng;
     }
 
     public String getLokasi() {
